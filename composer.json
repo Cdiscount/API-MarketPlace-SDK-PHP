@@ -1,5 +1,5 @@
 {
-	"name": "API-MarketPlace-SDK-PHP",
+	"name": "cdiscount/sdkphpapi",
     "description": "PHP SDK for the Cdiscount Marketplace API",
     "type": "sdk",
     "version": "1.0.2",
