@@ -1,0 +1,89 @@
+<h2>1- Install a web server (for example wamp for windows)</h2>
+<h3>1.1 - Min requirements :</h3>
+<ul>
+<li>Apache 2.2</li>
+<li>Php 5.6</li>
+</ul>
+
+<h2>2- Clone the Git repository in your root project folder</h2>
+<p>The SDK is structured like that : </p>
+<ul>
+<li>config/ : config files</li>
+<li>samples/ : samples folder</li>
+<li>sdk/ : content of the Cdiscount SDK (do not modifiy any file of this folder)</li>
+</ul>
+
+<h2>3 - Insert your API's credentials</h2>
+<h3>3.1 - Requirements</h3>
+<p>To use Cdiscount Marketplace API and Cdiscount Marketplace SDK you first need to follow the steps described in the Cdiscount Marketplace API website.</p>
+<p>The sections are the following : </p>
+<ul>
+<li>Request your account creation.</li>
+<li>Have set up your account</li>
+</ul>
+
+<h3>3.2 - Update the config files</h3>
+<p>Follow the procedure to insert your API credentials</p>
+<ul>
+<li>Open the config folder</li>
+<li>Open the config.ini file</li>
+<li>Set the api mode : 'preprod' or 'prod'</li>
+<li>Open the preprod.config.ini file or the prod.config.ini file (if you set mode to 'prod')</li>
+<li>Set your api username</li>
+<li>Set your api password</li>
+</ul>
+
+<h2>4 - Use the SDK</h2>
+<h3>4.1 - Use the endpoints</h3>
+<p>The SDK contains the following endpoints :</p>
+<ul>
+<li>Seller</li>
+<li>Offer</li>
+<li>Discussion</li>
+<li>Product</li>
+<li>Order</li>
+<li>Relays</li>
+</ul>
+<p>All the SDK methods are described in the MarketPlace API Website because they have the same names of the Cdiscount Marketplace API methods.</p>
+<p>For each method, you have a PHP file with a sample to call the corresponding API function.</p>
+<p>For example, to call the GetSellerInformation API method, open the GetSellerInformation.php file contained in the Seller folder and follow the same steps of the sample.</p>
+ 
+<h3>4.2 - CDSApiClient Object</h3>
+<p>The CDSApiClient allows you to call the API.</p>
+<p>The CDSApiClient object contains all the endpoints. It's also create an API call to get a token for you.</p>
+<p>Don't create a new CDSApiClient each time you call the API !</p>
+<p>You can (have to) use the same CDSApiClient for all your API' calls.</p>
+<p>Here an example of how use the same CDSApiClient for many API calls : </p>
+<br/>
+<code>
+
+$client = new \Sdk\ApiClient\CDSApiClient();
+
+$token = $client->init();
+
+if ($token == null || !$client->isTokenValid()) {
+
+    echo "Souci lors de la génération du token";
+    die;
+}
+
+$offerPoint = $client->getOfferPoint();
+
+$offerListResponse = $offerPoint->getOfferList(null);
+
+/** Parse here $offerListResponse **/
+
+$sellerPoint = $client->getSellerPoint();
+
+$sellerResponse = $sellerPoint->getSellerInformation();
+
+/** Parse here $sellerResponse **/
+
+</code>
+<h2>5 - Update the SDK</h2>
+<p>Download the new SDK Zip file from the CDiscount Marketplace API Website</p>
+<p>Erase the SDK folder with the new one</p>
+<p>Erase the vendor folder with the new one</p>
+
+<h2>Notes</h2>
+<p>In the sample, the parametrer error_reporting is set to '-1'. Do not let it in production mode.</p>
