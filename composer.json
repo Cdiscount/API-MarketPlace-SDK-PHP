@@ -11,6 +11,5 @@
         "zendframework/zend-config": "^2.6"
     },
     "license": "GPL-3.0",
-    "minimum-stability": "stable",
     "version": "1.0.4"
 }
