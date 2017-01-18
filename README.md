@@ -66,7 +66,16 @@ You can (have to) use the same CDSApiClient for all your API' calls.
 
 Here an example of how use the same CDSApiClient for many API calls :
 
-`$client = new \Sdk\ApiClient\CDSApiClient(); $token = $client->init(); if ($token == null || !$client->isTokenValid()) { echo "Souci lors de la génération du token"; die; } $offerPoint = $client->getOfferPoint(); $offerListResponse = $offerPoint->getOfferList(null); /** Parse here $offerListResponse **/ $sellerPoint = $client->getSellerPoint(); $sellerResponse = $sellerPoint->getSellerInformation(); /** Parse here $sellerResponse **/`
+`$client = new \Sdk\ApiClient\CDSApiClient();
+$token = $client->init(); 
+if ($token == null || !$client->isTokenValid()) {
+	echo "Souci lors de la génération du token";
+	die;
+}
+$offerPoint = $client->getOfferPoint();
+$offerListResponse = $offerPoint->getOfferList(null); /** Parse here $offerListResponse **/
+$sellerPoint = $client->getSellerPoint();
+$sellerResponse = $sellerPoint->getSellerInformation(); /** Parse here $sellerResponse **/`
 
 
 ## 5 - Update the SDK
