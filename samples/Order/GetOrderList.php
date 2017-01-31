@@ -1,7 +1,6 @@
 <?php
 /**
  * Created by CDiscount
- * Created by CDiscount
  * Date: 20/10/2016
  * Time: 14:07
  */

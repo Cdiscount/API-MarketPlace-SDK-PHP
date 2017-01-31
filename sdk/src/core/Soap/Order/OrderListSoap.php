@@ -14,6 +14,9 @@ use Sdk\Soap\XmlUtils;
 class OrderListSoap
 {
 
+    /**
+     * @var string
+     */
     private $_tag = 'OrderList';
 
     /**
