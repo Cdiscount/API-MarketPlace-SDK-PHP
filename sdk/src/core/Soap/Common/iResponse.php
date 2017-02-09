@@ -85,4 +85,24 @@ abstract class iResponse
     {
         return $this->_hasError;
     }
+
+    /**
+     * Check error message and operation success flag
+     * @param $headerResult
+     * @return bool
+     */
+    protected function isOperationSuccess($headerResult)
+    {
+        $objError = $headerResult['ErrorMessage'];
+
+        if (isset($objError['_']) && strlen($objError['_']) > 0) {
+            $this->_hasError = true;
+            $this->_errorMessage = $objError['_'];
+        }
+        if (isset($headerResult['OperationSuccess']['_']) && $headerResult['OperationSuccess']['_'] == 'true') {
+            return true;
+        }
+        return false;
+    }
+
 }

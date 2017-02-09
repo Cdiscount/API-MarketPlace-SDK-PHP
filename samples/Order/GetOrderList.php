@@ -53,7 +53,6 @@ $orderListResponse = $orderPoint->getOrderList($orderFilter);
 
 if ($orderListResponse->hasError()) {
     echo $orderListResponse->getErrorMessage();
-    die;
 }
 
 $orders = $orderListResponse->getOrderList()->getOrders();
@@ -63,21 +62,21 @@ if ($orders == null) {
     die;
 }
 
+$cnt = 1;
+
 /** @var \Sdk\Order\Order $order */
 foreach ($orders as $order) {
 
     echo "<br/><br/>";
 
-    echo "---------      ORDER     ----------<br/>";
+    echo "---------      ORDER n° " . $cnt . " / " . sizeof($orders) . "  ----------<br/>";
 
-    echo "Order Number : " . $order->getOrderNumber() . "<br/>";
-    echo "Visa : " . $order->getVisaCegid() . "<br/>";
-    echo "ShippingCity : " . $order->getShippingAddress()->getCity() . "<br/>";
-    echo "OrderState : " . $order->getOrderState() . "<br/>";
+    echo "&nbsp;&nbsp;&nbsp;Order Number : " . $order->getOrderNumber() . "<br/>";
+    echo "&nbsp;&nbsp;&nbsp;Visa : " . $order->getVisaCegid() . "<br/>";
+    echo "&nbsp;&nbsp;&nbsp;ShippingCity : " . $order->getShippingAddress()->getCity() . "<br/>";
+    echo "&nbsp;&nbsp;&nbsp;OrderState : " . $order->getOrderState() . "<br/>";
 
-    echo "ArchiveParcelList : " . $order->isArchiveParcelList() . "<br/>";
-
-    echo "---------      ORDER END     ----------<br/>";
+    echo "&nbsp;&nbsp;&nbsp;ArchiveParcelList : " . $order->isArchiveParcelList() . "<br/>";
 
     $parceList = $order->getParcelList()->getParcels();
 
@@ -103,35 +102,42 @@ foreach ($orders as $order) {
         echo "---------      END PARCEL     ----------<br/>";
     }
 
-    echo "---------      ORDERLINELIST     ----------<br/>";
+    $cntOL = 1;
 
     $orderLineList = $order->getOrderLineList()->getOrderLines();
+    /** @var Sdk\Order\OrderLine $orderLine */
     foreach ($orderLineList as $orderLine) {
 
-        echo "AcceptationState = " . $orderLine->getAcceptationState() . "<br/>";
-        echo "CategoryCode = " . $orderLine->getCategoryCode() . "<br/>";
-        echo "DeliveryDateMax = " . $orderLine->getDeliveryDateMax() . "<br/>";
-        echo "DeliveryDateMin = " . $orderLine->getDeliveryDateMin() . "<br/>";
-        echo "HasClaim = " . $orderLine->isHasClaim() . "<br/>";
-        echo "InitialPrice = " . $orderLine->getInitialPrice() . "<br/>";
-        echo "IsCDAV = " . $orderLine->isCdav() . "<br/>";
-        echo "IsNegotiated = " . $orderLine->isIsNegotiated() . "<br/>";
-        echo "IsProductEanGenerated = " . $orderLine->isProductEanGenerated() . "<br/>";
-        echo "Name = " . $orderLine->getName() . "<br/>";
-        echo "ProductCondition = " . $orderLine->getProductCondition() . "<br/>";
-        echo "ProductEan = " . $orderLine->getProductEan() . "<br/>";
-        echo "ProductId = " . $orderLine->getProductId() . "<br/>";
-        echo "PurchasePrice = " . $orderLine->getPurchasePrice() . "<br/>";
-        echo "Quantity = " . $orderLine->getQuantity() . "<br/>";
-        echo "RowId = " . $orderLine->getRowId() . "<br/>";
-        echo "SellerProductId = " . $orderLine->getSellerProductId() . "<br/>";
-        echo "ShippingDateMax = " . $orderLine->getShippingDateMax() . "<br/>";
-        echo "ShippingDateMin = " . $orderLine->getShippingDateMin() . "<br/>";
-        echo "Sku = " . $orderLine->getSku() . "<br/>";
-        echo "SkuParent = " . $orderLine->getSkuParent() . "<br/>";
-        echo "UnitAdditionalShippingCharges = " . $orderLine->getUnitAdditionalShippingCharges() . "<br/>";
-        echo "UnitShippingCharges = " . $orderLine->getUnitShippingCharges() . "<br/>";
+        echo "<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---------      ORDERLINELIST  " . $cntOL . " / " . sizeof($orderLineList) . "    ----------<br/>";
+
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;AcceptationState = " . $orderLine->getAcceptationState() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;CategoryCode = " . $orderLine->getCategoryCode() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DeliveryDateMax = " . $orderLine->getDeliveryDateMax() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DeliveryDateMin = " . $orderLine->getDeliveryDateMin() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;HasClaim = " . $orderLine->isHasClaim() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;InitialPrice = " . $orderLine->getInitialPrice() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IsCDAV = " . $orderLine->isCdav() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IsNegotiated = " . $orderLine->isIsNegotiated() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IsProductEanGenerated = " . $orderLine->isProductEanGenerated() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name = " . $orderLine->getName() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ProductCondition = " . $orderLine->getProductCondition() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ProductEan = " . $orderLine->getProductEan() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ProductId = " . $orderLine->getProductId() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PurchasePrice = " . $orderLine->getPurchasePrice() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantity = " . $orderLine->getQuantity() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;RowId = " . $orderLine->getRowId() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SellerProductId = " . $orderLine->getSellerProductId() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ShippingDateMax = " . $orderLine->getShippingDateMax() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ShippingDateMin = " . $orderLine->getShippingDateMin() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sku = " . $orderLine->getSku() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SkuParent = " . $orderLine->getSkuParent() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UnitAdditionalShippingCharges = " . $orderLine->getUnitAdditionalShippingCharges() . "<br/>";
+        echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UnitShippingCharges = " . $orderLine->getUnitShippingCharges() . "<br/>";
+        echo "<br/><br/>";
+        ++$cntOL;
     }
 
     echo "---------      ORDERLINELISTEND     ----------<br/>";
+    echo "---------      ORDER END     ----------<br/>";
+    ++$cnt;
 }

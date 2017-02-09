@@ -5,13 +5,15 @@
 *   Apache 2.2
 *   Php 5.6
 
-## 2- Clone the Git repository in your root project folder
+## 2.1- Clone the Git repository in your root project folder
 
 The SDK is structured like that :
 
 *   config/ : config files
 *   samples/ : samples folder
 *   sdk/ : content of the Cdiscount SDK (do not modifiy any file of this folder)
+
+## 2.2- Run the 'composer update' command in the root path of the sdk folder to download Zend Framework dependencies
 
 ## 3 - Insert your API's credentials
 

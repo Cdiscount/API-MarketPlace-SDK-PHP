@@ -46,8 +46,6 @@ class SellerPoint
         $bodyXML = $body->generateXML($getSellerInfoXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
 
-        echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         $response = $this->_sendRequest('GetSellerInformation', $envelopeXML);
 
         $sellerInfoResponse = new GetSellerInformationResponse($response);
@@ -69,17 +67,14 @@ class SellerPoint
         $bodyXML = $body->generateXML($getSellerInfoXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
 
-        //echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         $response = $this->_sendRequest('GetSellerIndicators', $envelopeXML);
-
-        //echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $getSellerIndicatorsResponse = new GetSellerIndicatorsResponse($response);
         return $getSellerIndicatorsResponse;
     }
 
     /**
+     * Send the curl request
      * @param $method
      * @param $data
      * @return string
@@ -92,12 +87,6 @@ class SellerPoint
 
         $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
         $response = $request->call();
-
-        /*echo "-------------------<br/>";
-
-        echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
-        echo "-------------------<br/>";*/
 
         return $response;
     }

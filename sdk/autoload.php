@@ -13,6 +13,7 @@ require_once __DIR__ . '/src/core/Soap/BaliseTool.php';
 require_once __DIR__ . '/src/core/Auth/Token.php';
 
 require_once __DIR__ . '/src/core/Common/CommonResult.php';
+require_once __DIR__ . '/src/core/Common/ErrorMessage.php';
 require_once __DIR__ . '/src/core/Common/ReportLog.php';
 require_once __DIR__ . '/src/core/Common/ReportPropertyLog.php';
 

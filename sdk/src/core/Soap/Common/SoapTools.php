@@ -14,7 +14,7 @@ class SoapTools
 
     public static function isSoapValueNull($value)
     {
-        if (isset($value['nil']) && $value['nil'] == 'true') {
+        if ((isset($value['nil']) && $value['nil'] == 'true') || (empty($value))) {
             return true;
         }
         return false;

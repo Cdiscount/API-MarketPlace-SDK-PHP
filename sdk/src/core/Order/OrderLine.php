@@ -8,7 +8,6 @@
 
 namespace Sdk\Order;
 
-
 use Sdk\Soap\Common\SoapTools;
 
 class OrderLine
@@ -24,7 +23,7 @@ class OrderLine
     }
 
     /**
-     * @var string;
+     * @var string
      */
     private $_acceptationState = null;
 
@@ -47,7 +46,7 @@ class OrderLine
     /**
      * @var string
      */
-    private $_categoryCode = null;
+    private $_categoryCode = "";
 
     /**
      * @return string
@@ -298,7 +297,7 @@ class OrderLine
     /**
      * @var string
      */
-    private $_sellerProductId = null;
+    private $_sellerProductId = "";
 
     /**
      * @return string
@@ -480,7 +479,7 @@ class OrderLine
     /**
      * @var string
      */
-    private $_productEan = null;
+    private $_productEan = "";
 
     /**
      * @return string

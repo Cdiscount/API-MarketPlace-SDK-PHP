@@ -21,6 +21,7 @@ use Sdk\Parcel\ParcelItemList;
 use Sdk\Parcel\ParcelList;
 use Sdk\Seller\Address;
 use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\SoapTools;
 
 class GetOrderListResponse extends iResponse
 {
@@ -47,9 +48,8 @@ class GetOrderListResponse extends iResponse
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
 
-        // Check for error messages
-        if (!$this->_hasErrorMessage()) {
-
+        if ($this->isOperationSuccess($this->_dataResponse['s:Body']['GetOrderListResponse']['GetOrderListResult']))
+        {
             $this->_orderList = new OrderList();
 
             /**
@@ -88,7 +88,7 @@ class GetOrderListResponse extends iResponse
     }
 
     /**
-     *
+     * Parse the list of orders
      */
     private function _setOrderList()
     {
@@ -96,7 +96,11 @@ class GetOrderListResponse extends iResponse
 
         $arrays = false;
         if (isset($objOrderResult['Order'])) {
-            foreach ($objOrderResult['Order'] as $order) {
+            $orderResults = $objOrderResult['Order'];
+	        if (isset($orderResults['OrderNumber'])){
+		        $orderResults = array($orderResults);
+	        }
+            foreach ($orderResults as $order) {
 
                 if (is_array($order)) {
                     $orderObj = new Order($order['OrderNumber']);
@@ -130,7 +134,7 @@ class GetOrderListResponse extends iResponse
                     $orderObj->setLastUpdatedDate($order['LastUpdatedDate']);
                     $orderObj->setModifiedDate($order['ModifiedDate']);
 
-                    $orderLineList = $this->_getOrderLineList($order['OrderLineList']['OrderLine']);
+                    $orderLineList = $this->_getOrderLineList($order['OrderLineList']);
                     $orderObj->setOrderLineList($orderLineList);
 
                     //TODO gérer offer
@@ -242,55 +246,70 @@ class GetOrderListResponse extends iResponse
     }
 
     /**
-     * @param $orderLineListOBJ
+     * @param $orderLineListOBJGlobal
      * @return OrderLineList
      */
-    private function _getOrderLineList($orderLineListOBJ)
+    private function _getOrderLineList($orderLineListOBJGlobal)
     {
-        //TODO check multiple orderline
-        $orderLine = new OrderLine($orderLineListOBJ['ProductId']);
+        $orderLines = $orderLineListOBJGlobal['OrderLine'];
+        if (isset($orderLines['ProductId'])){
+            $orderLines = array($orderLines);
+        }
 
         $orderLineList = new OrderLineList();
 
-        $orderLine->setAcceptationState($orderLineListOBJ['AcceptationState']);
-        $orderLine->setCategoryCode($orderLineListOBJ['CategoryCode']);
+        foreach ($orderLines as $orderLineListOBJ)
+        {
+            $orderLine = new OrderLine($orderLineListOBJ['ProductId']);
 
-        /**
-         * Delivery Dates
-         */
-        $orderLine->setDeliveryDateMax($orderLineListOBJ['DeliveryDateMax']);
-        $orderLine->setDeliveryDateMin($orderLineListOBJ['DeliveryDateMin']);
+            if (isset($orderLineListOBJ['AcceptationState']) && !SoapTools::isSoapValueNull($orderLineListOBJ['AcceptationState'])) {
+                $orderLine->setAcceptationState($orderLineListOBJ['AcceptationState']);
+            }
+            if (isset($orderLineListOBJ['CategoryCode']) && !SoapTools::isSoapValueNull($orderLineListOBJ['CategoryCode'])) {
+                $orderLine->setCategoryCode($orderLineListOBJ['CategoryCode']);
+            }
 
-        if ($orderLineListOBJ['HasClaim'] == 'true') {
-            $orderLine->setHasClaim(true);
-        }
-        $orderLine->setInitialPrice($orderLineListOBJ['InitialPrice']);
-        if ($orderLineListOBJ['IsCDAV'] == 'true') {
-            $orderLine->setCdav(true);
-        }
-        if ($orderLineListOBJ['IsNegotiated'] == 'true') {
-            $orderLine->setIsNegotiated(true);
-        }
-        if ($orderLineListOBJ['IsProductEanGenerated'] == 'true') {
-            $orderLine->setProductEanGenerated(true);
-        }
-        $orderLine->setName($orderLineListOBJ['Name']);
-        //TODO add orderlinechildlist
+            /**
+             * Delivery Dates
+             */
+            $orderLine->setDeliveryDateMax($orderLineListOBJ['DeliveryDateMax']);
+            $orderLine->setDeliveryDateMin($orderLineListOBJ['DeliveryDateMin']);
 
-        $orderLine->setProductCondition($orderLineListOBJ['ProductCondition']);
-        $orderLine->setProductEan($orderLineListOBJ['ProductEan']);
-        $orderLine->setPurchasePrice(floatval($orderLineListOBJ['PurchasePrice']));
-        $orderLine->setQuantity(intval($orderLineListOBJ['Quantity']));
-        $orderLine->setRowId(intval($orderLineListOBJ['RowId']));
-        $orderLine->setSellerProductId($orderLineListOBJ['SellerProductId']);
-        $orderLine->setShippingDateMax($orderLineListOBJ['ShippingDateMax']);
-        $orderLine->setShippingDateMin($orderLineListOBJ['ShippingDateMin']);
-        $orderLine->setSku($orderLineListOBJ['Sku']);
-        $orderLine->setSkuParent($orderLineListOBJ['SkuParent']);
-        $orderLine->setUnitAdditionalShippingCharges(intval($orderLineListOBJ['UnitAdditionalShippingCharges']));
-        $orderLine->setUnitShippingCharges(intval($orderLineListOBJ['UnitShippingCharges']));
+            if ($orderLineListOBJ['HasClaim'] == 'true') {
+                $orderLine->setHasClaim(true);
+            }
+            $orderLine->setInitialPrice($orderLineListOBJ['InitialPrice']);
+            if ($orderLineListOBJ['IsCDAV'] == 'true') {
+                $orderLine->setCdav(true);
+            }
+            if ($orderLineListOBJ['IsNegotiated'] == 'true') {
+                $orderLine->setIsNegotiated(true);
+            }
+            if ($orderLineListOBJ['IsProductEanGenerated'] == 'true') {
+                $orderLine->setProductEanGenerated(true);
+            }
+            $orderLine->setName($orderLineListOBJ['Name']);
+            //TODO add orderlinechildlist
 
-        $orderLineList->addOrderLine($orderLine);
+            $orderLine->setProductCondition($orderLineListOBJ['ProductCondition']);
+            if (isset($orderLineListOBJ['ProductEan']) && !SoapTools::isSoapValueNull($orderLineListOBJ['ProductEan'])) {
+                $orderLine->setProductEan($orderLineListOBJ['ProductEan']);
+            }
+            $orderLine->setPurchasePrice(floatval($orderLineListOBJ['PurchasePrice']));
+            $orderLine->setQuantity(intval($orderLineListOBJ['Quantity']));
+            $orderLine->setRowId(intval($orderLineListOBJ['RowId']));
+            if (isset($orderLineListOBJ['SellerProductId']) && !SoapTools::isSoapValueNull($orderLineListOBJ['SellerProductId'])) {
+                $orderLine->setSellerProductId($orderLineListOBJ['SellerProductId']);
+            }
+            $orderLine->setShippingDateMax($orderLineListOBJ['ShippingDateMax']);
+            $orderLine->setShippingDateMin($orderLineListOBJ['ShippingDateMin']);
+            $orderLine->setSku($orderLineListOBJ['Sku']);
+            $orderLine->setSkuParent($orderLineListOBJ['SkuParent']);
+            $orderLine->setUnitAdditionalShippingCharges(intval($orderLineListOBJ['UnitAdditionalShippingCharges']));
+            $orderLine->setUnitShippingCharges(intval($orderLineListOBJ['UnitShippingCharges']));
+
+            $orderLineList->addOrderLine($orderLine);
+        }
 
         return $orderLineList;
     }
