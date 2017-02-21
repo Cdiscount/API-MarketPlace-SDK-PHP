@@ -22,7 +22,7 @@ if ($token == null || !$client->isTokenValid()) {
 
 /******* GET MODEL LIST *******/
 
-$modelFilter = new \Sdk\Product\ModelFilter(/* CategoryCode */ '06040201');
+$modelFilter = new \Sdk\Product\ModelFilter(/* CategoryCode */ '0D010901');
 
 $productPoint = $client->getProductPoint();
 
@@ -45,4 +45,9 @@ foreach ($getModelListResponse->getModelList() as $productModel) {
         }
     }
 
+    echo "<br/>MandatoryModelProperties : <br/>";
+
+    foreach ($productModel->getMandatoryModelProperties() as $mandatoryModelProperty) {
+        echo " -- " . $mandatoryModelProperty . "<br/>";
+    }
 }

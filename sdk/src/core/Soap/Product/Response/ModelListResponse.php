@@ -12,6 +12,7 @@ namespace Sdk\Soap\Product\Response;
 use Sdk\Product\KeyValueProperty;
 use Sdk\Product\ProductModel;
 use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\SoapTools;
 
 class ModelListResponse extends iResponse
 {
@@ -104,6 +105,14 @@ class ModelListResponse extends iResponse
             }
 
             $productModel->addKeyValueProperty($keyvalueObj);
+        }
+
+        if (isset($productModelXML['Definition']['MandatoryModelProperties']) && !SoapTools::isSoapValueNull($productModelXML['Definition']['MandatoryModelProperties'])
+            && isset($productModelXML['Definition']['MandatoryModelProperties']['a:string'])) {
+
+            foreach ($productModelXML['Definition']['MandatoryModelProperties']['a:string'] as $mandatoryModelProperty) {
+                $productModel->addMandatoryModelProperty($mandatoryModelProperty);
+            }
         }
 
         array_push($this->_modelList, $productModel);
