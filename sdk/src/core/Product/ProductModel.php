@@ -89,6 +89,28 @@ class ProductModel
     }
 
     /**
+     * @var array
+     */
+    private $_mandatoryModelProperties= null;
+
+    /**
+     * @param $mandatoryModelProperty
+     *
+     */
+    public function addMandatoryModelProperty($mandatoryModelProperty)
+    {
+        array_push($this->_mandatoryModelProperties, $mandatoryModelProperty);
+    }
+
+    /**
+     * @return array
+     */
+    public function getMandatoryModelProperties()
+    {
+        return $this->_mandatoryModelProperties;
+    }
+
+    /**
      * @var string
      */
     private $_productXmlStructure = null;
@@ -117,9 +139,6 @@ class ProductModel
     {
         $this->_modelId = $modelD;
         $this->_keyValueProperties = array();
+        $this->_mandatoryModelProperties = array();
     }
-
-
-
-
 }
