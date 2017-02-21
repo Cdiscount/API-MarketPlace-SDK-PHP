@@ -5,13 +5,15 @@
 *   Apache 2.2
 *   Php 5.6
 
-## 2- Clone the Git repository in your root project folder
+## 2.1- Clone the Git repository in your root project folder
 
 The SDK is structured like that :
 
 *   config/ : config files
 *   samples/ : samples folder
 *   sdk/ : content of the Cdiscount SDK (do not modifiy any file of this folder)
+
+## 2.2- Run the 'composer update' command in the root path of the sdk folder to download Zend Framework dependencies
 
 ## 3 - Insert your API's credentials
 
@@ -66,7 +68,16 @@ You can (have to) use the same CDSApiClient for all your API' calls.
 
 Here an example of how use the same CDSApiClient for many API calls :
 
-`$client = new \Sdk\ApiClient\CDSApiClient(); $token = $client->init(); if ($token == null || !$client->isTokenValid()) { echo "Souci lors de la génération du token"; die; } $offerPoint = $client->getOfferPoint(); $offerListResponse = $offerPoint->getOfferList(null); /** Parse here $offerListResponse **/ $sellerPoint = $client->getSellerPoint(); $sellerResponse = $sellerPoint->getSellerInformation(); /** Parse here $sellerResponse **/`
+`$client = new \Sdk\ApiClient\CDSApiClient();
+$token = $client->init(); 
+if ($token == null || !$client->isTokenValid()) {
+	echo "Souci lors de la génération du token";
+	die;
+}
+$offerPoint = $client->getOfferPoint();
+$offerListResponse = $offerPoint->getOfferList(null); /** Parse here $offerListResponse **/
+$sellerPoint = $client->getSellerPoint();
+$sellerResponse = $sellerPoint->getSellerInformation(); /** Parse here $sellerResponse **/`
 
 
 ## 5 - Update the SDK

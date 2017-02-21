@@ -15,7 +15,7 @@ $client = new \Sdk\ApiClient\CDSApiClient();
 $token = $client->init();
 
 if ($token == null || !$client->isTokenValid()) {
-    echo "Oups, souci lors de la génération du token";
+    $client->getTokenGenerationError()->displayErrorMessage();
     die;
 }
 
