@@ -1,112 +1,115 @@
 <?php
-/**
- * Created by Cdiscount.
- * Date: 13/12/2016
- * Time: 14:46
+
+/* 
+ * Created by Cdiscount
+ * Date : 18/01/2017
+ * Time : 15:46
  */
-
-
 namespace Sdk\Soap\Order;
-
 
 use Sdk\Soap\BaliseTool;
 
 class ManageParcelSoap extends BaliseTool
 {
-    #region privateTAG
-
-    /**
+    /*
      * @var string
      */
-    private $_manageParcelRequestTAG = 'manageParcelRequest';
-
-    /**
+    private $_manageParcelRequestTag = 'manageParcelRequest';
+    
+    /*
      * @var string
      */
-    private $_ScopusIdTAG = 'ScopusId';
-
-    /**
+    private $_scopusIdTAG = 'ScopusId';
+    
+    /*
      * @var string
      */
     private $_parcelActionsListTAG = 'ParcelActionsList';
-
-    /**
+    
+    /*
      * @var string
      */
-    private $_ParcelInfosTAG = 'ParcelInfos';
-
-    /**
+    private $_parcelInfosTAG = 'ParcelInfos';
+    
+    /*
      * @var string
      */
-    private $_ParcelNumberTAG = 'ParcelNumber';
-
-    /**
+    private $_parcelNumberTAG = 'ParcelNumber';
+    
+    /*
      * @var string
      */
-    private $_SkuTAG = 'Sku';
-
-    /**
+    private $_manageParcelTAG = 'ManageParcel';
+    
+    /*
      * @var string
      */
-    private $_parcelActionsTAG = 'ManageParcel';
-
-    #endregion
-
-    /**
-     * ManageParcelSoap constructor.
-     * @param string $xmlns
-     */
-    public function __construct($xmlns = 'xmlns="http://www.cdiscount.com"')
+    private $_skuTAG = 'Sku';
+    
+    /*
+    * ManageParcelSoap constructor
+    * @param string $xmlns
+    */
+    public function __construct($xmlns = 'xmlns="http://www.cdiscount.com"') 
     {
         $this->_xmlns = $xmlns;
         $this->_tag = 'ManageParcel';
         parent::__construct();
     }
-
-    /**
+    
+    /*
      * @param $request \Sdk\Order\ManageParcelRequest
-     * @param $namespace
-     * @return string
      */
-    public function generateManageParcelRequestXML($request, $namespace)
+    public function generateManageParcelRequestXml($request)
     {
+        $namespace = 'cdis:';
+        /*
+         * @param $namespace
+         */        
         $this->_xmlUtil->setGlobalPrefix($namespace);
-
-        /** Balise ouvrante manageParcelRequest */
-        $xml = $this->_xmlUtil->generateOpenBalise($this->_manageParcelRequestTAG);
-
-        /** Balise ouvrante parcelActionsList */
+        /*
+         * balise ouvrante ManageParcelrequest
+         */
+        $xml = $this->_xmlUtil->generateOpenBalise($this->_manageParcelRequestTag);
+        
+        /*
+         * Balise ouvrante ParcelActionsList
+         */
         $xml .= $this->_xmlUtil->generateOpenBalise($this->_parcelActionsListTAG);
-
-        /** @var \Sdk\Order\ParcelInfos $parcelInfo */
-        foreach ($request->getParcelActionsList() as $parcelInfo) {
-
-
-            /** Balise ouvrante ParcelInfos */
-            $xml .= $this->_xmlUtil->generateOpenBalise($this->_ParcelInfosTAG);
-
-            /** Balise parcelActions */
-            $xml .= $this->_xmlUtil->generateBalise($this->_parcelActionsTAG, $parcelInfo->getParcelActions());
-            /** Balise ParcelNumber */
-            $xml .= $this->_xmlUtil->generateBalise($this->_ParcelNumberTAG, $parcelInfo->getParcelNumber());
-            /** Balise SKU */
-            $xml .= $this->_xmlUtil->generateBalise($this->_SkuTAG, $parcelInfo->getSku());
-
-            /** Balise fermante ParcelInfos */
-            $xml .= $this->_xmlUtil->generateCloseBalise($this->_ParcelInfosTAG);
+        /*
+         * @var param $parcelInfos \Sdk\Order\ParcelInfos
+         */
+        foreach($request->getParcelActionsList() as $parcelInfos)
+        {
+            //balise ouvrante parcelInfos
+            $xml .= $this->_xmlUtil->generateOpenBalise($this->_parcelInfosTAG);
+            
+            //balise manageParcel
+            $xml .= $this->_xmlUtil->generateBalise($this->_manageParcelTAG, $parcelInfos->getManageParcel());
+            
+            //Balise ParcelNumber
+            $xml .= $this->_xmlUtil->generateBalise($this->_parcelNumberTAG, $parcelInfos->getParcelNumber());
+            
+            //Balise Sku
+            $xml .= $this->_xmlUtil->generateBalise($this->_skuTAG, $parcelInfos->getSku());
+            
+            //Balise fermante ParcelInfo
+            $xml .= $this->_xmlUtil->generateCloseBalise($this->_parcelInfosTAG);
         }
-
-        /** Balise fermante parcelActionsList */
+        
+        //Balise fermante ParcelActionsList
         $xml .= $this->_xmlUtil->generateCloseBalise($this->_parcelActionsListTAG);
-
-        /** Balise ScopusId */
-        $xml .= $this->_xmlUtil->generateBalise($this->_ScopusIdTAG, $request->getScopusId());
-
-        /** Balise fermante manageParcelRequest */
-        $xml .= $this->_xmlUtil->generateCloseBalise($this->_manageParcelRequestTAG);
-
+        
+        /*
+         * Balise scopusId
+         */
+        $xml .= $this->_xmlUtil->generateBalise($this->_scopusIdTAG, $request->getScopusId());
+        
+        //balise fermante ManageParcel
+        $xml .= $this->_xmlUtil->generateCloseBalise($this->_manageParcelRequestTag);
+        
         $this->_xmlUtil->setGlobalPrefix('');
-
+        
         return $xml;
     }
 }

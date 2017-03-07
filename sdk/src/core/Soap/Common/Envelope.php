@@ -2,6 +2,8 @@
 /**
  * Created by CDiscount
  * Created by CDiscount
+ * History : 
+ * MSajid : add new method addNameSpace
  * Date: 03/10/2016
  * Time: 15:03
  */
@@ -45,12 +47,12 @@ class Envelope
     }
 
     /**
-     * Add a namespace to the enveloppe
+     * Add a new namespace
      *
-     * @param $namespace
+     * @param $xmlns
      */
-    public function addNamespace($namespace)
+    public function addNameSpace($xmlns)
     {
-        $this->_xmlns .=  ' ' . $namespace;
+        $this->_xmlns .= ' ' . $xmlns;
     }
 }

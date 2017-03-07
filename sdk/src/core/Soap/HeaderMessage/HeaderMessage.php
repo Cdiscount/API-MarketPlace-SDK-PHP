@@ -16,54 +16,26 @@ use Sdk\Soap\XmlUtils;
 class HeaderMessage
 {
 
-    /**
-     * @var string
-     */
     private $_headerChildrenPrefix = 'a:';
 
-    /**
-     * @var string
-     */
     private $_version;
 
-    /**
-     * @var string
-     */
     private $_versionTAG = 'Version';
 
-    /**
-     * @var string
-     */
     private $_headerTAG = 'headerMessage';
 
-    /**
-     * @var null|XmlUtils
-     */
     private $_xmlUtil = null;
 
-    /**
-     * @var string
-     */
     private $_xmlnsa = 'xmlns:a="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"';
 
-    /**
-     * @var string
-     */
     private $_xmlnsi = 'xmlns:i="http://www.w3.org/2001/XMLSchema-instance"';
 
-    /**
-     * HeaderMessage constructor.
-     * @param string $version
-     */
     public function __construct($version = '1.0')
     {
         $this->_version = $version;
         $this->_xmlUtil = new XmlUtils($this->_headerChildrenPrefix);
     }
 
-    /**
-     * @return string
-     */
     public function generateHeader()
     {
         $inlines = array($this->_xmlnsa, $this->_xmlnsi);
@@ -81,5 +53,38 @@ class HeaderMessage
         $headerMessage = $headerBaliseOpen . $context->generateXML() . $localization->generateXML() . $security->generateXML() . $version . $headerBaliseClose;
 
         return $headerMessage;
+
+
+
+        /*echo $context->generateXML();
+        echo $localization->generateXML();
+        echo $security->generateXML();*/
+
+        /*
+
+        $e->generateXML();
+
+        $newsXML = new SimpleXMLElement("<news></news>");
+        $newsXML->addAttribute('newsPagePrefix', 'value goes here');
+        $newsIntro = $newsXML->addChild('content');
+        $newsIntro->addAttribute('type', 'latest');
+        echo $newsXML->asXML();
+        */
+
+        /*
+        $client = new SoapClientDebug(
+            null,
+            array(
+                'location' => 'https://example.com/ExampleWebServiceDL/services/ExampleHandler',
+                'uri' => 'http://example.com/wsdl',
+                'trace' => 1,
+                'use' => SOAP_LITERAL,
+                'style' => SOAP_DOCUMENT,
+            )
+        );
+        $params = new \SoapVar("<Echo><a:Acquirer><Id>MyId</Id><UserId>MyUserId</UserId><Password>MyPassword</Password></a:Acquirer></Echo>", XSD_ANYXML);
+        $result = $client->MethodNameIsIgnored($params);
+        */
     }
+
 }

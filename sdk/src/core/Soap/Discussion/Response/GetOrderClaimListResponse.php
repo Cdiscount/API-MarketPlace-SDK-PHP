@@ -12,6 +12,7 @@ namespace Sdk\Soap\Discussion\Response;
 use Sdk\Discussion\Message;
 use Sdk\Discussion\OrderClaim;
 use Sdk\Soap\Common\iResponse;
+use Sdk\Soap\Common\SoapTools;
 
 class GetOrderClaimListResponse extends iResponse
 {
@@ -45,8 +46,7 @@ class GetOrderClaimListResponse extends iResponse
         $this->_dataResponse = $reader->fromString($response);
 
         // Check For error message
-        if (!$this->_hasErrorMessage()) {
-
+        if ($this->isOperationSuccess($this->_dataResponse['s:Body']['GetOrderClaimListResponse']['GetOrderClaimListResult'])) {
             /**
              * Global informations
              */
@@ -54,7 +54,9 @@ class GetOrderClaimListResponse extends iResponse
 
             $this->_orderClaimList = array();
 
-            $this->_generateOrderClaimListFromXML($this->_dataResponse['s:Body']['GetOrderClaimListResponse']['GetOrderClaimListResult']['OrderClaimList']);
+            if (!SoapTools::isSoapValueNull($this->_dataResponse['s:Body']['GetOrderClaimListResponse']['GetOrderClaimListResult']['OrderClaimList'])) {
+                $this->_generateOrderClaimListFromXML($this->_dataResponse['s:Body']['GetOrderClaimListResponse']['GetOrderClaimListResult']['OrderClaimList']);
+            }
         }
     }
 
@@ -66,25 +68,6 @@ class GetOrderClaimListResponse extends iResponse
         $objInfoResult = $this->_dataResponse['s:Body']['GetOrderClaimListResponse']['GetOrderClaimListResult'];
         $this->_tokenID = $objInfoResult['TokenId'];
         $this->_sellerLogin = $objInfoResult['SellerLogin'];
-    }
-
-    /**
-     * Check if the response has an error message
-     * @return bool
-     */
-    private function _hasErrorMessage()
-    {
-        $objError = $this->_dataResponse['s:Body']['GetOrderClaimListResponse']['GetOrderClaimListResult']['ErrorMessage'];
-        $this->_errorList = array();
-
-        if (isset($objError['_']) && strlen($objError['_']) > 0) {
-
-            $this->_hasError = true;
-            $this->_errorMessage = $objError['_'];
-            array_push($this->_errorList, $this->_errorMessage);
-            return true;
-        }
-        return false;
     }
 
     /**

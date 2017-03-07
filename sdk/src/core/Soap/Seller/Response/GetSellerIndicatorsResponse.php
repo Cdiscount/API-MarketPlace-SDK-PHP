@@ -109,7 +109,7 @@ class GetSellerIndicatorsResponse extends iResponse
                     $sellerIndicator->setThresholdType($sellerIndicatorXML['ThresholdType']);
                 }
                 if (isset($sellerIndicatorXML['ValueD30']) && !SoapTools::isSoapValueNull($sellerIndicatorXML['ValueD30'])) {
-                    $sellerIndicator->setValueD30(floatval($sellerIndicatorXML['ValueD30']));
+                    $sellerIndicator->setValueD30(floatval(['ValueD30']));
                 }
                 if (isset($sellerIndicatorXML['ValueD60']) && !SoapTools::isSoapValueNull($sellerIndicatorXML['ValueD60'])) {
                     $sellerIndicator->setValueD60(floatval($sellerIndicatorXML['ValueD60']));

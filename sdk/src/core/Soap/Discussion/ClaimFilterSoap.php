@@ -12,14 +12,28 @@ use Sdk\Discussion\ClaimFilter;
 
 class ClaimFilterSoap extends FilterSoap
 {
+    /**
+     * @var string TAG
+     */
     private $_OnlyWithMessageFromCdsCustomerServiceTAG = 'OnlyWithMessageFromCdsCustomerService';
 
     /**
      * ClaimFilterSoap constructor.
+     * @param array $optionalsNamespaces
      */
-    public function __construct()
+    public function __construct($optionalsNamespaces)
     {
-        parent::__construct('xmlns:i="http://www.w3.org/2001/XMLSchema-instance"', 'orderClaimFilter');
+        if (isset($optionalsNamespaces)) {
+            foreach ($optionalsNamespaces as $namespace) {
+                if ($this->startsWith($namespace, 'xmlns:cdis')) {
+                    $this->specificConstructor('cdis:', 'orderClaimFilter');
+                    break;
+                }
+            }
+        }
+        else {
+            parent::__construct('xmlns:i="http://www.w3.org/2001/XMLSchema-instance"', 'orderClaimFilter');
+        }
     }
 
     /**
@@ -45,11 +59,29 @@ class ClaimFilterSoap extends FilterSoap
         if ($child->getOrderNumberList() == null) {
             $this->_childrens .= $this->_xmlUtil->generateAutoClosingBaliseWithInline($this->_OrderNumberListTAG, 'i:nil', 'true');
         }
+        else {
+            /**
+             * Order number list
+             */
+            /** @var string $orderNumber */
+            foreach ($child->getOrderNumberList() as $orderNumber) {
+
+                $globalPrefix = $this->_xmlUtil->getGlobalPrefix();
+                $this->_xmlUtil->setGlobalPrefix('');
+
+                $this->_childrens .= $this->_xmlUtil->generateOpenBalise($this->_OrderNumberListTAG);
+                $this->_childrens .= $this->_xmlUtil->generateBalise($this->_StringTAG, $orderNumber);
+                $this->_childrens .= $this->_xmlUtil->generateCloseBalise($this->_OrderNumberListTAG);
+
+                $this->_xmlUtil->setGlobalPrefix($globalPrefix);
+            }
+        }
 
         if (!$child->isOnlyMessageFromCDSCustomerService()) {
-            $this->_childrens .= $this->_xmlUtil->generateAutoClosingBaliseWithInline($this->_OnlyWithMessageFromCdsCustomerServiceTAG, 'i:nil', 'true');
+            $this->_childrens .= $this->_xmlUtil->generateBalise($this->_OnlyWithMessageFromCdsCustomerServiceTAG, 'false');
+        }
+        else {
+            $this->_childrens .= $this->_xmlUtil->generateBalise($this->_OnlyWithMessageFromCdsCustomerServiceTAG, 'true');
         }
     }
-
-
 }

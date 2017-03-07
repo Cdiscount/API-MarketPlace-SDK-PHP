@@ -153,15 +153,17 @@ class GetSellerInformationResponse extends iResponse
         $objInfoResult = $this->_dataResponse['s:Body']['GetSellerInformationResponse']['GetSellerInformationResult']['OfferPoolList'];
 
         $arrays = false;
-        foreach ($objInfoResult['OfferPool'] as $offer) {
+        if (isset($objInfoResult['OfferPool'])) {
+            foreach ($objInfoResult['OfferPool'] as $offer) {
 
-            if (is_array($offer)) {
-                $arrays = true;
-                array_push($this->_offerPoolList, new OfferPool($offer['Id'], $offer['Description']));
+                if (is_array($offer)) {
+                    $arrays = true;
+                    array_push($this->_offerPoolList, new OfferPool($offer['Id'], $offer['Description']));
+                }
             }
-        }
-        if (!$arrays) {
-            array_push($this->_offerPoolList, new OfferPool($objInfoResult['OfferPool']['Id'], $objInfoResult['OfferPool']['Description']));
+            if (!$arrays) {
+                array_push($this->_offerPoolList, new OfferPool($objInfoResult['OfferPool']['Id'], $objInfoResult['OfferPool']['Description']));
+            }
         }
     }
 

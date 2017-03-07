@@ -11,10 +11,6 @@ namespace Sdk\Soap\Product\Response;
 
 class GetAllModelListResponse extends ModelListResponse
 {
-    /**
-     * GetAllModelListResponse constructor.
-     * @param $dataResponse
-     */
     public function __construct($dataResponse)
     {
         parent::__construct('GetAllModelListResponse', 'GetAllModelListResult');

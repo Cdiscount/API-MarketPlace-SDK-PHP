@@ -20,4 +20,25 @@ class ValidateOrderLine extends OrderLine
         parent::setAcceptationState($acceptationState);
         parent::__construct(0);
     }
+    
+    /*
+     * @var enum
+     */
+    private $_typeOfReturn = \Sdk\Order\AskingForReturnType::AskingForReturn;
+    
+    /*
+     * @return enum
+     */
+    public function getTypeOfReturn()
+    {
+        return $this->_typeOfReturn;
+    }
+    
+    /*
+     * @param $typeOfReturn Sdk\Order\AskingForReturnType
+     */
+    public function setTypeOfReturn($typeOfReturn)
+    {
+        $this->_typeOfReturn = $typeOfReturn;
+    }
 }

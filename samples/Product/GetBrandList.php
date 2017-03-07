@@ -1,7 +1,7 @@
 <?php
 /**
- * Created by CDiscount
- * Created by CDiscount
+ * Created by guillaume.cochard.
+ * Mail: guillaume.cochard@ext.cdiscount.com
  * Date: 02/11/2016
  * Time: 10:24
  */

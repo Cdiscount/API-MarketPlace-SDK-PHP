@@ -1,78 +1,84 @@
 <?php
-/**
- * Created by Cdiscount.
- * Date: 13/12/2016
- * Time: 17:52
+
+/* 
+ * Created by Cdiscount
+ * Date : 19/01/2017
+ * Time : 15:46
  */
 
-
 namespace Sdk\Order;
-
-
 use Sdk\Common\CommonResult;
 
 class ParcelActionResult extends CommonResult
 {
-    /**
+    /*
      * @var string
      */
     private $_actionType = null;
-
-    /**
-     * @return string
-     */
-    public function getActionType()
-    {
-        return $this->_actionType;
-    }
-
-    /**
-     * @param string $actionType
-     */
-    public function setActionType($actionType)
-    {
-        $this->_actionType = $actionType;
-    }
-
-    /**
+    
+    /*
      * @var bool
      */
-    private $_actionCreated = false;
-
-    /**
-     * @return boolean
-     */
-    public function isActionCreated()
-    {
-        return $this->_actionCreated;
-    }
-
-    /**
-     * @param boolean $actionCreated
-     */
-    public function setActionCreated($actionCreated)
-    {
-        $this->_actionCreated = $actionCreated;
-    }
-
-    /**
+    private $_isActionCreated = false;
+    
+    /*
      * @var string
      */
-    private $_parcelNumber = null;
+    private  $_parcelNumber = null;
+    
+    /*
+     * ParcelActionResult constructor, initialize array erorList the commonResult
+     */
+    public function __construct() 
+    {
+        $this->_errorList = array();
+    }
 
-    /**
+    /*
+     * @param $parcelNumber
+     */
+    public function setParcelNumber($parcelNumber) 
+    {
+        $this->_parcelNumber = $parcelNumber;
+    }
+
+    /*
      * @return string
      */
     public function getParcelNumber()
     {
         return $this->_parcelNumber;
     }
-
-    /**
-     * @param string $parcelNumber
+    
+    /*
+     * return string
      */
-    public function setParcelNumber($parcelNumber)
+    public function getActionType()
     {
-        $this->_parcelNumber = $parcelNumber;
+        return $this->_actionType;
+    }
+    
+    /*
+     * @param $actionType
+     */
+    public function setActionType($actionType)
+    {
+        $this->_actionType = $actionType;
+    }
+    
+    /*
+     * @return bool
+     */
+    public function isActionCreated()
+    {
+        return $this->_isActionCreated;
+    }
+    
+    /*
+     * @param $isActionCreated
+     */
+    public function setIsActionCreated($isActionCreated)
+    {
+        $this->_isActionCreated = $isActionCreated;
     }
 }

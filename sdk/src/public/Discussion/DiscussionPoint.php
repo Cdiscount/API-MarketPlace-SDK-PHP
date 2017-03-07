@@ -8,7 +8,6 @@
 
 namespace Sdk\Discussion;
 
-
 use Sdk\ConfigTools\ConfigFileLoader;
 use Sdk\HttpTools\CDSApiSoapRequest;
 use Sdk\Soap\Common\Body;
@@ -35,12 +34,18 @@ class DiscussionPoint
      */
     public function getOrderClaimList($claimFilter)
     {
-        $getOrderClaimList = new GetOrderClaimList();
-        $claimFilterSoap = new ClaimFilterSoap();
+        $optionalsNamespaces = array('xmlns:cdis="http://www.cdiscount.com"', 'xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"');
 
-        $envelopeXML = $this->_buildGenericListXML($getOrderClaimList, $claimFilterSoap, $claimFilter);
+        $getOrderClaimList = new GetOrderClaimList();
+        $claimFilterSoap = new ClaimFilterSoap($optionalsNamespaces);
+
+        $envelopeXML = $this->_buildGenericListXML($getOrderClaimList, $claimFilterSoap, $claimFilter, $optionalsNamespaces);
+
+        echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $response = $this->_sendRequest('GetOrderClaimList', $envelopeXML);
+
+        echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $getOrderClaimListResponse = new GetOrderClaimListResponse($response);
         return $getOrderClaimListResponse;
@@ -122,11 +127,25 @@ class DiscussionPoint
      * @param $questionList
      * @param $filterSoap
      * @param $filter
+     * @param $namespaces array string : optionals namespaces
      * @return string
      */
-    private function _buildGenericListXML($questionList, $filterSoap, $filter)
+    private function _buildGenericListXML($questionList, $filterSoap, $filter, $namespaces = null)
     {
+        /**
+         * Enveloppe
+         */
         $envelope = new Envelope();
+
+        /**
+         * Adding optional namepaces
+         */
+        if (isset($namespaces)) {
+            foreach ($namespaces as $namespace) {
+                $envelope->addNameSpace($namespace);
+            }
+        }
+
         $body = new Body();
 
         $header = new HeaderMessage();

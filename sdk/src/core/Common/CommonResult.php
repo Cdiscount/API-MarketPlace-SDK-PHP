@@ -1,20 +1,19 @@
 <?php
-/**
- * Created by Cdiscount.
- * Date: 14/12/2016
- * Time: 14:12
- */
 
+/* 
+ * Created by Cdiscount
+ * Date : 31/01/2017
+ * Time : 10:58
+ */
 
 namespace Sdk\Common;
 
-
-class CommonResult
+abstract class CommonResult 
 {
-    /**
+    /*
      * @var string
      */
-    private $_errorMessage = null;
+    protected $_errorMessage;
 
     /**
      * @return string
@@ -23,11 +22,11 @@ class CommonResult
     {
         return $this->_errorMessage;
     }
-
-    /**
-     * @param string $errorMessage
+    
+    /*
+     * @param $errorMessage
      */
-    public function setErrorMessage($errorMessage)
+    public function  setErrorMessage($errorMessage)
     {
         $this->_errorMessage = $errorMessage;
     }
@@ -35,18 +34,18 @@ class CommonResult
     /**
      * @var bool
      */
-    private $_operationSuccess = false;
+    protected $_operationSuccess;
 
     /**
-     * @return boolean
+     * @return mixed
      */
     public function isOperationSuccess()
     {
         return $this->_operationSuccess;
     }
-
-    /**
-     * @param boolean $operationSuccess
+    
+    /*
+     * @param $operationSuccess
      */
     public function setOperationSuccess($operationSuccess)
     {
@@ -54,51 +53,9 @@ class CommonResult
     }
 
     /**
-     * @var string
-     */
-    private $_sellerLogin = null;
-
-    /**
-     * @return string
-     */
-    public function getSellerLogin()
-    {
-        return $this->_sellerLogin;
-    }
-
-    /**
-     * @param string $sellerLogin
-     */
-    public function setSellerLogin($sellerLogin)
-    {
-        $this->_sellerLogin = $sellerLogin;
-    }
-
-    /**
-     * @var string
-     */
-    private $_tokenId = null;
-
-    /**
-     * @return string
-     */
-    public function getTokenId()
-    {
-        return $this->_tokenId;
-    }
-
-    /**
-     * @param string $tokenId
-     */
-    public function setTokenId($tokenId)
-    {
-        $this->_tokenId = $tokenId;
-    }
-
-    /**
      * @var array
      */
-    private $_errorList = null;
+    protected $_errorList;
 
     /**
      * @return array
@@ -107,20 +64,12 @@ class CommonResult
     {
         return $this->_errorList;
     }
-
-    /**
-     * @param $error
+    
+    /*
+     * @param $errorMessage
      */
-    public function addErrorToList($error)
+    public function addErrorToList($errorMessage)
     {
-        array_push($this->_errorList, $error);
-    }
-
-    /**
-     * CommonResult constructor.
-     */
-    public function __construct()
-    {
-        $this->_errorList = array();
+        array_push($this->_errorList, $errorMessage);
     }
 }

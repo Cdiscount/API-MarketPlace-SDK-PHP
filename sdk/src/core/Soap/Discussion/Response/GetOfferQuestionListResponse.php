@@ -91,10 +91,6 @@ class GetOfferQuestionListResponse extends iResponse
      */
     private function _generateOfferQuestionListFromXML($offerQuestionListXML)
     {
-        if (!isset($offerQuestionListXML['OfferQuestion'])) {
-            return;
-        }
-
         foreach ($offerQuestionListXML['OfferQuestion'] as $questionXML) {
 
             $offerQuestion = new OfferQuestion($questionXML['Id']);

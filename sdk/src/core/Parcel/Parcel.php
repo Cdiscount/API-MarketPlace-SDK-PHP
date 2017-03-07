@@ -154,4 +154,25 @@ class Parcel
     {
         $this->_parcelItemList = new ParcelItemList();
     }
+    
+    /*
+     * @var array
+     */
+    private $_trackingList = null;
+    
+    /*
+     * @return array of \Sdk\Parcel\Tracking
+     */
+    public function getTrackingList()
+    {
+        return $this->_trackingList;
+    }
+    
+    /*
+     * @var $trackingList \Sdk\Parcel\TrackingList
+     */
+    public function setTrackingList($trackingList)
+    {
+        $this->_trackingList = $trackingList;
+    }
 }

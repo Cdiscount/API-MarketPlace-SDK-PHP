@@ -87,8 +87,8 @@ class ProductModel
     {
         return $this->_keyValueProperties;
     }
-
-    /**
+	
+	/**
      * @var array
      */
     private $_mandatoryModelProperties= null;
@@ -139,6 +139,10 @@ class ProductModel
     {
         $this->_modelId = $modelD;
         $this->_keyValueProperties = array();
-        $this->_mandatoryModelProperties = array();
+		$this->_mandatoryModelProperties = array();
     }
+
+
+
+
 }

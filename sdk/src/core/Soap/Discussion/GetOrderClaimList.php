@@ -19,4 +19,14 @@ class GetOrderClaimList extends BaliseTool
         $this->_tag = 'GetOrderClaimList';
         parent::__construct();
     }
+
+    /**
+     * Add a namespace
+     *
+     * @param $namespace
+     */
+    public function addNamespace($namespace)
+    {
+        $this->_xmlns .= " " . $namespace;
+    }
 }

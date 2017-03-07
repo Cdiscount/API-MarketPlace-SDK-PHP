@@ -9,9 +9,7 @@
 namespace Sdk\Soap\Mail\Response;
 
 
-use Sdk\Mail\DiscussionMail;
 use Sdk\Soap\Common\iResponse;
-use Sdk\Soap\Common\SoapTools;
 
 class GenerateDiscussionMailGuidResponse extends iResponse
 {
@@ -50,9 +48,9 @@ class GenerateDiscussionMailGuidResponse extends iResponse
              */
             $this->_setGlobalInformations();
 
-            $this->_discussionMailGuidList = array();
+            $this->_discussionMailList = array();
 
-            $this->_generateDiscussionMailGuidFromXML($this->_dataResponse['s:Body']['GetDiscussionMailListResponse']['GetDiscussionMailListResult']['DiscussionMailList']);
+            //$this->_generateDiscussionMailListFromXML($this->_dataResponse['s:Body']['GetDiscussionMailListResponse']['GetDiscussionMailListResult']['DiscussionMailList']);
         }
     }
 
@@ -97,6 +95,6 @@ class GenerateDiscussionMailGuidResponse extends iResponse
         if (isset($discussionMailListXML['DiscussionMail']['MailAddress']) && !SoapTools::isSoapValueNull($discussionMailListXML['DiscussionMail']['MailAddress'])) {
             $discussionMail->setMailAddress($discussionMailListXML['DiscussionMail']['MailAddress']);
         }
-        array_push($this->_discussionMailGuidList, $discussionMail);
+        array_push($this->_discussionMailList, $discussionMail);
     }
 }

@@ -19,7 +19,7 @@ class ValidateOrderLineResults
     /**
      * @return array
      */
-    public function getValidateOrderLineResults()
+    public function getValidateOrderLineResultList()
     {
         return $this->_validateOrderLineResults;
     }

@@ -8,6 +8,7 @@
 
 namespace Sdk\Order;
 
+
 use Sdk\Soap\Common\SoapTools;
 
 class OrderLine
@@ -23,7 +24,7 @@ class OrderLine
     }
 
     /**
-     * @var string
+     * @var string;
      */
     private $_acceptationState = null;
 
@@ -46,7 +47,7 @@ class OrderLine
     /**
      * @var string
      */
-    private $_categoryCode = "";
+    private $_categoryCode = null;
 
     /**
      * @return string
@@ -297,7 +298,7 @@ class OrderLine
     /**
      * @var string
      */
-    private $_sellerProductId = "";
+    private $_sellerProductId = null;
 
     /**
      * @return string
@@ -517,6 +518,26 @@ class OrderLine
     {
         $this->_productEanGenerated = $productEanGenerated;
     }
-
     #endregion EAN
+    
+    /*
+     * @var boolean
+     */
+    private $_refundShippingCharges = false;
+    
+    /*
+     * @return boolean
+     */
+    public function isRefundShippingChargesResult()
+    {
+        return $this->_refundShippingCharges;
+    }
+    
+    /*
+     * @param $refundShippingCharge
+     */
+    public function setRefundShippingCharges($refundShippingCharge)
+    {
+        $this->_refundShippingCharges = $refundShippingCharge;
+    }
 }

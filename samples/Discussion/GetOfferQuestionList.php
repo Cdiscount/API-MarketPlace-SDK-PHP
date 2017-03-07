@@ -1,8 +1,8 @@
 <?php
 
 /**
- * Created by CDiscount
- * Created by CDiscount
+ * Created by guillaume.cochard.
+ * Mail: guillaume.cochard@ext.cdiscount.com
  * Date: 04/11/2016
  * Time: 11:11
  */
@@ -35,11 +35,6 @@ $offerQuestionFilter->addStatus(\Sdk\Discussion\DiscussionStatusEnum::Open);
 $offerQuestionFilter->addStatus(\Sdk\Discussion\DiscussionStatusEnum::Closed);
 
 $discussionResponse = $discussionPoint->getOfferQuestionList($offerQuestionFilter);
-
-if ($discussionResponse->getOfferQuestionList() == null) {
-    echo "No discussions<br/>";
-    die;
-}
 
 /** @var \Sdk\Discussion\OfferQuestion $offerQuestion */
 foreach ($discussionResponse->getOfferQuestionList() as $offerQuestion) {

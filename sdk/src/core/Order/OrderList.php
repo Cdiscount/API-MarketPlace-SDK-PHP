@@ -15,11 +15,11 @@ class OrderList
     /**
      * @var array Sdk\Order\Order
      */
-    private $_orderList = array();
+    private $_orderList = null;
 
     public function __construct()
     {
-
+        $this->_orderList = array();
     }
 
     /**

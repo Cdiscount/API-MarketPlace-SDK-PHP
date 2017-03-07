@@ -14,9 +14,6 @@ use Sdk\Soap\XmlUtils;
 class OrderListSoap
 {
 
-    /**
-     * @var string
-     */
     private $_tag = 'OrderList';
 
     /**
@@ -43,10 +40,6 @@ class OrderListSoap
         $xml = $this->_xmlUtil->generateOpenBaliseWithInline('validateOrderListMessage', array('xmlns:i="http://www.w3.org/2001/XMLSchema-instance"'));
 
         $xml .= $this->_xmlUtil->generateOpenBalise($this->_tag);
-
-        //<typereturn>Type</typereturn>
-
-        $xml .= $this->_xmlUtil->generateBalise('typeReturn', 'Type');
 
         /** @var \Sdk\Order\Validate\ValidateOrder $validateOrder */
         foreach ($this->_orderList->getOrders() as $validateOrder) {

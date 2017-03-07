@@ -40,8 +40,6 @@ class RelaysPoint
 
         echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
-        $getParcelShopListResponse = new GetParcelShopListResponse($response);
-
         //$getProductPackageSubmissionResultResponse = new GetProductPackageSubmissionResultResponse($response);
         //return $getProductPackageSubmissionResultResponse;
     }

@@ -597,4 +597,67 @@ class Order
     }
 
     #endregion ParcelList
+
+    /**
+     * @var string
+     */
+    private $_modGesLog = null;
+
+    /**
+     * @return string
+     */
+    public function getModGesLog()
+    {
+        return $this->_modGesLog;
+    }
+
+    /**
+     * @param $modGesLog
+     */
+    public function setModGesLog($modGesLog)
+    {
+        $this->_modGesLog = $modGesLog;
+    }
+
+    /**
+     * @var string PartnerOrderRef
+     */
+    private $_partnerOrderRef = "";
+
+    /**
+     * @return string
+     */
+    public function getPartnerOrderRef()
+    {
+        return $this->_partnerOrderRef;
+    }
+
+    /**
+     * @param string $partnerOrderRef
+     */
+    public function setPartnerOrderRef($partnerOrderRef)
+    {
+        $this->_partnerOrderRef = $partnerOrderRef;
+    }
+    
+    /*
+     * @var array
+     */
+    private $_voucherList = null;
+    
+    /*
+     * @return array
+     */
+    public function getVoucherList()
+    {
+        return $this->_voucherList;
+    }
+    
+    /*
+     * @param $voucherList \Sdk\Order\VoucherList
+     */
+    public function setVoucherList($voucherList)
+    {
+        $this->_voucherList = $voucherList;
+    }
 }

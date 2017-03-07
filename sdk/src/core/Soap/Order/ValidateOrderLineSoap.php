@@ -17,7 +17,12 @@ class ValidateOrderLineSoap extends BaliseTool
     private $_AcceptationStateTAG = 'AcceptationState';
     private $_ProductConditionTAG = 'ProductCondition';
     private $_SellerProductIdTAG = 'SellerProductId';
-
+    
+    /*
+     * @ var string TAG
+     */
+    private $_TypeOfReturnTAG = 'TypeOfReturn';
+    
     /**
      * @var \Sdk\Order\ValidateOrderLine
      */
@@ -40,6 +45,7 @@ class ValidateOrderLineSoap extends BaliseTool
         $xml .= $this->_xmlUtil->generateBalise($this->_AcceptationStateTAG, $this->_validateOrderLine->getAcceptationState());
         $xml .= $this->_xmlUtil->generateBalise($this->_ProductConditionTAG, $this->_validateOrderLine->getProductCondition());
         $xml .= $this->_xmlUtil->generateBalise($this->_SellerProductIdTAG, $this->_validateOrderLine->getSellerProductId());
+        $xml .= $this->_xmlUtil->generateBalise($this->_TypeOfReturnTAG, $this->_validateOrderLine->getTypeOfReturn());
 
         $xml .= $this->_generateCloseBalise();
         return $xml;

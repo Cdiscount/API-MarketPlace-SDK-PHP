@@ -1,34 +1,31 @@
 <?php
-/**
- * Created by Cdiscount.
- * Date: 13/12/2016
- * Time: 13:57
+/* 
+ * Created by Cdiscount
+ * Date : 18/01/2017
+ * Time : 15:46
  */
-
-
 namespace Sdk\Order;
-
 
 class ManageParcelRequest
 {
     /**
-     * @var String
+     * @var string
      */
     private $_scopusId = null;
-
+    
     /**
-     * @return String
+     * @return string
      */
     public function getScopusId()
     {
         return $this->_scopusId;
     }
-
+    
     /**
      * @var array
      */
     private $_parcelActionsList = null;
-
+    
     /**
      * @return array
      */
@@ -36,22 +33,24 @@ class ManageParcelRequest
     {
         return $this->_parcelActionsList;
     }
-
+    
     /**
-     * @param $parcelInfo \Sdk\Order\ParcelInfos
+     * @param $parcelInfos \Sdk\Order\ParcelInfos 
      */
-    public function addParcelAction($parcelInfo)
+    public function addParcelActionsList($parcelInfos)
     {
-        array_push($this->_parcelActionsList, $parcelInfo);
+        array_push($this->_parcelActionsList, $parcelInfos);
     }
-
-    /**
-     * ManageParcelRequest constructor.
+    
+    /*
+     * ManageParcelRequest constructor
      * @param $scopusId
      */
-    public function __construct($scopusId)
+    public function __construct($scopusId) 
     {
-        $this->_scopusId = $scopusId;
+        $this-> _scopusId = $scopusId;
         $this->_parcelActionsList = array();
     }
 }
+
+

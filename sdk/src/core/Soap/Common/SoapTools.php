@@ -11,7 +11,12 @@ namespace Sdk\Soap\Common;
 
 class SoapTools
 {
-
+    /**
+     * Check if the soap value is filled
+     *
+     * @param $value
+     * @return bool
+     */
     public static function isSoapValueNull($value)
     {
         if ((isset($value['nil']) && $value['nil'] == 'true') || (empty($value))) {

@@ -11,10 +11,6 @@ namespace Sdk\Soap\Product\Response;
 
 class GetAllAllowedCategoryTreeResponse extends GetGenericCategoryTreeResponse
 {
-    /**
-     * GetAllAllowedCategoryTreeResponse constructor.
-     * @param $response
-     */
     public function __construct($response)
     {
 

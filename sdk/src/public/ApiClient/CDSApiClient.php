@@ -152,12 +152,4 @@ class CDSApiClient
     {
         return Token::getInstance()->isTokenValid();
     }
-
-    /**
-     * @return \Sdk\Common\ErrorMessage
-     */
-    public function getTokenGenerationError()
-    {
-        return Token::getInstance()->getTokenGenerationError();
-    }
 }

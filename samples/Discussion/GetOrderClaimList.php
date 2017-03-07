@@ -1,7 +1,7 @@
 <?php
 /**
- * Created by CDiscount
- * Created by CDiscount
+ * Created by guillaume.cochard.
+ * Mail: guillaume.cochard@ext.cdiscount.com
  * Date: 03/11/2016
  * Time: 16:26
  */
@@ -25,15 +25,20 @@ $discussionPoint = $client->getDiscussionPoint();
 
 $claimFilter = new \Sdk\Discussion\ClaimFilter();
 
-$claimFilter->setBeginCreationDate('2016-10-01T00:00:00.00');
-$claimFilter->setBeginModificationDate('2016-10-01T01:00:00.00');
-$claimFilter->setEndCreationDate('2016-10-20T23:59:59.99');
-$claimFilter->setEndModificationDate('2016-10-20T02:00:00.00');
+$claimFilter->setBeginCreationDate('2017-01-01T01:00:00.00');
+$claimFilter->setBeginModificationDate('2017-01-01T01:00:00.00');
+$claimFilter->setEndCreationDate('2017-02-23T01:00:00.00');
+$claimFilter->setEndModificationDate('2017-02-23T01:00:00.00');
+$claimFilter->addOrderNumber('1602092055KOFEB');
 
-$claimFilter->addStatus(\Sdk\Discussion\DiscussionStatusEnum::Open);
-//$claimFilter->addStatus(\Sdk\Discussion\DiscussionStatusEnum::Closed);
+//$claimFilter->addStatus(\Sdk\Discussion\DiscussionStatusEnum::Open);
+$claimFilter->addStatus(\Sdk\Discussion\DiscussionStatusEnum::All);
 
 $discussionResponse = $discussionPoint->getOrderClaimList($claimFilter);
+
+if (count($discussionResponse->getOrderClaimList()) == 0) {
+    echo "Aucune discussion ne correspond à ces dates.<br/>";
+}
 
 /** @var \Sdk\Discussion\OrderClaim $orderClaim */
 foreach ($discussionResponse->getOrderClaimList() as $orderClaim) {

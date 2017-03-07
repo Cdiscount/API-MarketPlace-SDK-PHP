@@ -36,6 +36,14 @@ class XmlUtils
     }
 
     /**
+     * @return string
+     */
+    public function getGlobalPrefix()
+    {
+        return $this->_globalPrefix;
+    }
+
+    /**
      * @param $tag
      * @param $value
      * @return string

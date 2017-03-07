@@ -21,12 +21,27 @@ class FilterSoap
 
     protected $_StatusListTAG = 'StatusList';
     protected $_DiscussionStateFilterTAG = 'DiscussionStateFilter';
+
+    /**
+     * Tag for OrderNumberList
+     * @var string
+     */
     protected $_OrderNumberListTAG = 'OrderNumberList';
+
+    /**
+     * Tag for string (OrderNumberList for ex.)
+     * @var string
+     */
+    protected $_StringTAG = 'arr:string';
 
     private $_xmlns = '';
 
     protected $_xmlUtil;
 
+    /**
+     * Children balises
+     * @var string
+     */
     protected $_childrens = "";
 
     private $_tag = null;
@@ -40,6 +55,17 @@ class FilterSoap
     {
         $this->_xmlns = $xmlns;
         $this->_xmlUtil = new XmlUtils('');
+        $this->_tag = $tag;
+    }
+
+    /**
+     * FilterSoap constructor.
+     * @param $prefix
+     * @param $tag
+     */
+    public function specificConstructor($prefix, $tag)
+    {
+        $this->_xmlUtil = new XmlUtils($prefix);
         $this->_tag = $tag;
     }
 
@@ -97,5 +123,18 @@ class FilterSoap
             return $this->_xmlUtil->generateAutoClosingBalise($tag, 'i:nil', 'true');
         }
         return $this->_xmlUtil->generateOpenBalise($tag) . $value . $this->_xmlUtil->generateCloseBalise($tag);
+    }
+
+    /**
+     * Tool method
+     *
+     * @param $haystack
+     * @param $needle
+     * @return bool
+     */
+    protected function startsWith($haystack, $needle)
+    {
+        $length = strlen($needle);
+        return (substr($haystack, 0, $length) === $needle);
     }
 }

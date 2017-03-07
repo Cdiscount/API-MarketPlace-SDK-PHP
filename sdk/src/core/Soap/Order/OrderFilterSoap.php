@@ -10,61 +10,58 @@ namespace Sdk\Soap\Order;
 
 
 use Sdk\Order\OrderFilter;
+use Sdk\Soap\Discussion\FilterSoap;
 use Sdk\Soap\XmlUtils;
 
-class OrderFilterSoap
+class OrderFilterSoap extends FilterSoap
 {
-    private $_BeginCreationDateTAG = 'BeginCreationDate';
-    private $_BeginModificationDateTAG = 'BeginModificationDate';
-    private $_EndCreationDateTAG = 'EndCreationDate';
-    private $_EndModificationDateTAG = 'EndModificationDate';
-
     private $_FetchOrderLinesTAG = 'FetchOrderLines';
-
+    
     private $_OrderStateEnumTAG = 'OrderStateEnum';
-
+    
     private $_StatesTAG = 'States';
+    /*
+     * @var partner order ref string tag
+     */
+    private $_partnerOrderRefTAG = 'PartnerOrderRef';
+    /*
+     * @var orderType enum tag
+     */
+    private $_orderTypeTAG = 'OrderType';
+    
+    /*
+     * @var fetch parcels boolean tag
+     */
+    private $_fetchParcelsTAG = 'FetchParcels';
+    
+    /**
+     * @var string
+     */
+    private $_orderReferenceListTAG = 'OrderReferenceList';
+    
+    /**
+     * Prefix for string tag
+     * @var string
+     */
+    private $_stringTAG = 'arr:string';
 
-    private $_tag = 'orderFilter';
-
-    private $_xmlns = '';
-
-    private $_xmlUtil;
-
-    private $_childrens = "";
-
-    public function __construct($xmlns = 'xmlns:i="http://www.w3.org/2001/XMLSchema-instance"')
+    /**
+     * ClaimFilterSoap constructor.
+     * @param array $optionalsNamespaces
+     */
+    public function __construct($optionalsNamespaces)
     {
-        $this->_xmlns = $xmlns;
-        $this->_xmlUtil = new XmlUtils('');
-    }
-
-    private function _generateOpeningBalise()
-    {
-        $inlines = array($this->_xmlns);
-
-        return $this->_xmlUtil->generateOpenBaliseWithInline($this->_tag, $inlines);
-    }
-
-    private function _generateClosingBalise()
-    {
-        return $this->_xmlUtil->generateCloseBalise($this->_tag);
-    }
-
-    public function generateEnclosingBalise($child)
-    {
-        $xml = $this->_generateOpeningBalise();
-        $xml .= $child;
-        $xml .= $this->_generateClosingBalise();
-        return $xml;
-    }
-
-    public function generateEnclosingBaliseWithChildren()
-    {
-        $xml = $this->_generateOpeningBalise();
-        $xml .= $this->_childrens;
-        $xml .= $this->_generateClosingBalise();
-        return $xml;
+        if (isset($optionalsNamespaces)) {
+            foreach ($optionalsNamespaces as $namespace) {
+                if ($this->startsWith($namespace, 'xmlns:cdis')) {
+                    $this->specificConstructor('cdis:', 'orderFilter');
+                    break;
+                }
+            }
+        }
+        else {
+            parent::__construct('xmlns:i="http://www.w3.org/2001/XMLSchema-instance"', 'orderFilter');
+        }
     }
 
     /**
@@ -75,11 +72,26 @@ class OrderFilterSoap
         /**
          * Dates
          */
-        $beginCreationDateBalise = $this->_serializeDate($child->getBeginCreationDate(), $this->_BeginCreationDateTAG);
-        $beginModificationDateBalise = $this->_serializeDate($child->getBeginModificationDate(), $this->_BeginModificationDateTAG);
-        $endCreationDateBalise = $this->_serializeDate($child->getEndCreationDate(), $this->_EndCreationDateTAG);
-        $endModificationDateBalise = $this->_serializeDate($child->getEndModificationDate(), $this->_EndModificationDateTAG);
-
+        $beginCreationDateBalise = null;
+        if ($child->getBeginCreationDate() != NULL) {
+            $beginCreationDateBalise .= $this->_serializeDate($child->getBeginCreationDate(), $this->_BeginCreationDateTAG);
+        }
+        
+        $beginModificationDateBalise = null;
+        if ($child->getBeginModificationDate() != NULL) {
+            $beginModificationDateBalise .= $this->_serializeDate($child->getBeginModificationDate(), $this->_BeginModificationDateTAG);
+        }
+        
+        $endCreationDateBalise = null;
+        if ($child->getEndCreationDate() != NULL) {
+            $endCreationDateBalise .= $this->_serializeDate($child->getEndCreationDate(), $this->_EndCreationDateTAG);
+        }
+        
+        $endModificationDateBalise = null;
+        if ($child->getEndModificationDate() != NULL) {
+            $endModificationDateBalise .= $this->_serializeDate($child->getEndModificationDate(), $this->_EndModificationDateTAG);
+        }
+        
         $this->_childrens .= $beginCreationDateBalise . $beginModificationDateBalise . $endCreationDateBalise . $endModificationDateBalise;
 
         /**
@@ -95,23 +107,74 @@ class OrderFilterSoap
         $fetchOrderLinesBalise .= $this->_xmlUtil->generateCloseBalise($this->_FetchOrderLinesTAG);
 
         $this->_childrens .= $fetchOrderLinesBalise;
+        
+        /*
+         * fetch parcels
+         */
+        $fetchParcelsBalise = $this->_xmlUtil->generateOpenBalise($this->_fetchParcelsTAG);
+        if ($child->isFetchParcels()) {
+            $fetchParcelsBalise .= 'true';
+        }else {
+            $fetchParcelsBalise .= 'false';
+        }
+        $fetchParcelsBalise .= $this->_xmlUtil->generateCloseBalise($this->_fetchParcelsTAG);
+        $this->_childrens .= $fetchParcelsBalise;
+        
+        /*
+         * OrderreferenceList
+         */
+        $orderReferenceList = $child->getOrderReferenceList();
+        if ( isset($orderReferenceList) && count($orderReferenceList) > 0 ) {
+            $orderReferenceListBalise = $this->_xmlUtil->generateOpenBalise($this->_orderReferenceListTAG);
+        
+            $orderRefs = "";
 
+            /**
+             * Parsing over orderRef
+             */
+            /** @var string $orderReference */
+            foreach ($orderReferenceList as $orderReference) {
+
+                $globalPrefix = $this->_xmlUtil->getGlobalPrefix();
+                $this->_xmlUtil->setGlobalPrefix('');
+
+                $orderRefs .= $this->_xmlUtil->generateOpenBalise($this->_stringTAG);
+                $orderRefs .= $orderReference;
+                $orderRefs .= $this->_xmlUtil->generateCloseBalise($this->_stringTAG);
+
+                $this->_xmlUtil->setGlobalPrefix($globalPrefix);
+            }
+         
+            $orderReferenceListBalise .= $orderRefs;
+
+            $orderReferenceListBalise .= $this->_xmlUtil->generateCloseBalise($this->_orderReferenceListTAG);
+            $this->_childrens .= $orderReferenceListBalise;       
+        }
+             
+        /*
+         * order type
+         */
+        if ($child->getOrderType() != \Sdk\Order\OrderTypeEnum::None) {
+            $this->_childrens .= $this->_xmlUtil->generateBalise($this->_orderTypeTAG, $child->getOrderType());
+        }
+        
+        /*
+         * PartnerOrderRef
+         */
+        if ($child->getPartnerOrderRef() != NULL) {
+           $this->_childrens .= $this->_xmlUtil->generateBalise($this->_partnerOrderRefTAG, $child->getPartnerOrderRef()); 
+        }
+              
         /**
          * States
          */
-        $statesBalise = $this->_xmlUtil->generateOpenBalise($this->_StatesTAG);
-        foreach ($child->getStates() as $state) {
-            $statesBalise .= $this->_xmlUtil->generateBalise($this->_OrderStateEnumTAG, $state);
-        }
-        $statesBalise .= $this->_xmlUtil->generateCloseBalise($this->_StatesTAG);
-        $this->_childrens .= $statesBalise;
-    }
-
-    private function _serializeDate($value, $tag)
-    {
-        if ($value == null) {
-            return $this->_xmlUtil->generateAutoClosingBalise($tag, 'i:nil', 'true');
-        }
-        return $this->_xmlUtil->generateOpenBalise($tag) . $value . $this->_xmlUtil->generateCloseBalise($tag);
+        if ($child->getStates() != NULL) {
+           $statesBalise = $this->_xmlUtil->generateOpenBalise($this->_StatesTAG);
+            foreach ($child->getStates() as $state) {
+                $statesBalise .= $this->_xmlUtil->generateBalise($this->_OrderStateEnumTAG, $state);
+            }
+            $statesBalise .= $this->_xmlUtil->generateCloseBalise($this->_StatesTAG);
+            $this->_childrens .= $statesBalise; 
+        } 
     }
 }

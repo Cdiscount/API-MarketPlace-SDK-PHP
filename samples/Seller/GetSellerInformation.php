@@ -1,7 +1,7 @@
 <?php
 /**
- * Created by CDiscount
- * Created by CDiscount
+ * Created by guillaume.cochard.
+ * Mail: guillaume.cochard@ext.cdiscount.com
  * Date: 20/10/2016
  * Time: 14:38
  */
@@ -15,7 +15,7 @@ $client = new \Sdk\ApiClient\CDSApiClient();
 $token = $client->init();
 
 if ($token == null || !$client->isTokenValid()) {
-    $client->getTokenGenerationError()->displayErrorMessage();
+    echo "Oups, souci lors de la génération du token";
     die;
 }
 

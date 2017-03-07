@@ -96,7 +96,7 @@ class OfferPoint
         $bodyXML = $body->generateXML($submitProductPackageXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
 
-        echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
+        //echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $response = $this->_sendRequest('SubmitOfferPackage', $envelopeXML);
 

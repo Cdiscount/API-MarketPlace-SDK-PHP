@@ -8,7 +8,6 @@
 
 namespace Sdk\Auth;
 
-use Sdk\Core\Common\ErrorMessage;
 use Sdk\ConfigTools\ConfigFileLoader;
 use Sdk\HttpTools\CDSApiRequest;
 use Zend\Db\Sql\Ddl\Column\Datetime;
@@ -87,6 +86,10 @@ class Token
         libxml_use_internal_errors(true);
         $xmlResult = simplexml_load_string($request->execute());
 
+        echo '<p>'.nl2br(htmlentities($xmlResult , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
+
+        //TODO gestion erreur token
+
         if ($xmlResult !== false && isset($xmlResult[0]) && ctype_alnum(strval($xmlResult[0]))) {
             $this->_token = $xmlResult[0];
 
@@ -120,16 +123,6 @@ class Token
     public function isTokenValid()
     {
         return $this->_isValid;
-    }
-
-    /**
-     * Return Token generation error
-     *
-     * @return ErrorMessage
-     */
-    public function getTokenGenerationError()
-    {
-        return new ErrorMessage("Erreur lors de la génération du token, veuillez vérifier vos identifiants API dans les fichiers de configuration");
     }
 
     #endregion Public methods

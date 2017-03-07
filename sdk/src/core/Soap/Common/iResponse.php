@@ -104,5 +104,4 @@ abstract class iResponse
         }
         return false;
     }
-
 }
