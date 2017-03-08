@@ -312,12 +312,12 @@ class Order
     #region SiteCommission
 
     /**
-     * @var int
+     * @var float
      */
-    private $_siteCommissionPromisedAmount = 0;
+    private $_siteCommissionPromisedAmount = 0.0;
 
     /**
-     * @return int
+     * @return float
      */
     public function getSiteCommissionPromisedAmount()
     {
@@ -325,7 +325,7 @@ class Order
     }
 
     /**
-     * @param int $siteCommissionPromisedAmount
+     * @param float $siteCommissionPromisedAmount
      */
     public function setSiteCommissionPromisedAmount($siteCommissionPromisedAmount)
     {
@@ -333,12 +333,12 @@ class Order
     }
 
     /**
-     * @var int
+     * @var float
      */
-    private $_siteCommissionShippedAmount = 0;
+    private $_siteCommissionShippedAmount = 0.0;
 
     /**
-     * @return int
+     * @return float
      */
     public function getSiteCommissionShippedAmount()
     {
@@ -346,7 +346,7 @@ class Order
     }
 
     /**
-     * @param int $siteCommissionShippedAmount
+     * @param float $siteCommissionShippedAmount
      */
     public function setSiteCommissionShippedAmount($siteCommissionShippedAmount)
     {
@@ -354,12 +354,12 @@ class Order
     }
 
     /**
-     * @var int
+     * @var float
      */
-    private $_siteCommissionValidatedAmount = 0;
+    private $_siteCommissionValidatedAmount = 0.0;
 
     /**
-     * @return int
+     * @return float
      */
     public function getSiteCommissionValidatedAmount()
     {
@@ -367,7 +367,7 @@ class Order
     }
 
     /**
-     * @param int $siteCommissionValidatedAmount
+     * @param float $siteCommissionValidatedAmount
      */
     public function setSiteCommissionValidatedAmount($siteCommissionValidatedAmount)
     {
@@ -446,12 +446,12 @@ class Order
     #region Amount and Shipping Charges
 
     /**
-     * @var int
+     * @var float
      */
-    private $_shippedTotalAmount = 0;
+    private $_shippedTotalAmount = 0.0;
 
     /**
-     * @return int
+     * @return float
      */
     public function getShippedTotalAmount()
     {
@@ -459,7 +459,7 @@ class Order
     }
 
     /**
-     * @param int $shippedTotalAmount
+     * @param float $shippedTotalAmount
      */
     public function setShippedTotalAmount($shippedTotalAmount)
     {
@@ -467,12 +467,12 @@ class Order
     }
 
     /**
-     * @var int
+     * @var float
      */
-    private $_shippedTotalShippingCharges = 0;
+    private $_shippedTotalShippingCharges = 0.0;
 
     /**
-     * @return int
+     * @return float
      */
     public function getShippedTotalShippingCharges()
     {
@@ -480,7 +480,7 @@ class Order
     }
 
     /**
-     * @param int $shippedTotalShippingCharges
+     * @param float $shippedTotalShippingCharges
      */
     public function setShippedTotalShippingCharges($shippedTotalShippingCharges)
     {
@@ -488,12 +488,12 @@ class Order
     }
 
     /**
-     * @var int
+     * @var float
      */
-    private $_validatedTotalAmount = 0;
+    private $_validatedTotalAmount = 0.0;
 
     /**
-     * @return int
+     * @return float
      */
     public function getValidatedTotalAmount()
     {
@@ -501,7 +501,7 @@ class Order
     }
 
     /**
-     * @param int $validatedTotalAmount
+     * @param float $validatedTotalAmount
      */
     public function setValidatedTotalAmount($validatedTotalAmount)
     {
@@ -509,12 +509,12 @@ class Order
     }
 
     /**
-     * @var int
+     * @var float
      */
-    private $_validatedTotalShippingCharges = 0;
+    private $_validatedTotalShippingCharges = 0.0;
 
     /**
-     * @return int
+     * @return float
      */
     public function getValidatedTotalShippingCharges()
     {
@@ -522,7 +522,7 @@ class Order
     }
 
     /**
-     * @param int $validatedTotalShippingCharges
+     * @param float $validatedTotalShippingCharges
      */
     public function setValidatedTotalShippingCharges($validatedTotalShippingCharges)
     {

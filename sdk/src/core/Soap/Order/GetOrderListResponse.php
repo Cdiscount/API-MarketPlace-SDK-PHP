@@ -159,21 +159,21 @@ class GetOrderListResponse extends iResponse
                         $orderObj->setVoucherList($voucherList);
                     }
                     
-                    $orderObj->setShippedTotalAmount(intval($order['ShippedTotalAmount']));
+                    $orderObj->setShippedTotalAmount(floatval($order['ShippedTotalAmount']));
 
-                    $orderObj->setShippedTotalShippingCharges(intval($order['ShippedTotalShippingCharges']));
+                    $orderObj->setShippedTotalShippingCharges(floatval($order['ShippedTotalShippingCharges']));
 
                     $address = $this->_getAddress($order['ShippingAddress']);
                     $orderObj->setShippingAddress($address);
 
-                    $orderObj->setSiteCommissionPromisedAmount(intval($order['SiteCommissionPromisedAmount']));
-                    $orderObj->setSiteCommissionShippedAmount(intval($order['SiteCommissionShippedAmount']));
-                    $orderObj->setSiteCommissionValidatedAmount(intval($order['SiteCommissionValidatedAmount']));
+                    $orderObj->setSiteCommissionPromisedAmount(floatval($order['SiteCommissionPromisedAmount']));
+                    $orderObj->setSiteCommissionShippedAmount(floatval($order['SiteCommissionShippedAmount']));
+                    $orderObj->setSiteCommissionValidatedAmount(floatval($order['SiteCommissionValidatedAmount']));
 
                     $orderObj->setStatus($order['Status']);
 
-                    $orderObj->setValidatedTotalAmount(intval($order['ValidatedTotalAmount']));
-                    $orderObj->setValidatedTotalShippingCharges(intval($order['ValidatedTotalShippingCharges']));
+                    $orderObj->setValidatedTotalAmount(floatval($order['ValidatedTotalAmount']));
+                    $orderObj->setValidatedTotalShippingCharges(floatval($order['ValidatedTotalShippingCharges']));
 
                     $orderObj->setValidationStatus($order['ValidationStatus']);
 
