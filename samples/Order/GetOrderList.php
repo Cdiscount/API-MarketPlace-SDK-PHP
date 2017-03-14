@@ -49,8 +49,7 @@ $orderFilter->addState(\Sdk\Order\OrderStateEnum::PaymentRefused);
 $orderFilter->addState(\Sdk\Order\OrderStateEnum::ShipmentRefusedBySeller);
 $orderFilter->addState(\Sdk\Order\OrderStateEnum::RefusedNoShipment);*/
 $orderFilter->setFetchParcels(false);
-//$orderFilter->addOrderReferenceToList('1604241513ZDAAD');
-$orderFilter->addOrderReferenceToList('16102010231AVNW');
+//$orderFilter->addOrderReferenceToList('1604248913ZDAAD');
 //$orderFilter->setOrderType(\Sdk\Order\OrderTypeEnum::EXTFBC);
 //$orderFilter->setPartnerOrderRef('ENA_test_APIFBC_20161117_03');
 
