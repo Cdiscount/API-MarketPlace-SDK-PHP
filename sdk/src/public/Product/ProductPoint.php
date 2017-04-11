@@ -20,23 +20,52 @@ use Sdk\Soap\Product\GetAllowedCategoryTree;
 use Sdk\Soap\Product\GetBrandList;
 use Sdk\Soap\Product\GetModelList;
 use Sdk\Soap\Product\GetProductList;
+use Sdk\Soap\Product\GetProductListByIdentifier;
 use Sdk\Soap\Product\GetProductPackageProductMatchingFileData;
 use Sdk\Soap\Product\GetProductPackageSubmissionResult;
 use Sdk\Soap\Product\ModelFilterSoap;
 use Sdk\Soap\Product\ProductFilterSoap;
+use Sdk\Soap\Product\IdentifierRequestSoap;
 use Sdk\Soap\Product\Response\GetAllAllowedCategoryTreeResponse;
 use Sdk\Soap\Product\Response\GetAllModelListResponse;
 use Sdk\Soap\Product\Response\GetAllowedCategoryTreeResponse;
 use Sdk\Soap\Product\Response\GetBrandListResponse;
 use Sdk\Soap\Product\Response\GetModelListResponse;
 use Sdk\Soap\Product\Response\GetProductListResponse;
+use Sdk\Soap\Product\Response\GetProductListByIdentifierResponse;
 use Sdk\Soap\Product\Response\GetProductPackageProductMatchingFileDataResponse;
 use Sdk\Soap\Product\Response\GetProductPackageSubmissionResultResponse;
 use Sdk\Soap\Product\Response\SubmitProductPackageResponse;
 use Sdk\Soap\Product\SubmitProductPackage;
 
+/*
+ * Product point
+ */
 class ProductPoint
 {
+    /**
+     * @return GetProductListByIdentifierResponse
+     */
+    public function getProductListByIdentifier($identifierRequest)
+    {
+        $envelope = new Envelope();
+        $body = new Body();
+        $getProductListByIdentifier = new GetProductListByIdentifier();
+        $header = new HeaderMessage();
+
+        $headerXML = $header->generateHeader();
+        $identifierRequestSoap = new IdentifierRequestSoap($identifierRequest);
+        $productFilterSoapXml = $identifierRequestSoap->serialize();
+
+        $getProductListByIdentifierXML = $getProductListByIdentifier->generateEnclosingBalise($headerXML . $productFilterSoapXml);
+        $bodyXML = $body->generateXML($getProductListByIdentifierXML);
+        $envelopeXML = $envelope->generateXML($bodyXML);
+
+        $response = $this->_sendRequest('GetProductListByIdentifier', $envelopeXML);
+
+        $getProductListByIdentifierResponse = new GetProductListByIdentifierResponse($response);
+        return $getProductListByIdentifierResponse;
+    }
 
     /**
      * @param $productFilter \Sdk\Product\ProductFilter
@@ -55,8 +84,6 @@ class ProductPoint
         $getProductListXML = $getProductList->generateEnclosingBalise($headerXML . $productFilterSoapXml);
         $bodyXML = $body->generateXML($getProductListXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
-
-        //echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $response = $this->_sendRequest('GetProductList', $envelopeXML);
 
@@ -78,8 +105,6 @@ class ProductPoint
         $allowedCategoryTreeXML = $getAllowedCategoryTree->generateEnclosingBalise($headerXML);
         $bodyXML = $body->generateXML($allowedCategoryTreeXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
-
-        //echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $response = $this->_sendRequest('GetAllowedCategoryTree', $envelopeXML);
 
@@ -103,11 +128,7 @@ class ProductPoint
         $bodyXML = $body->generateXML($allowedCategoryTreeXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
 
-        //echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         $response = $this->_sendRequest('GetAllAllowedCategoryTree', $envelopeXML);
-
-        //echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $allowedCategoryTreeResponse = new GetAllAllowedCategoryTreeResponse($response);
 
@@ -134,8 +155,6 @@ class ProductPoint
 
         $response = $this->_sendRequest('GetModelList', $envelopeXML);
 
-        //echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         $getModelListResponse = new GetModelListResponse($response);
         return $getModelListResponse;
     }
@@ -155,16 +174,11 @@ class ProductPoint
         $bodyXML = $body->generateXML($getModelListXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
 
-        echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         $response = $this->_sendRequest('GetAllModelList', $envelopeXML);
-
-        echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $getAllModelListResponse = new GetAllModelListResponse($response);
 
         return $getAllModelListResponse;
-        //echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
     }
 
     /**
@@ -182,11 +196,7 @@ class ProductPoint
         $bodyXML = $body->generateXML($getBrandListXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
 
-        //echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         $response = $this->_sendRequest('GetBrandList', $envelopeXML);
-
-        //echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $getBrandListResponse = new GetBrandListResponse($response);
 
@@ -260,11 +270,7 @@ class ProductPoint
         $bodyXML = $body->generateXML($submitProductPackageXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
 
-        echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         $response = $this->_sendRequest('GetProductPackageProductMatchingFileData', $envelopeXML);
-
-        echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $getProductPackageProductMatchingFileDataResponse = new GetProductPackageProductMatchingFileDataResponse($response);
 
