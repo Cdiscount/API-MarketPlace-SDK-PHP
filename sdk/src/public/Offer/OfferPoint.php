@@ -28,9 +28,10 @@ class OfferPoint
 
     /**
      * @param $productList
+     * @param $offerPoolId
      * @return GetOfferListResponse
      */
-    public function getOfferList($productList)
+    public function getOfferList($productList, $offerPoolId)
     {
         $envelope = new Envelope();
         $body = new Body();
@@ -39,12 +40,17 @@ class OfferPoint
 
         $headerXML = $header->generateHeader();
         $offerFilterSoap = new OfferFilter($productList);
+        $offerFilterSoap->setOfferPoolId($offerPoolId);
         $offerFilterSoapXml = $offerFilterSoap->serialize();
         $getOfferListXML = $getOfferList->generateEnclosingBalise($headerXML . $offerFilterSoapXml);
         $bodyXML = $body->generateXML($getOfferListXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
 
+        echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
+
         $response = $this->_sendRequest('GetOfferList', $envelopeXML);
+
+        echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $getOfferListResponse = new GetOfferListResponse($response);
         return $getOfferListResponse;

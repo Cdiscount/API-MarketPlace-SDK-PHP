@@ -23,7 +23,9 @@ if ($token == null || !$client->isTokenValid()) {
 
 $offerPoint = $client->getOfferPoint();
 
-$offerListResponse = $offerPoint->getOfferList(null);
+$offerPoolId = 2;
+
+$offerListResponse = $offerPoint->getOfferList(null, $offerPoolId);
 
 /** @var \Sdk\Offer\Offer $offer */
 foreach ($offerListResponse->getOfferList() as $offer) {

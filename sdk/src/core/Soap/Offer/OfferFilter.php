@@ -23,6 +23,11 @@ class OfferFilter extends BaliseTool
     private $PageNumberTAG = 'PageNumber';
 
     /**
+     * @var int
+     */
+    private $_offerPoolId = 1;
+
+    /**
      * @var array
      */
     private $_productList = null;
@@ -51,6 +56,14 @@ class OfferFilter extends BaliseTool
     }
 
     /**
+     * @param $offerPoolId int
+     */
+    public function setOfferPoolId($offerPoolId)
+    {
+        $this->_offerPoolId = $offerPoolId;
+    }
+
+    /**
      * @return string
      */
     public function serialize()
@@ -58,7 +71,7 @@ class OfferFilter extends BaliseTool
         $xml = $this->_xmlUtil->generateOpenBalise($this->offerFilterTAG);
 
         /** OfferPoolId **/
-        $xml .= $this->_xmlUtil->generateBalise($this->OfferPoolIdTAG, 1);
+        $xml .= $this->_xmlUtil->generateBalise($this->OfferPoolIdTAG, $this->_offerPoolId);
 
         if ($this->_productList != null) {
 
@@ -77,5 +90,13 @@ class OfferFilter extends BaliseTool
         }
         $xml .= $this->_xmlUtil->generateCloseBalise($this->offerFilterTAG);
         return $xml;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOfferPoolId()
+    {
+        return $this->_offerPoolId;
     }
 }
