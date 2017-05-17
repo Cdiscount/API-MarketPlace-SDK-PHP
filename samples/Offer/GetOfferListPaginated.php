@@ -23,9 +23,11 @@ if ($token == null || !$client->isTokenValid()) {
 $offerFilter = new \Sdk\Offer\OfferFilter();
 $offerFilter->setPageNumber(1);
 
+$offerPoolId = 2;
+
 $offerPoint = $client->getOfferPoint();
 
-$offerListResponse = $offerPoint->getOfferListPaginated($offerFilter);
+$offerListResponse = $offerPoint->getOfferListPaginated($offerFilter, $offerPoolId);
 
 echo "CurrentPageNumber : " . $offerListResponse->getCurrentPageNumber() . " - NumberOfPages : " . $offerListResponse->getNumberOfPages() . "<br/>";
 

@@ -58,9 +58,10 @@ class OfferPoint
 
     /**
      * @param $offerFilter \Sdk\Offer\OfferFilter
+     * @param $offerPoolId
      * @return GetOfferListPaginatedResponse
      */
-    public function getOfferListPaginated($offerFilter)
+    public function getOfferListPaginated($offerFilter, $offerPoolId)
     {
         $envelope = new Envelope();
         $body = new Body();
@@ -69,6 +70,7 @@ class OfferPoint
 
         $headerXML = $header->generateHeader();
         $offerFilterSoap = new OfferFilter(null);
+        $offerFilterSoap->setOfferPoolId($offerPoolId);
         $offerFilterSoap->setOfferFilter($offerFilter);
 
         $offerFilterSoapXml = $offerFilterSoap->serialize();
@@ -76,6 +78,8 @@ class OfferPoint
         $getOfferListXML = $getOfferList->generateEnclosingBalise($headerXML . $offerFilterSoapXml);
         $bodyXML = $body->generateXML($getOfferListXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
+
+        echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $response = $this->_sendRequest('GetOfferListPaginated', $envelopeXML);
 
