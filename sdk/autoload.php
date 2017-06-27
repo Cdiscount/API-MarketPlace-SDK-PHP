@@ -239,3 +239,24 @@ require_once __DIR__ . '/src/public/Product/ProductTypeEnum.php';
 require_once __DIR__ . '/src/public/Relays/RelaysPoint.php';
 
 require_once __DIR__ . '/src/public/Seller/SellerPoint.php';
+
+require_once __DIR__ . '/src/public/Fulfilment/FulfilmentProductRequest.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/GetProductStockListSoap.php';
+require_once __DIR__ . '/src/public/Fulfilment/FulfilmentPoint.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/GetProductStockListResponse.php';
+require_once __DIR__ . '/src/core/Fulfilment/ProductStock.php';
+require_once __DIR__ . '/src/core/Fulfilment/ProductStockListMessage.php';
+
+require_once __DIR__ . '/src/public/Fulfilment/OrderStatusRequest.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/GetExternalOrderStatusSoap.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/GetExternalOrderStatusResponse.php';
+require_once __DIR__ . '/src/core/Fulfilment/ExternalOrderStatus.php';
+require_once __DIR__ . '/src/core/Fulfilment/OrderStatusMessage.php';
+
+require_once __DIR__ . '/src/public/Fulfilment/OrderIntegrationRequest.php';
+require_once __DIR__ . '/src/public/Fulfilment/ExternalOrder.php';
+require_once __DIR__ . '/src/public/Fulfilment/ExternalCustomer.php';
+require_once __DIR__ . '/src/public/Fulfilment/ExternalOrderLine.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/CreateExternalOrderSoap.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/CreateExternalOrderResponse.php';
+require_once __DIR__ . '/src/core/Fulfilment/OrderIntegrationMessage.php';
