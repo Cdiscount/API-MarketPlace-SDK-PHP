@@ -5,7 +5,8 @@
  * Date: 22/09/2016
  * Time: 12:03
  */
-
+ 
+ 
 require_once __DIR__ . '/src/core/Soap/BaliseTool.php';
 
 require_once __DIR__ . '/src/core/Auth/Token.php';
@@ -237,57 +238,76 @@ require_once __DIR__ . '/src/public/Product/ProductPoint.php';
 require_once __DIR__ . '/src/public/Product/ProductTypeEnum.php';
 
 require_once __DIR__ . '/src/public/Relays/RelaysPoint.php';
-
 require_once __DIR__ . '/src/public/Seller/SellerPoint.php';
 
 require_once __DIR__ . '/src/public/Fulfilment/FulfilmentProductRequest.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/GetProductStockListSoap.php';
 require_once __DIR__ . '/src/public/Fulfilment/FulfilmentPoint.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/GetProductStockListResponse.php';
-require_once __DIR__ . '/src/core/Fulfilment/ProductStock.php';
-require_once __DIR__ . '/src/core/Fulfilment/ProductStockListMessage.php';
-require_once __DIR__ . '/src/public/Fulfilment/FulfilmentSupplyOrderRequest.php';
-require_once __DIR__ . '/src/public/Fulfilment/FulfilmentOnDemandSupplyOrderRequest.php';
-require_once __DIR__ . '/src/public/Fulfilment/SupplyOrderReportRequest.php';
-require_once __DIR__ . '/src/public/Fulfilment/FulfilmentProductDescription.php';
-require_once __DIR__ . '/src/public/Fulfilment/WarehouseTypes.php';
-require_once __DIR__ . '/src/public/Fulfilment/FulfilmentOrderLine.php';
-require_once __DIR__ . '/src/public/Fulfilment/FulfilmentOrderLineRequest.php';
-require_once __DIR__ . '/src/core/Fulfilment/SupplyOrderReport.php';
-require_once __DIR__ . '/src/core/Fulfilment/SupplyOrderReportLine.php';
-require_once __DIR__ . '/src/core/Fulfilment/Error.php';
+require_once __DIR__ . '/src/public/Fulfilment/OfferStateActionRequest.php';
+require_once __DIR__ . '/src/public/Fulfilment/OfferStateActionType.php';
+require_once __DIR__ . '/src/public/Fulfilment/SubmitFulfilmentActivationRequest.php';
+require_once __DIR__ . '/src/public/Fulfilment/ProductActivationData.php';
+require_once __DIR__ . '/src/public/Fulfilment/FulfilmentProductActionType.php';
+require_once __DIR__ . '/src/public/Fulfilment/SupplyOrderRequest.php';
+require_once __DIR__ . '/src/public/Fulfilment/FulfilmentOnDemandOrderLineFilter.php';
+require_once __DIR__ . '/src/public/Fulfilment/FulfilmentOrderLineListToSupplyMessage.php';
+require_once __DIR__ . '/src/public/Fulfilment/WarehouseType.php';
 require_once __DIR__ . '/src/public/Fulfilment/OrderStatusRequest.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/GetExternalOrderStatusSoap.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/GetExternalOrderStatusResponse.php';
-require_once __DIR__ . '/src/core/Fulfilment/ExternalOrderStatus.php';
-require_once __DIR__ . '/src/core/Fulfilment/OrderStatusMessage.php';
-
 require_once __DIR__ . '/src/public/Fulfilment/OrderIntegrationRequest.php';
 require_once __DIR__ . '/src/public/Fulfilment/ExternalOrder.php';
 require_once __DIR__ . '/src/public/Fulfilment/ExternalCustomer.php';
 require_once __DIR__ . '/src/public/Fulfilment/ExternalOrderLine.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/CreateExternalOrderSoap.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/CreateExternalOrderResponse.php';
-require_once __DIR__ . '/src/core/Fulfilment/OrderIntegrationMessage.php';
-require_once __DIR__ . '/src/public/Fulfilment/FulfilmentOnDemandOrderLineFilter.php';
-require_once __DIR__ . '/src/public/Fulfilment/FulfilmentOrderLineListToSupplyMessage.php';
-require_once __DIR__ . '/src/public/Fulfilment/WarehouseType.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/SubmitFulfilmentSupplyOrderSoap.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/SubmitFulfilmentSupplyOrderResponse.php';
+require_once __DIR__ . '/src/public/Fulfilment/SupplyOrderRequest.php';
+require_once __DIR__ . '/src/public/Fulfilment/FulfilmentDeliveryDocumentRequest.php';
+require_once __DIR__ . '/src/public/Fulfilment/SupplyOrderRequest.php';
+require_once __DIR__ . '/src/public/Fulfilment/FulfilmentActivationReportRequest.php';
+require_once __DIR__ . '/src/public/Fulfilment/SupplyOrderReportRequest.php';
+require_once __DIR__ . '/src/public/Fulfilment/FulfilmentOnDemandSupplyOrderRequest.php';
+require_once __DIR__ . '/src/public/Fulfilment/FulfilmentOrderLineRequest.php';
+require_once __DIR__ . '/src/public/Fulfilment/FulfilmentSupplyOrderRequest.php';
+require_once __DIR__ . '/src/public/Fulfilment/FulfilmentProductDescription.php';
+
+require_once __DIR__ . '/src/core/Fulfilment/ProductStock.php';
+require_once __DIR__ . '/src/core/Fulfilment/GetFulfilmentDeliveryDocumentResult.php';
+require_once __DIR__ . '/src/core/Fulfilment/SubmitOfferStateActionResult.php';
+require_once __DIR__ . '/src/core/Fulfilment/ExternalOrderStatus.php';
+require_once __DIR__ . '/src/core/Fulfilment/OrderStatusMessage.php';
 require_once __DIR__ . '/src/core/Fulfilment/SubmitFulfilmentSupplyOrderResult.php';
 require_once __DIR__ . '/src/core/Fulfilment/SubmitFulfilmentOnDemandSupplyOrderResult.php';
 require_once __DIR__ . '/src/core/Fulfilment/FulfilmentSupplyOrderReportListResult.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/SubmitFulfilmentOnDemandSupplyOrderSoap.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/SubmitFulfilmentOnDemandSupplyOrderResponse.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/GetFulfilmentSupplyOrderReportListSoap.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/FulfilmentSupplyOrderReportListResponse.php';
 require_once __DIR__ . '/src/core/Fulfilment/FulfilmentOrderListToSupplyResult.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/GetFulfilmentOrderListToSupplySoap.php';                                                  
-require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/GetFulfilmentOrderListToSupplyResponse.php';
-require_once __DIR__ . '/src/public/Fulfilment/SupplyOrderRequest.php';
 require_once __DIR__ . '/src/core/Fulfilment/SupplyOrder.php';
 require_once __DIR__ . '/src/core/Fulfilment/SupplyOrderList.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/GetFulfilmentSupplyOrderSoap.php';
-require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/GetFulfilmentSupplyOrderResponse.php';
+require_once __DIR__ . '/src/core/Fulfilment/SubmitFulfilmentActivationResult.php';
 require_once __DIR__ . '/src/core/Fulfilment/FulfilmentSupplyOrderResult.php';
-require_once __DIR__ . '/src/public/Fulfilment/SupplyOrderRequest.php';
+require_once __DIR__ . '/src/core/Fulfilment/FulfilmentActivationReport.php';
+require_once __DIR__ . '/src/core/Fulfilment/FulfilmentActivationReportDetails.php';
+require_once __DIR__ . '/src/core/Fulfilment/FulfilmentActivationReportListResult.php';
+
+require_once __DIR__ . '/src/core/Soap/Fulfilment/GetProductStockListSoap.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/GetProductStockListResponse.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/CreateExternalOrderSoap.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/GetExternalOrderStatusSoap.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/GetFulfilmentActivationReportListSoap.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/GetFulfilmentDeliveryDocumentSoap.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/GetFulfilmentOrderListToSupplySoap.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/GetFulfilmentSupplyOrderReportListSoap.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/GetFulfilmentSupplyOrderSoap.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/CreateExternalOrderResponse.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/FulfilmentSupplyOrderReportListResponse.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/GetExternalOrderStatusResponse.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/GetFulfilmentActivationReportRequestXmlResponse.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/GetFulfilmentDeliveryDocumentResponse.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/GetFulfilmentOrderListToSupplyResponse.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/GetFulfilmentSupplyOrderResponse.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/SubmitFulfilmentActivationResponse.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/SubmitFulfilmentOnDemandSupplyOrderResponse.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/SubmitFulfilmentSupplyOrderResponse.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/Response/SubmitOfferStateActionResponse.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/SubmitFulfilmentActivationSoap.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/SubmitFulfilmentOnDemandSupplyOrderSoap.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/SubmitFulfilmentSupplyOrderSoap.php';
+require_once __DIR__ . '/src/core/Soap/Fulfilment/SubmitOfferStateActionSoap.php';
+
+
+
+

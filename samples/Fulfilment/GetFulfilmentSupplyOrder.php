@@ -38,7 +38,7 @@ $supplyOrderRequest->addSupplyOrder('FBC_34627');
 /*
 * @return fulfilmentSupplyOrderResponse
 */
-$fulfilmentSupplyOrderResponse = $fulfilmentPoint->GetFulfilementSupplyOrder($supplyOrderRequest);
+$fulfilmentSupplyOrderResponse = $fulfilmentPoint->GetFulfilmentSupplyOrder($supplyOrderRequest);
 
 if ($fulfilmentSupplyOrderResponse->getOperationSuccess() == false) {
     if( $fulfilmentSupplyOrderResponse->getErrorMessage() != null ){

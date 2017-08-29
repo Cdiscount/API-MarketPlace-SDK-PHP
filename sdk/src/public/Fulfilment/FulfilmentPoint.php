@@ -1,8 +1,7 @@
 <?php
 /*
  * Created by CDiscount
- * Date: 26/04/2017
- * Time: 11:47
+ * Date: 04/05/2017
  */
 
 namespace Sdk\Fulfilment;
@@ -12,28 +11,31 @@ use Sdk\ConfigTools\ConfigFileLoader;
 use Sdk\HttpTools\CDSApiSoapRequest;
 use Sdk\Soap\Common\Body;
 use Sdk\Soap\Common\Envelope;
-use Sdk\Soap\HeaderMessage\HeaderMessage;
-use Sdk\Soap\Fulfilment\Response\GetProductStockListResponse;
-use Sdk\Soap\Fulfilment\GetProductStockListSoap;
-use Sdk\Soap\Fulfilment\GetProductStockList;
-use Sdk\Soap\Fulfillment\GetExternalOrderStatusSoap;
-use Sdk\Soap\Fulfillment\Response\GetExternalOrderStatusResponse;
 use Sdk\Soap\Fulfillment\CreateExternalOrderSoap;
+use Sdk\Soap\Fulfillment\GetExternalOrderStatusSoap;
 use Sdk\Soap\Fulfillment\Response\CreateExternalOrderResponse;
-
-use Sdk\Soap\Fulfilment\SubmitFulfilmentSupplyOrderSoap;
-use Sdk\Soap\Fulfilment\SubmitFulfilmentOnDemandSupplyOrderSoap;
+use Sdk\Soap\Fulfillment\Response\GetExternalOrderStatusResponse;
 use Sdk\Soap\Fulfilment\GetFulfilmentOrderListToSupplySoap;
-use Sdk\Soap\Fulfilment\Response\SubmitFulfilmentSupplyOrderResponse;
-use Sdk\Soap\Fulfilment\Response\SubmitFulfilmentOnDemandSupplyOrderResponse;
-use Sdk\Soap\Fulfilment\Response\GetFulfilmentOrderListToSupplyResponse;
-use Sdk\Fulfilment\SupplyOrderRequest;
-use Sdk\Soap\Fulfilment\GetFulfilmentSupplyOrderSoap;
-use Sdk\Soap\Fulfilment\Response\GetFulfilmentSupplyOrderResponse;
 use Sdk\Soap\Fulfilment\GetFulfilmentSupplyOrderReportListSoap;
+use Sdk\Soap\Fulfilment\GetFulfilmentSupplyOrderSoap;
+use Sdk\Soap\Fulfilment\GetProductStockListSoap;
 use Sdk\Soap\Fulfilment\Response\FulfilmentSupplyOrderReportListResponse;
+use Sdk\Soap\Fulfilment\Response\GetFulfilmentOrderListToSupplyResponse;
+use Sdk\Soap\Fulfilment\Response\GetFulfilmentSupplyOrderResponse;
+use Sdk\Soap\Fulfilment\Response\GetProductStockListResponse;
+use Sdk\Soap\Fulfilment\Response\SubmitFulfilmentOnDemandSupplyOrderResponse;
+use Sdk\Soap\Fulfilment\Response\SubmitFulfilmentSupplyOrderResponse;
+use Sdk\Soap\Fulfilment\SubmitFulfilmentOnDemandSupplyOrderSoap;
+use Sdk\Soap\Fulfilment\SubmitFulfilmentSupplyOrderSoap;
+use Sdk\Soap\HeaderMessage\HeaderMessage;
 use Sdk\Soap\Fulfilment\SubmitOfferStateActionSoap;
 use Sdk\Soap\Fulfilment\Response\SubmitOfferStateActionResponse;
+use Sdk\Soap\Fulfilment\SubmitFulfilmentActivationSoap;
+use Sdk\Soap\Fulfilment\Response\SubmitFulfilmentActivationResponse;
+use Sdk\Soap\Fulfilment\GetFulfilmentDeliveryDocumentSoap;
+use Sdk\Soap\Fulfilment\Response\GetFulfilmentDeliveryDocumentResponse;
+use Sdk\Soap\Fulfilment\GetFulfilmentActivationReportListSoap;
+use Sdk\Soap\Fulfilment\Response\GetFulfilmentActivationReportRequestXmlResponse;
 
 /*
  * Fulfilment point
@@ -44,47 +46,40 @@ class FulfilmentPoint
     {
     }
 
-     /**
-     * @param $method
-     * @param $data
-     * @return mixed
-     */
-    private function _sendRequest($method, $data)
-    {
-        $headerRequestURL = ConfigFileLoader::getInstance()->getConfAttribute('methodurl');
-        $apiURL = ConfigFileLoader::getInstance()->getConfAttribute('url');
-        $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
-        $response = $request->call();
-        return $response;
-    }
-
     /*
-     * @param $fulfillmentProductRequest \Sdk\Fulfilment\FulfillmentProductRequest
-     * @return $getProductStockListResponse
+     * @param $offerStateActionRequest \Sdk\Fulfilment\OfferStateActionRequest
+     * @return $submitOfferStateActionResponse
      */
-    public function GetProductStockList($fulfilmentProductRequest)
+    public function SubmitOfferStateAction($offerStateActionRequest)
     {
         $envelope = new Envelope();
-        $envelope->addNameSpace(' xmlns:cdis="http://www.cdiscount.com"');
+        $envelope->addNameSpace('xmlns:cdis="http://www.cdiscount.com"');
         $header = new HeaderMessage();
         $body = new Body();
-        $getProductStockList = new GetProductStockListSoap();
+        $submitOfferStateAction = new SubmitOfferStateActionSoap();
+
         $headerXml = $header->generateHeader();
-        $fulfilmentProductRequestXml = $getProductStockList->generateFulfilmentProductRequestXml($fulfilmentProductRequest);
-        $getProductStockListXml = $getProductStockList->generateEnclosingBalise($headerXml . $fulfilmentProductRequestXml);
-        $bodyXml = $body->generateXML($getProductStockListXml);
+        $offerStateActionRequestXml = $submitOfferStateAction->generateofferStateActionRequestXml($offerStateActionRequest);
+
+        $submitOfferStateActionXml = $submitOfferStateAction->generateEnclosingBalise($headerXml . $offerStateActionRequestXml);
+
+        $bodyXml = $body->generateXML($submitOfferStateActionXml);
+
         $envelopeXml = $envelope->generateXML($bodyXml);
-        $response = $this->_sendRequest('GetProductStockList', $envelopeXml);
-        $getProductStockListResponse = new GetProductStockListResponse($response);
-        return $getProductStockListResponse;
+        //echo 'Request : '.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8"));
+        $response = $this->_sendRequest('SubmitOfferStateAction', $envelopeXml);
+
+        $submitOfferStateActionResponse = new SubmitOfferStateActionResponse($response);
+
+        return $submitOfferStateActionResponse;
     }
 
     /*
-     * @param $orderStatusRequest \Sdk\Fulfilment\OrderStatusRequest
-     * @return $getExternalOrderStatusResponse
-     */
+    * @param $orderStatusRequest \Sdk\Fulfilment\OrderStatusRequest
+    * @return $getExternalOrderStatusResponse
+    */
     public function GetExternalOrderStatus($orderStatusRequest)
-	{
+    {
         $envelope = new Envelope();
         $envelope->addNameSpace(' xmlns:cdis="http://www.cdiscount.com"');
         $header = new HeaderMessage();
@@ -100,10 +95,10 @@ class FulfilmentPoint
         return $getExternalOrderStatusResponse;
     }
 
-     /*
-     * @param $orderIntegrationRequest \Sdk\Fulfilment\orderIntegrationRequest
-     * @return $createExternalOrderResponse
-     */
+    /*
+    * @param $orderIntegrationRequest \Sdk\Fulfilment\orderIntegrationRequest
+    * @return $createExternalOrderResponse
+    */
     public function CreateExternalOrder($orderIntegrationRequest)
     {
         $envelope = new Envelope();
@@ -119,61 +114,63 @@ class FulfilmentPoint
         $response = $this->_sendRequest('CreateExternalOrder', $envelopeXml);
         $createExternalOrderResponse = new CreateExternalOrderResponse($response);
         return $createExternalOrderResponse;
-	}
-
-    /*
-     * @param $fulfilmentSupplyOrderRequest \Sdk\Fulfilment\FulfilmentSupplyOrderRequest
-     * @return $submitFulfilmentSupplyOrderResponse \Sdk\Soap\Fulfilment\Response\SubmitFulfilmentSupplyOrderResponse
-     */
-    public function SubmitFulfilmentSupplyOrder($fulfilmentSupplyOrderRequest)
-    {
-        $envelope = new Envelope();      
-        $envelope->addNameSpace('xmlns:cdis="http://www.cdiscount.com"');       
-        $header = new HeaderMessage();      
-        $body = new Body();       
-        $submitFulfilmentSupplyOrder = new SubmitFulfilmentSupplyOrderSoap();
-        
-        $headerXml = $header->generateHeader();
-        $fulfilmentSupplyOrderRequestXml = $submitFulfilmentSupplyOrder->generateFulfilmentSupplyOrderRequestXml($fulfilmentSupplyOrderRequest);
-        
-        $submitFulfilmentSupplyOrderXml = $submitFulfilmentSupplyOrder->generateEnclosingBalise($headerXml . $fulfilmentSupplyOrderRequestXml);
-        
-        $bodyXml = $body->generateXML($submitFulfilmentSupplyOrderXml);
-        
-        $envelopeXml = $envelope->generateXML($bodyXml);
-        //echo ' Request : '.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8"));
-        
-        $response = $this->_sendRequest('SubmitFulfilmentSupplyOrder', $envelopeXml);
-
-        $submitFulfilmentSupplyOrderResponse = new SubmitFulfilmentSupplyOrderResponse($response);
-        
-        return $submitFulfilmentSupplyOrderResponse;
     }
 
     /*
-     * @param $fulfilmentOnDemandSupplyOrderRequest \Sdk\Fulfilment\FulfilmentOnDemandSupplyOrderRequest
-     * @return $submitFulfilmentOnDemandSupplyOrderResponse \Sdk\Soap\Fulfilment\Response\SubmitFulfilmentOnDemandSupplyOrderResponse
-     */
-	public function SubmitFulfilmentOnDemandSupplyOrder($fulfilmentOnDemandSupplyOrderRequest)
+    * @param $fulfilmentOnDemandOrderLineRequest \Sdk\Fulfilment\FulfilmentOnDemandOrderLineFilter
+    * @return $getFulfilmentOrderListToSupplyResponse \Sdk\Soap\Fulfilment\Response\GetFulfilmentOrderListToSupplyResponse
+    */
+    public function GetFulfilmentOrderListToSupply($fulfilmentOnDemandOrderLineRequest)
     {
         $envelope = new Envelope();
         $envelope->addNameSpace(' xmlns:cdis="http://www.cdiscount.com"');
         $header = new HeaderMessage();
         $body = new Body();
-        $submitFulfilmentOnDemandSupplyOrder = new SubmitFulfilmentOnDemandSupplyOrderSoap();
+
+        $getFulfilmentOrderListToSupply = new GetFulfilmentOrderListToSupplySoap();
 
         $headerXml = $header->generateHeader();
-        $fulfilmentOnDemandSupplyOrderRequestXml = $submitFulfilmentOnDemandSupplyOrder->generateFulfilmentOnDemandSupplyOrderRequestXml($fulfilmentOnDemandSupplyOrderRequest);
-        $submitFulfilmentOnDemandSupplyOrderXml = $submitFulfilmentOnDemandSupplyOrder->generateEnclosingBalise($headerXml . $fulfilmentOnDemandSupplyOrderRequestXml);
+        $fulfilmentOnDemandOrderLineRequestXml = $getFulfilmentOrderListToSupply->generateFulfilmentOnDemandOrderLineRequestXml($fulfilmentOnDemandOrderLineRequest);
+        $getFulfilmentOrderListToSupplyXml = $getFulfilmentOrderListToSupply->generateEnclosingBalise($headerXml . $fulfilmentOnDemandOrderLineRequestXml);
 
-        $bodyXml = $body->generateXML($submitFulfilmentOnDemandSupplyOrderXml);
+        $bodyXml = $body->generateXML($getFulfilmentOrderListToSupplyXml);
 
         $envelopeXml = $envelope->generateXML($bodyXml);
+        //echo '<br/><br/><p> Response string : <br/><br/>'.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
+        $response = $this->_sendRequest('GetFulfilmentOrderListToSupply', $envelopeXml);
 
-        $response = $this->_sendRequest('SubmitFulfilmentOnDemandSupplyOrder', $envelopeXml);
+        //echo '<br/><br/><p> Response string : <br/><br/>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
-        $submitFulfilmentOnDemandSupplyOrderResponse = new SubmitFulfilmentOnDemandSupplyOrderResponse($response);
-        return $submitFulfilmentOnDemandSupplyOrderResponse;
+        $getFulfilmentOrderListToSupplyResponse = new GetFulfilmentOrderListToSupplyResponse($response);
+        return $getFulfilmentOrderListToSupplyResponse;
+    }
+
+    /*
+    * @param $supplyOrderRequest \Sdk\Fulfilment\SupplyOrderRequest
+    * @return $getFulfilmentSupplyOrderResponse \Sdk\Soap\Fulfilment\Response\GetFulfilmentSupplyOrderResponse
+    */
+    public function GetFulfilmentSupplyOrder($supplyOrderRequest)
+    {
+        $envelope = new Envelope();
+        $envelope->addNameSpace(' xmlns:cdis="http://www.cdiscount.com"');
+        $envelope->addNameSpace(' xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"');
+        $header = new HeaderMessage();
+        $body = new Body();
+        $getFulfilmentSupplyOrder = new GetFulfilmentSupplyOrderSoap();
+
+        $headerXml = $header->generateHeader();
+        $getFulfilmentSupplyOrderRequestXml = $getFulfilmentSupplyOrder->generateGetFulfilmentSupplyOrderRequestXml($supplyOrderRequest);
+
+        $getFulfilmentSupplyOrderXml = $getFulfilmentSupplyOrder->generateEnclosingBalise($headerXml . $getFulfilmentSupplyOrderRequestXml);
+        $bodyXml = $body->generateXML($getFulfilmentSupplyOrderXml);
+
+        $envelopeXml = $envelope->generateXML($bodyXml);
+        //echo '<br/><br/><p> Requete string : <br/><br/>'.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
+        $response = $this->_sendRequest('GetFulfilmentSupplyOrder', $envelopeXml);
+        //echo '<br/><br/><p> Response string : <br/><br/>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
+
+        $getFulfilmentSupplyOrderResponse = new GetFulfilmentSupplyOrderResponse($response);
+        return $getFulfilmentSupplyOrderResponse;
     }
 
     /*
@@ -203,65 +200,187 @@ class FulfilmentPoint
         $response = $this->_sendRequest('GetFulfilmentSupplyOrderReportList', $envelopeXml);
 
         $fulfilmentSupplyOrderReportListResponse = new FulfilmentSupplyOrderReportListResponse($response);
-       
+
         return $fulfilmentSupplyOrderReportListResponse;
     }
 
     /*
-     * @param $fulfilmentOnDemandOrderLineRequest \Sdk\Fulfilment\FulfilmentOnDemandOrderLineFilter
-     * @return $getFulfilmentOrderListToSupplyResponse \Sdk\Soap\Fulfilment\Response\GetFulfilmentOrderListToSupplyResponse
+     * @param $fulfillmentProductRequest \Sdk\Fulfilment\FulfillmentProductRequest
+     * @return $getProductStockListResponse
      */
-    public function GetFulfilmentOrderListToSupply($fulfilmentOnDemandOrderLineRequest)
+    public function GetProductStockList($fulfilmentProductRequest)
     {
         $envelope = new Envelope();
         $envelope->addNameSpace(' xmlns:cdis="http://www.cdiscount.com"');
         $header = new HeaderMessage();
         $body = new Body();
-
-        $getFulfilmentOrderListToSupply = new GetFulfilmentOrderListToSupplySoap();
-
+        $getProductStockList = new GetProductStockListSoap();
         $headerXml = $header->generateHeader();
-        $fulfilmentOnDemandOrderLineRequestXml = $getFulfilmentOrderListToSupply->generateFulfilmentOnDemandOrderLineRequestXml($fulfilmentOnDemandOrderLineRequest);
-        $getFulfilmentOrderListToSupplyXml = $getFulfilmentOrderListToSupply->generateEnclosingBalise($headerXml . $fulfilmentOnDemandOrderLineRequestXml);
-
-        $bodyXml = $body->generateXML($getFulfilmentOrderListToSupplyXml);
-
+        $fulfilmentProductRequestXml = $getProductStockList->generateFulfilmentProductRequestXml($fulfilmentProductRequest);
+        $getProductStockListXml = $getProductStockList->generateEnclosingBalise($headerXml . $fulfilmentProductRequestXml);
+        $bodyXml = $body->generateXML($getProductStockListXml);
         $envelopeXml = $envelope->generateXML($bodyXml);
-        //echo '<br/><br/><p> Response string : <br/><br/>'.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-        $response = $this->_sendRequest('GetFulfilmentOrderListToSupply', $envelopeXml);
-
-        //echo '<br/><br/><p> Response string : <br/><br/>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
-        $getFulfilmentOrderListToSupplyResponse = new GetFulfilmentOrderListToSupplyResponse($response);
-        return $getFulfilmentOrderListToSupplyResponse;
+        $response = $this->_sendRequest('GetProductStockList', $envelopeXml);
+        $getProductStockListResponse = new GetProductStockListResponse($response);
+        return $getProductStockListResponse;
     }
 
     /*
-     * @param $supplyOrderRequest \Sdk\Fulfilment\SupplyOrderRequest
-     * @return $getFulfilmentSupplyOrderResponse \Sdk\Soap\Fulfilment\Response\GetFulfilmentSupplyOrderResponse
+     * @param $fulfilmentSupplyOrderRequest \Sdk\Fulfilment\FulfilmentSupplyOrderRequest
+     * @return $submitFulfilmentSupplyOrderResponse \Sdk\Soap\Fulfilment\Response\SubmitFulfilmentSupplyOrderResponse
      */
-    public function GetFulfilementSupplyOrder($supplyOrderRequest)
+    public function SubmitFulfilmentSupplyOrder($fulfilmentSupplyOrderRequest)
+    {
+        $envelope = new Envelope();
+        $envelope->addNameSpace('xmlns:cdis="http://www.cdiscount.com"');
+        $header = new HeaderMessage();
+        $body = new Body();
+        $submitFulfilmentSupplyOrder = new SubmitFulfilmentSupplyOrderSoap();
+
+        $headerXml = $header->generateHeader();
+        $fulfilmentSupplyOrderRequestXml = $submitFulfilmentSupplyOrder->generateFulfilmentSupplyOrderRequestXml($fulfilmentSupplyOrderRequest);
+
+        $submitFulfilmentSupplyOrderXml = $submitFulfilmentSupplyOrder->generateEnclosingBalise($headerXml . $fulfilmentSupplyOrderRequestXml);
+
+        $bodyXml = $body->generateXML($submitFulfilmentSupplyOrderXml);
+
+        $envelopeXml = $envelope->generateXML($bodyXml);
+        //echo ' Request : '.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8"));
+
+        $response = $this->_sendRequest('SubmitFulfilmentSupplyOrder', $envelopeXml);
+
+        $submitFulfilmentSupplyOrderResponse = new SubmitFulfilmentSupplyOrderResponse($response);
+
+        return $submitFulfilmentSupplyOrderResponse;
+    }
+
+    /*
+     * @param $fulfilmentOnDemandSupplyOrderRequest \Sdk\Fulfilment\FulfilmentOnDemandSupplyOrderRequest
+     * @return $submitFulfilmentOnDemandSupplyOrderResponse \Sdk\Soap\Fulfilment\Response\SubmitFulfilmentOnDemandSupplyOrderResponse
+     */
+    public function SubmitFulfilmentOnDemandSupplyOrder($fulfilmentOnDemandSupplyOrderRequest)
     {
         $envelope = new Envelope();
         $envelope->addNameSpace(' xmlns:cdis="http://www.cdiscount.com"');
-        $envelope->addNameSpace(' xmlns:arr="http://schemas.microsoft.com/2003/10/Serialization/Arrays"');
         $header = new HeaderMessage();
         $body = new Body();
-        $getFulfilmentSupplyOrder = new GetFulfilmentSupplyOrderSoap();
+        $submitFulfilmentOnDemandSupplyOrder = new SubmitFulfilmentOnDemandSupplyOrderSoap();
 
         $headerXml = $header->generateHeader();
-        $getFulfilmentSupplyOrderRequestXml = $getFulfilmentSupplyOrder->generateGetFulfilmentSupplyOrderRequestXml($supplyOrderRequest);
+        $fulfilmentOnDemandSupplyOrderRequestXml = $submitFulfilmentOnDemandSupplyOrder->generateFulfilmentOnDemandSupplyOrderRequestXml($fulfilmentOnDemandSupplyOrderRequest);
+        $submitFulfilmentOnDemandSupplyOrderXml = $submitFulfilmentOnDemandSupplyOrder->generateEnclosingBalise($headerXml . $fulfilmentOnDemandSupplyOrderRequestXml);
 
-        $getFulfilmentSupplyOrderXml = $getFulfilmentSupplyOrder->generateEnclosingBalise($headerXml . $getFulfilmentSupplyOrderRequestXml);
-        $bodyXml = $body->generateXML($getFulfilmentSupplyOrderXml);
+        $bodyXml = $body->generateXML($submitFulfilmentOnDemandSupplyOrderXml);
 
         $envelopeXml = $envelope->generateXML($bodyXml);
-        //echo '<br/><br/><p> Requete string : <br/><br/>'.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-        $response = $this->_sendRequest('GetFulfilmentSupplyOrder', $envelopeXml);
-        //echo '<br/><br/><p> Response string : <br/><br/>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
-        $getFulfilmentSupplyOrderResponse = new GetFulfilmentSupplyOrderResponse($response);
-        return $getFulfilmentSupplyOrderResponse;
+        $response = $this->_sendRequest('SubmitFulfilmentOnDemandSupplyOrder', $envelopeXml);
+
+        $submitFulfilmentOnDemandSupplyOrderResponse = new SubmitFulfilmentOnDemandSupplyOrderResponse($response);
+        return $submitFulfilmentOnDemandSupplyOrderResponse;
     }
 
+    /*
+     * @param $request \Sdk\Fulfilment\SubmitFulfilmentActivationRequest
+     * @return $submitFulfilmentActivationResponse
+     */
+    public function SubmitFulfilmentActivation($request)
+    {
+        $envelope = new Envelope();
+        $envelope->addNameSpace(' xmlns:cdis="http://www.cdiscount.com"');
+        $envelope->addNameSpace(' xmlns:cdis1="http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages"');
+        $envelope->addNameSpace(' xmlns:cdis2="http://schemas.datacontract.org/2004/07/Cdiscount.Service.Marketplace.API.External.Contract.Data.Fulfilment"');
+        $header = new HeaderMessage();
+        $body = new Body();
+        $submitFulfilmentActivationSoap = new SubmitFulfilmentActivationSoap();
+
+        $headerXml = $header->generateHeader();
+        $submitFulfilmentActivationquestXml = $submitFulfilmentActivationSoap->generateFulfilmentActivationRequestXml($request);
+
+        $getFulfilmentActivationXml = $submitFulfilmentActivationSoap->generateEnclosingBalise($headerXml . $submitFulfilmentActivationquestXml);
+        $bodyXml = $body->generateXML($getFulfilmentActivationXml);
+
+        $envelopeXml = $envelope->generateXML($bodyXml);
+        // echo '<p> Request : <br/><br/>'.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
+        $response = $this->_sendRequest('SubmitFulfilmentActivation', $envelopeXml);
+
+        $submitFulfilmentActivationResponse = new SubmitFulfilmentActivationResponse($response);
+        return $submitFulfilmentActivationResponse;
+    }
+
+    /*
+     * @param $fulfilmentDeliveryRequest \Sdk\Fulfilment\FulfilmentDeliveryRequest
+     * @return $getFulfilmentDeliveryDocumentResponse
+     */
+    public function GetFulfilmentDeliveryDocument($fulfilmentDeliveryRequest)
+    {
+        $envelope = new Envelope();
+        $envelope->addNameSpace(' xmlns:cdis="http://www.cdiscount.com"');
+        $header = new HeaderMessage();
+        $body = new Body();
+        $getFulfilmentDeliveryDocument = new GetFulfilmentDeliveryDocumentSoap();
+
+        $headerXml = $header->generateHeader();
+        $getFulfilmentDeliveryDocumentRequestXml = $getFulfilmentDeliveryDocument->generateFulfilmentDeliveryDocumentRequestXml($fulfilmentDeliveryRequest);
+
+        $getFulfilmentDeliveryDocumentXml = $getFulfilmentDeliveryDocument->generateEnclosingBalise($headerXml . $getFulfilmentDeliveryDocumentRequestXml);
+
+        $bodyXml = $body->generateXML($getFulfilmentDeliveryDocumentXml);
+
+        $envelopeXml = $envelope->generateXML($bodyXml);
+        //echo ' Request SOAP : '.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8"));
+        $response = $this->_sendRequest('GetFulfilmentDeliveryDocument', $envelopeXml);
+
+        $getFulfilmentDeliveryDocumentResponse = new GetFulfilmentDeliveryDocumentResponse($response);
+
+        return $getFulfilmentDeliveryDocumentResponse;
+    }
+
+    /*
+     * @param $FulfilmentActivationReportRequest \Sdk\Fulfilment\FulfilmentActivationReportRequest
+     * @return $FulfilmentActivationReportRequestXmlResponse
+     */
+    public function GetFulfilmentActivationReportList($FulfilmentActivationReportRequest)
+    {
+        $envelope = new Envelope();
+        $envelope->addNameSpace(' xmlns:cdis="http://www.cdiscount.com"');
+        $header = new HeaderMessage();
+        $body = new Body();
+        $FulfilmentActivationReportList = new GetFulfilmentActivationReportListSoap();
+
+        $headerXml = $header->generateHeader();
+
+        $FulfilmentActivationReportRequestXml = $FulfilmentActivationReportList->generateFulfilmentActivationReportRequestXml($FulfilmentActivationReportRequest);
+
+        $FulfilmentActivationReportXml = $FulfilmentActivationReportList->generateEnclosingBalise($headerXml . $FulfilmentActivationReportRequestXml);
+
+        $bodyXml = $body->generateXML($FulfilmentActivationReportXml);
+
+        $envelopeXml = $envelope->generateXML($bodyXml);
+
+        //echo '<p> Request : <br/><br/>'.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
+        $response = $this->_sendRequest('GetFulfilmentActivationReportList', $envelopeXml);
+        //echo '<br/><br/><p> Response string : <br/><br/>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
+        $FulfilmentActivationReportRequestXmlResponse = new GetFulfilmentActivationReportRequestXmlResponse($response);
+
+        return $FulfilmentActivationReportRequestXmlResponse;
+    }
+
+    /*
+     * @param $method
+     * @param $data
+     * @return $response
+     */
+    private function _sendRequest($method, $data)
+    {
+        $headerRequestURL = ConfigFileLoader::getInstance()->getConfAttribute('methodurl');
+
+        $apiURL = ConfigFileLoader::getInstance()->getConfAttribute('url');
+
+        $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
+
+        $response = $request->call();
+
+        return $response;
+    }
 }

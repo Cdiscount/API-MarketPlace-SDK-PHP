@@ -23,9 +23,7 @@ if ($token == null || !$client->isTokenValid()) {
 $fulfilmentPoint = $client->getFulfilmentPoint();
 
 $fulfilmentOnDemandOrderLineRequest = new \Sdk\Fulfilment\FulfilmentOnDemandOrderLineFilter('1704261314FH6QI','3515060974125','ANZ');
-
-
-$getFulfilmentOrderListToSupplyResponse= $fulfilmentPoint->GetFulfilmentOrderListToSupply($fulfilmentOnDemandOrderLineRequest);
+$getFulfilmentOrderListToSupplyResponse = $fulfilmentPoint->GetFulfilmentOrderListToSupply($fulfilmentOnDemandOrderLineRequest);
 
 if ($getFulfilmentOrderListToSupplyResponse->getOperationSuccess() == false) {
     if( $getFulfilmentOrderListToSupplyResponse->getErrorMessage() != null ){
