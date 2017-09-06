@@ -7,7 +7,6 @@
         "zendframework/zend-db": "^2.8",
         "zendframework/zend-soap": "^2.6",
         "zendframework/zend-http": "^2.5",
-        "zendframework/zend-log": "^2.9",
         "zendframework/zend-config": "^2.6"
     },
     "license": "GPL-3.0",
