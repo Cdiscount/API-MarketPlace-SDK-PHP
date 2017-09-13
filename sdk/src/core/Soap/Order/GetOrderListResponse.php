@@ -316,8 +316,8 @@ class GetOrderListResponse extends iResponse
             $orderLine->setSkuParent($orderLineListOBJ['SkuParent']);
             $orderLine->setUnitAdditionalShippingCharges(floatval($orderLineListOBJ['UnitAdditionalShippingCharges']));
             $orderLine->setUnitShippingCharges(floatval($orderLineListOBJ['UnitShippingCharges']));
-            
-            if ($orderLineListOBJ['RefundShippingCharges'] == 'true') {
+
+            if (isset ($orderLineListOBJ['RefundShippingCharges']) && $orderLineListOBJ['RefundShippingCharges']== 'true') {
                 $orderLine->setRefundShippingCharges(true);
             }
             $orderLineList->addOrderLine($orderLine);
