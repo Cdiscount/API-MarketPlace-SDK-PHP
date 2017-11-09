@@ -63,8 +63,7 @@ class ProductPoint
 
         $response = $this->_sendRequest('GetProductListByIdentifier', $envelopeXML);
 
-        $getProductListByIdentifierResponse = new GetProductListByIdentifierResponse($response);
-        return $getProductListByIdentifierResponse;
+        return new GetProductListByIdentifierResponse($response);
     }
 
     /**
@@ -87,8 +86,7 @@ class ProductPoint
 
         $response = $this->_sendRequest('GetProductList', $envelopeXML);
 
-        $getProductListResponse = new GetProductListResponse($response);
-        return $getProductListResponse;
+        return new GetProductListResponse($response);
     }
 
     /**
@@ -108,9 +106,7 @@ class ProductPoint
 
         $response = $this->_sendRequest('GetAllowedCategoryTree', $envelopeXML);
 
-        $allowedCategoryTreeResponse = new GetAllowedCategoryTreeResponse($response);
-
-        return $allowedCategoryTreeResponse;
+        return new GetAllowedCategoryTreeResponse($response);
     }
 
     /**
@@ -130,9 +126,7 @@ class ProductPoint
 
         $response = $this->_sendRequest('GetAllAllowedCategoryTree', $envelopeXML);
 
-        $allowedCategoryTreeResponse = new GetAllAllowedCategoryTreeResponse($response);
-
-        return $allowedCategoryTreeResponse;
+        return new GetAllAllowedCategoryTreeResponse($response);
     }
 
     /**
@@ -155,8 +149,7 @@ class ProductPoint
 
         $response = $this->_sendRequest('GetModelList', $envelopeXML);
 
-        $getModelListResponse = new GetModelListResponse($response);
-        return $getModelListResponse;
+        return new GetModelListResponse($response);
     }
 
     /**
@@ -176,9 +169,7 @@ class ProductPoint
 
         $response = $this->_sendRequest('GetAllModelList', $envelopeXML);
 
-        $getAllModelListResponse = new GetAllModelListResponse($response);
-
-        return $getAllModelListResponse;
+        return new GetAllModelListResponse($response);
     }
 
     /**
@@ -198,9 +189,7 @@ class ProductPoint
 
         $response = $this->_sendRequest('GetBrandList', $envelopeXML);
 
-        $getBrandListResponse = new GetBrandListResponse($response);
-
-        return $getBrandListResponse;
+        return new GetBrandListResponse($response);
     }
 
     /**
@@ -223,8 +212,7 @@ class ProductPoint
 
         $response = $this->_sendRequest('SubmitProductPackage', $envelopeXML);
 
-        $submitProductPackageResponse = new SubmitProductPackageResponse($response);
-        return $submitProductPackageResponse;
+        return new SubmitProductPackageResponse($response);
     }
 
     /**
@@ -247,8 +235,7 @@ class ProductPoint
 
         $response = $this->_sendRequest('GetProductPackageSubmissionResult', $envelopeXML);
 
-        $getProductPackageSubmissionResultResponse = new GetProductPackageSubmissionResultResponse($response);
-        return $getProductPackageSubmissionResultResponse;
+        return new GetProductPackageSubmissionResultResponse($response);
     }
 
     /**
@@ -272,9 +259,7 @@ class ProductPoint
 
         $response = $this->_sendRequest('GetProductPackageProductMatchingFileData', $envelopeXML);
 
-        $getProductPackageProductMatchingFileDataResponse = new GetProductPackageProductMatchingFileDataResponse($response);
-
-        return $getProductPackageProductMatchingFileDataResponse;
+        return new GetProductPackageProductMatchingFileDataResponse($response);
     }
 
     /**
@@ -289,9 +274,8 @@ class ProductPoint
         $apiURL = ConfigFileLoader::getInstance()->getConfAttribute('url');
 
         $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
-        $response = $request->call();
 
-        return $response;
+        return $request->call();
     }
 
 

@@ -52,8 +52,7 @@ class RelaysPoint
         $apiURL = ConfigFileLoader::getInstance()->getConfAttribute('url');
 
         $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
-        $response = $request->call();
 
-        return $response;
+        return $request->call();
     }
 }

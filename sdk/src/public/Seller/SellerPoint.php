@@ -40,8 +40,7 @@ class SellerPoint
 
         $response = $this->_sendRequest('GetSellerInformation', $envelopeXML);
 
-        $sellerInfoResponse = new GetSellerInformationResponse($response);
-        return $sellerInfoResponse;
+        return new GetSellerInformationResponse($response);
     }
 
     /**
@@ -61,8 +60,7 @@ class SellerPoint
 
         $response = $this->_sendRequest('GetSellerIndicators', $envelopeXML);
 
-        $getSellerIndicatorsResponse = new GetSellerIndicatorsResponse($response);
-        return $getSellerIndicatorsResponse;
+        return new GetSellerIndicatorsResponse($response);
     }
 
     /**
@@ -77,8 +75,7 @@ class SellerPoint
         $apiURL = ConfigFileLoader::getInstance()->getConfAttribute('url');
 
         $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
-        $response = $request->call();
 
-        return $response;
+        return $request->call();
     }
 }

@@ -51,8 +51,7 @@ class OrderPoint
 
         $response = $this->_sendRequest('ValidateOrderList', $envelopeXML);
 
-        $validateOrderListResponse = new ValidateOrderListResponse($response);
-        return $validateOrderListResponse;
+        return new ValidateOrderListResponse($response);
     }
 
     /**
@@ -84,8 +83,7 @@ class OrderPoint
 
         $response = $this->_sendRequest('GetOrderList', $envelopeXML);
 
-        $sellerInfoResponse = new GetOrderListResponse($response);
-        return $sellerInfoResponse;
+        return new GetOrderListResponse($response);
     }
 
     /**
@@ -153,9 +151,7 @@ class OrderPoint
 
         $response = $this->_sendRequest('ManageParcel', $envelopeXml);
 
-        $manageParcelResponse = new ManageParcelResponse($response);
-
-        return $manageParcelResponse;
+        return new ManageParcelResponse($response);
     }
     
     /*
@@ -181,10 +177,8 @@ class OrderPoint
         $envelopeXML = $envelope->generateXML($bodyXML);
 
         $response = $this->_sendRequest('CreateRefundVoucher', $envelopeXML);
-        
-        $createRefundVoucherResponse = new CreateRefundVoucherResponse($response);
-        
-        return $createRefundVoucherResponse;
+
+        return new CreateRefundVoucherResponse($response);
     }
 
     private function _sendRequest($method, $data)
@@ -194,9 +188,7 @@ class OrderPoint
         $apiURL = ConfigFileLoader::getInstance()->getConfAttribute('url');
 
         $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
-        $response = $request->call();
-
-        return $response;
+        return $request->call();
     }
 
 }
