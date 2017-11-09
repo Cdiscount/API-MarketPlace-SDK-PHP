@@ -90,10 +90,10 @@ class SupplyOrderReportRequest
      */
     public function __construct($beginCreationDate, $depositIdList, $endCreationDate, $pageNumber, $pageSize) 
     {
-        $this-> _beginCreationDate = $beginCreationDate;
-        $this-> _depositIdList = $depositIdList;
-        $this-> _endCreationDate = $endCreationDate;
-        $this-> _pageNumber = $pageNumber;
-        $this-> _pageSize = $pageSize;
+        $this->_beginCreationDate = $beginCreationDate;
+        $this->_depositIdList = $depositIdList;
+        $this->_endCreationDate = $endCreationDate;
+        $this->_pageNumber = $pageNumber;
+        $this->_pageSize = $pageSize;
     } 
 }

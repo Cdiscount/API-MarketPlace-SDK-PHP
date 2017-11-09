@@ -144,7 +144,7 @@ class FulfilmentOrderLine
      */
      public function setWarehouse($warehouse)
      {
-        $this-> _warehouse = $warehouse;
+        $this->_warehouse = $warehouse;
      }
 
      /**
@@ -152,7 +152,7 @@ class FulfilmentOrderLine
      */
      public function setExpectedCustomerDeliveryMin($expectedCustomerDeliveryMin)
      {
-        $this-> _expectedCustomerDeliveryMin = $expectedCustomerDeliveryMin;
+        $this->_expectedCustomerDeliveryMin = $expectedCustomerDeliveryMin;
      }
 
      /**
@@ -160,7 +160,7 @@ class FulfilmentOrderLine
      */
      public function setExpectedCustomerDeliveryMax($expectedCustomerDeliveryMax)
      {
-        $this-> _expectedCustomerDeliveryMax = $expectedCustomerDeliveryMax;
+        $this->_expectedCustomerDeliveryMax = $expectedCustomerDeliveryMax;
      }
 
      /**
@@ -168,7 +168,7 @@ class FulfilmentOrderLine
      */
      public function setLatestWarehouseDeliveryDate($latestWarehouseDeliveryDate)
      {
-        $this-> _latestWarehouseDeliveryDate = $latestWarehouseDeliveryDate;
+        $this->_latestWarehouseDeliveryDate = $latestWarehouseDeliveryDate;
      }
 
      /**
@@ -176,7 +176,7 @@ class FulfilmentOrderLine
      */
      public function setProductName($productName)
      {
-        $this-> _productName = $productName;
+        $this->_productName = $productName;
      }
 
      /**
@@ -184,7 +184,7 @@ class FulfilmentOrderLine
      */
      public function setSellerProductReference($sellerProductReference)
      {
-        $this-> _sellerProductReference = $sellerProductReference;
+        $this->_sellerProductReference = $sellerProductReference;
      }
 
      /**
@@ -192,7 +192,7 @@ class FulfilmentOrderLine
      */
      public function setOrderDate($orderDate)
      {
-        $this-> _orderDate = $orderDate;
+        $this->_orderDate = $orderDate;
      }
 
      /**
@@ -200,7 +200,7 @@ class FulfilmentOrderLine
      */
      public function setProductEan($productEan)
      {
-        $this-> _productEan = $productEan;
+        $this->_productEan = $productEan;
      }
 
      /**
@@ -208,7 +208,7 @@ class FulfilmentOrderLine
      */
      public function setOrderReference($orderReference)
      {
-        $this-> _orderReference = $orderReference;
+        $this->_orderReference = $orderReference;
      }
 
      /**
@@ -216,7 +216,7 @@ class FulfilmentOrderLine
      */
      public function setQuantity($quantity)
      {
-        $this-> _quantity = $quantity;
+        $this->_quantity = $quantity;
      }
 
     /*

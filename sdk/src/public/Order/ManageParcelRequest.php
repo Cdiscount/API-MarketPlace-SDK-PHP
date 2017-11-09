@@ -48,7 +48,7 @@ class ManageParcelRequest
      */
     public function __construct($scopusId) 
     {
-        $this-> _scopusId = $scopusId;
+        $this->_scopusId = $scopusId;
     }
 }
 
