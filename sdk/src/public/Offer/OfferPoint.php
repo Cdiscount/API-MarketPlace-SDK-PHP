@@ -46,11 +46,7 @@ class OfferPoint
         $bodyXML = $body->generateXML($getOfferListXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
 
-        echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         $response = $this->_sendRequest('GetOfferList', $envelopeXML);
-
-        echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $getOfferListResponse = new GetOfferListResponse($response);
         return $getOfferListResponse;
@@ -78,8 +74,6 @@ class OfferPoint
         $getOfferListXML = $getOfferList->generateEnclosingBalise($headerXML . $offerFilterSoapXml);
         $bodyXML = $body->generateXML($getOfferListXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
-
-        echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $response = $this->_sendRequest('GetOfferListPaginated', $envelopeXML);
 

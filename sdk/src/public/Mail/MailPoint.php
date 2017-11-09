@@ -67,11 +67,7 @@ class MailPoint
         $bodyXML = $body->generateXML($generateDiscussionMailGuidXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
 
-        echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         $response = $this->_sendRequest('GenerateDiscussionMailGuid', $envelopeXML);
-
-        echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $generateDiscussionMailGuidResponse = new GenerateDiscussionMailGuidResponse($response);
         return $generateDiscussionMailGuidResponse;

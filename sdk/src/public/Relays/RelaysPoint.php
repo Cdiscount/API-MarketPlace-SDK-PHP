@@ -34,11 +34,7 @@ class RelaysPoint
         $bodyXML = $body->generateXML($submitProductPackageXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
 
-        echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         $response = $this->_sendRequest('GetParcelShopList', $envelopeXML);
-
-        echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         //$getProductPackageSubmissionResultResponse = new GetProductPackageSubmissionResultResponse($response);
         //return $getProductPackageSubmissionResultResponse;

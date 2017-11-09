@@ -86,8 +86,6 @@ class Token
         libxml_use_internal_errors(true);
         $xmlResult = simplexml_load_string($request->execute());
 
-        echo '<p>'.nl2br(htmlentities($xmlResult , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         //TODO gestion erreur token
 
         if ($xmlResult !== false && isset($xmlResult[0]) && ctype_alnum(strval($xmlResult[0]))) {

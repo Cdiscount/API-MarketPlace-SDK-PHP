@@ -46,11 +46,7 @@ class DiscussionPoint
 
         $envelopeXML = $this->_buildGenericListXML($getOrderClaimList, $claimFilterSoap, $claimFilter, $optionalsNamespaces);
 
-        echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         $response = $this->_sendRequest('GetOrderClaimList', $envelopeXML);
-
-        echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $getOrderClaimListResponse = new GetOrderClaimListResponse($response);
         return $getOrderClaimListResponse;
