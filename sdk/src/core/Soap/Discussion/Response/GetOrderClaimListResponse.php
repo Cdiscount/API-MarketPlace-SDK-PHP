@@ -103,11 +103,11 @@ class GetOrderClaimListResponse extends iResponse
                 }
                 $message = new Message();
                 $message->setContent($messageXML['Content']);
-                //if (isset($orderClaimXML['Sender'])) {
+
                 if (isset($messageXML['Sender'])) {
                     $message->setSender($messageXML['Sender']);
                 }
-                //if (isset($orderClaimXML['Timestamp'])) {
+
                 if (isset($messageXML['Timestamp'])) {
                     $message->setTimestamp($messageXML['Timestamp']);
                 }

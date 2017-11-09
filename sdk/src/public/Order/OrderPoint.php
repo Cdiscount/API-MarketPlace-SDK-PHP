@@ -56,8 +56,6 @@ class OrderPoint
 
         $response = $this->_sendRequest('ValidateOrderList', $envelopeXML);
 
-        //$response = "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"><s:Body><ValidateOrderListResponse xmlns=\"http://www.cdiscount.com\"><ValidateOrderListResult xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><ErrorMessage i:nil=\"true\" xmlns=\"http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages\"/><OperationSuccess xmlns=\"http://schemas.datacontract.org/2004/07/Cdiscount.Framework.Core.Communication.Messages\">true</OperationSuccess><ErrorList/><SellerLogin>login</SellerLogin><TokenId>???</TokenId><ValidateOrderResults><ValidateOrderResult><Errors/><OrderNumber>1109029051W54OU</OrderNumber><ValidateOrderLineResults><ValidateOrderLineResult><Errors/><SellerProductId>CHI8003970895435</SellerProductId><Updated>true</Updated></ValidateOrderLineResult><ValidateOrderLineResult><Errors/><SellerProductId>DOD3592668078117</SellerProductId><Updated>true</Updated></ValidateOrderLineResult><ValidateOrderLineResult><Errors/><SellerProductId>FRAISTRAITEMENT</SellerProductId><Updated>true</Updated></ValidateOrderLineResult></ValidateOrderLineResults><Validated>true</Validated><Warnings/></ValidateOrderResult></ValidateOrderResults></ValidateOrderListResult></ValidateOrderListResponse></s:Body></s:Envelope>";
-
         $validateOrderListResponse = new ValidateOrderListResponse($response);
         return $validateOrderListResponse;
     }
