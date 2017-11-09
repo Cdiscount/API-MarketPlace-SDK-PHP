@@ -29,11 +29,6 @@ use Sdk\Soap\Order\ValidateOrderListResponse;
 
 class OrderPoint
 {
-
-    public function __construct()
-    {
-    }
-
     /**
      * @param $order \Sdk\Order\OrderList
      * @return ValidateOrderListResponse

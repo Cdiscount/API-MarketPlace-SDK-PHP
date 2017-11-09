@@ -11,14 +11,6 @@ namespace Sdk\Seller;
 
 class Seller
 {
-
-    /**
-     * Seller constructor.
-     */
-    public function __construct()
-    {
-    }
-
     private $_email = null;
 
     /**

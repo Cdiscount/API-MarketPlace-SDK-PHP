@@ -23,14 +23,6 @@ use Sdk\Soap\Seller\Response\GetSellerIndicatorsResponse;
  */
 class SellerPoint
 {
-
-    /**
-     * SellerPoint constructor.
-     */
-    public function __construct()
-    {
-    }
-
     /**
      * @return GetSellerInformationResponse
      */
