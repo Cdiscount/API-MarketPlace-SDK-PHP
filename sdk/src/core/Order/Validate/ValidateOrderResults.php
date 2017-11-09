@@ -11,15 +11,7 @@ namespace Sdk\Order\Validate;
 
 class ValidateOrderResults
 {
-    private $_validateOrderResults;
-
-    /**
-     * ValidateOrderResults constructor.
-     */
-    public function __construct()
-    {
-        $this->_validateOrderResults = array();
-    }
+    private $_validateOrderResults = array();
 
     /**
      * @param $validateOrderResult \Sdk\Order\Validate\ValidateOrderResult

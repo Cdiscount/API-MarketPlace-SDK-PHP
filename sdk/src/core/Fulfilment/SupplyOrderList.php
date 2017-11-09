@@ -11,15 +11,7 @@ class SupplyOrderList
     /*
      * @var array
      */
-    private $_supplyOrderList = null;
-    
-    /*
-     * SupplyOrderList constructor
-     */
-    public function __construct() 
-    {
-        $this->_supplyOrderList = array();
-    }
+    private $_supplyOrderList = array();
     
     /*
      * return array
