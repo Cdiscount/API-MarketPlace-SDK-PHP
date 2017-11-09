@@ -15,7 +15,6 @@ class SoapClientDebug extends SoapClient
 {
     public function __doRequest($request, $location, $action, $version, $one_way = 0) {
         // Add code to inspect/dissect/debug/adjust the XML given in $request here
-        //echo "$request\n"; // OK, but XML string in single line
         $doc = new DomDocument('1.0');
         $doc->preserveWhiteSpace = false;
         $doc->formatOutput = true;

@@ -66,7 +66,7 @@ class FulfilmentPoint
         $bodyXml = $body->generateXML($submitOfferStateActionXml);
 
         $envelopeXml = $envelope->generateXML($bodyXml);
-        //echo 'Request : '.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8"));
+
         $response = $this->_sendRequest('SubmitOfferStateAction', $envelopeXml);
 
         $submitOfferStateActionResponse = new SubmitOfferStateActionResponse($response);
@@ -136,10 +136,8 @@ class FulfilmentPoint
         $bodyXml = $body->generateXML($getFulfilmentOrderListToSupplyXml);
 
         $envelopeXml = $envelope->generateXML($bodyXml);
-        //echo '<br/><br/><p> Response string : <br/><br/>'.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-        $response = $this->_sendRequest('GetFulfilmentOrderListToSupply', $envelopeXml);
 
-        //echo '<br/><br/><p> Response string : <br/><br/>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
+        $response = $this->_sendRequest('GetFulfilmentOrderListToSupply', $envelopeXml);
 
         $getFulfilmentOrderListToSupplyResponse = new GetFulfilmentOrderListToSupplyResponse($response);
         return $getFulfilmentOrderListToSupplyResponse;
@@ -165,9 +163,8 @@ class FulfilmentPoint
         $bodyXml = $body->generateXML($getFulfilmentSupplyOrderXml);
 
         $envelopeXml = $envelope->generateXML($bodyXml);
-        //echo '<br/><br/><p> Requete string : <br/><br/>'.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
+
         $response = $this->_sendRequest('GetFulfilmentSupplyOrder', $envelopeXml);
-        //echo '<br/><br/><p> Response string : <br/><br/>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $getFulfilmentSupplyOrderResponse = new GetFulfilmentSupplyOrderResponse($response);
         return $getFulfilmentSupplyOrderResponse;
@@ -194,8 +191,6 @@ class FulfilmentPoint
         $bodyXml = $body->generateXML($fulfilmentSupplyReportListXml);
 
         $envelopeXml = $envelope->generateXML($bodyXml);
-
-        //echo ' Request SOAP : '.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 
         $response = $this->_sendRequest('GetFulfilmentSupplyOrderReportList', $envelopeXml);
 
@@ -245,7 +240,6 @@ class FulfilmentPoint
         $bodyXml = $body->generateXML($submitFulfilmentSupplyOrderXml);
 
         $envelopeXml = $envelope->generateXML($bodyXml);
-        //echo ' Request : '.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8"));
 
         $response = $this->_sendRequest('SubmitFulfilmentSupplyOrder', $envelopeXml);
 
@@ -301,7 +295,7 @@ class FulfilmentPoint
         $bodyXml = $body->generateXML($getFulfilmentActivationXml);
 
         $envelopeXml = $envelope->generateXML($bodyXml);
-        // echo '<p> Request : <br/><br/>'.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
+
         $response = $this->_sendRequest('SubmitFulfilmentActivation', $envelopeXml);
 
         $submitFulfilmentActivationResponse = new SubmitFulfilmentActivationResponse($response);
@@ -328,7 +322,7 @@ class FulfilmentPoint
         $bodyXml = $body->generateXML($getFulfilmentDeliveryDocumentXml);
 
         $envelopeXml = $envelope->generateXML($bodyXml);
-        //echo ' Request SOAP : '.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8"));
+
         $response = $this->_sendRequest('GetFulfilmentDeliveryDocument', $envelopeXml);
 
         $getFulfilmentDeliveryDocumentResponse = new GetFulfilmentDeliveryDocumentResponse($response);
@@ -358,9 +352,8 @@ class FulfilmentPoint
 
         $envelopeXml = $envelope->generateXML($bodyXml);
 
-        //echo '<p> Request : <br/><br/>'.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
         $response = $this->_sendRequest('GetFulfilmentActivationReportList', $envelopeXml);
-        //echo '<br/><br/><p> Response string : <br/><br/>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
+
         $FulfilmentActivationReportRequestXmlResponse = new GetFulfilmentActivationReportRequestXmlResponse($response);
 
         return $FulfilmentActivationReportRequestXmlResponse;

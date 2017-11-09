@@ -291,8 +291,6 @@ class ProductPoint
         $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
         $response = $request->call();
 
-        //echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         return $response;
     }
 

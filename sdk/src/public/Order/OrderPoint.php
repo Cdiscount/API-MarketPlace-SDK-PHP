@@ -134,11 +134,7 @@ class OrderPoint
       </CreateRefundVoucherAfterShipment></soapenv:Body></soapenv:Envelope>";
 
 
-
-        //echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
         $response = $this->_sendRequest('CreateRefundVoucherAfterShipment', $envelopeXML);
-
-        //echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
     }
 
     /*
@@ -162,13 +158,10 @@ class OrderPoint
 
         $envelopeXml = $envelope->generateXML($bodyXml);
 
-        //echo '<p> Request : <br/><br/>'.nl2br(htmlentities($envelopeXml , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
         $response = $this->_sendRequest('ManageParcel', $envelopeXml);
-        //echo '<br/><br/><p> Response string : <br/><br/>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $manageParcelResponse = new ManageParcelResponse($response);
-        //echo '<br/><br/>Response PHP object : <br/>';
-        //print_r($manageParcelResponse);
+
         return $manageParcelResponse;
     }
     
@@ -193,9 +186,8 @@ class OrderPoint
         $bodyXML = $body->generateXML($createRefundVoucherXML);
         
         $envelopeXML = $envelope->generateXML($bodyXML);
-        //echo '<p> Request : <br/><br/>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
+
         $response = $this->_sendRequest('CreateRefundVoucher', $envelopeXML);
-        //echo '<p> Response : <br/><br/>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
         
         $createRefundVoucherResponse = new CreateRefundVoucherResponse($response);
         

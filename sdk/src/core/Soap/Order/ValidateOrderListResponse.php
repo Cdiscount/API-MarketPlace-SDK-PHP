@@ -95,7 +95,6 @@ class ValidateOrderListResponse extends iResponse
                  * \Sdk\Order\Validate\ValidateOrderLineResult
                  */
                 foreach ($validateOrderResult['ValidateOrderLineResults'] as $validateOrderLineResult) {
-                    //echo $objValidateOrderLineResult['SellerProductId'] . "<br/>";
                     if(isset($validateOrderLineResult['SellerProductId']) && !SoapTools::isSoapValueNull($validateOrderLineResult['SellerProductId'])){
                         
                         $orderLineResult = new ValidateOrderLineResult($validateOrderLineResult['SellerProductId']);

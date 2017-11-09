@@ -64,11 +64,7 @@ class DiscussionPoint
 
         $envelopeXML = $this->_buildGenericListXML($getOrderQuestionList, $orderQuestionFilterSoap, $orderQuestionFilter);
 
-        //echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         $response = $this->_sendRequest('GetOrderQuestionList', $envelopeXML);
-
-        //echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $getOrderQuestionListResponse = new GetOrderQuestionListResponse($response);
         return $getOrderQuestionListResponse;
@@ -86,11 +82,7 @@ class DiscussionPoint
 
         $envelopeXML = $this->_buildGenericListXML($getOfferQuestionList, $offerQuestionFilterSoap, $orderQuestionFilter);
 
-        //echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         $response = $this->_sendRequest('GetOfferQuestionList', $envelopeXML);
-
-        //echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $getOfferQuestionListResponse = new GetOfferQuestionListResponse($response);
         return $getOfferQuestionListResponse;
@@ -114,11 +106,7 @@ class DiscussionPoint
         $bodyXML = $body->generateXML($closeDiscussionListXML);
         $envelopeXML = $envelope->generateXML($bodyXML);
 
-        //echo '<p>'.nl2br(htmlentities($envelopeXML , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
-
         $response = $this->_sendRequest('CloseDiscussionList', $envelopeXML);
-
-        //echo '<p>'.nl2br(htmlentities($response , ENT_QUOTES | ENT_IGNORE, "UTF-8")).'</p>';
 
         $closeDiscussionListResponse = new CloseDiscussionListResponse($response);
         return $closeDiscussionListResponse;

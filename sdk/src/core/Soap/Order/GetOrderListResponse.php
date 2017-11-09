@@ -330,8 +330,6 @@ class GetOrderListResponse extends iResponse
         $parcelListObj = new ParcelList();
 
         foreach ($parcelList as $parcel) {
-            //echo "CustomerNum : " . $parcel['CustomerNum'] . "<br/>";
-
             $parcelObj = new Parcel();
             $parcelObj->setCustomerNum($parcel['CustomerNum']);
             $parcelObj->setExternalCarrierName($parcel['ExternalCarrierName']);

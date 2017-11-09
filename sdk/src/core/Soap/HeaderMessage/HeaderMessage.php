@@ -54,12 +54,6 @@ class HeaderMessage
 
         return $headerMessage;
 
-
-
-        /*echo $context->generateXML();
-        echo $localization->generateXML();
-        echo $security->generateXML();*/
-
         /*
 
         $e->generateXML();
