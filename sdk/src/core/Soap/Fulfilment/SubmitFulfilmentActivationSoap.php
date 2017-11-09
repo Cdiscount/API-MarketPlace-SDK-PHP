@@ -49,7 +49,6 @@ class SubmitFulfilmentActivationSoap extends BaliseTool
      */
     public function generateFulfilmentActivationRequestXml($request)
     {
-        $inlines = array($this->_xmlns_cdis2);
         /*
          * Opening tag FulfilmentSupplyOrderRequest
          */
