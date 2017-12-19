@@ -1,2 +1,2 @@
-Version number : 1.1.4
-Version date   : 29082017
+Version number : 1.1.5
+Version date   : 19122017
