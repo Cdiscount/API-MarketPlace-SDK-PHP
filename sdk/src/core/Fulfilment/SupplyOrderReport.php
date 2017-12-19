@@ -16,7 +16,7 @@ class SupplyOrderReport
     /*
      * @var array
      */
-    private $_reportLineList = null;
+    private $_reportLineList = array();
 
      /*
      * @return array
@@ -49,12 +49,4 @@ class SupplyOrderReport
     {
         array_push($this->_reportLineList, $reportLineList);
     }
-
-     /*
-     * SupplyOrderReport constructor
-     */
-    public function __construct() 
-    {
-         $this->_reportLineList = array();
-    } 
 }

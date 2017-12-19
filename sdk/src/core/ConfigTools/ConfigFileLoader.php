@@ -79,8 +79,6 @@ class ConfigFileLoader
         $this->_apiMode = $configFile['api']['mode'];
 
         $this->_fileData = $reader->fromFile(__DIR__ . '/../../../../config/' . $this->_apiMode . '.config.ini');
-
-        //echo $this->_fileData['api']['username'];
     }
 
     #endregion LoadConfigFile

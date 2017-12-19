@@ -14,15 +14,7 @@ class SellerRefundResultList
     /*
      *@var array 
      */
-    private $_sellerRefundResultList = null;
-    
-    /*
-     * SellerRefundResultList constructor
-     */
-    public function __construct() 
-    {
-        $this->_sellerRefundResultList = array();
-    }
+    private $_sellerRefundResultList = array();
     
     /*
      * @return array

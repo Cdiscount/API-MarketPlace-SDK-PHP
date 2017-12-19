@@ -13,10 +13,6 @@ namespace Sdk\Product;
  */
 class IdentifierRequest
 {
-    public function __construct() {
-        $_valueList = array();
-    }
-
     /*
      * @var string
      */

@@ -53,41 +53,6 @@ class CDSApiSoapRequest
         $this->_adapter = new \Zend\Http\Client\Adapter\Curl();
         $this->_setAdapaterOptions($data, $apiURL);
         $this->_client->setAdapter($this->_adapter);
-
-
-
-        /*
-        $this->_buildHeader($method, $headerMethodURL);
-
-
-
-        $this->_client = new \Zend\Http\Client();
-        $this->_adapter = new \Zend\Http\Client\Adapter\Curl();
-        $this->_client->setAdapter($this->_adapter);
-
-        $this->_request = new \Zend\Http\Request();
-        $this->_request->setUri($apiURL);
-        $this->_request->setMethod(\Zend\Http\Request::METHOD_POST);
-
-        $header = array();
-
-        $header['Content-Type'] = 'text/xml;charset=UTF-8';
-        $header['SOAPAction'] = 'http://www.cdiscount.com/IMarketplaceAPIService/GetSellerInformation';
-
-
-        $this->_client->setHeaders($header);
-
-        var_dump($this->_client->getHeader('Content-Type'));
-
-        var_dump($method);
-        var_dump($headerMethodURL);
-        var_dump($apiURL);
-        var_dump($data);
-        var_dump($header);
-
-        $this->_setAdapaterOptions($data, $apiURL);
-
-        */
     }
 
     /**
@@ -107,7 +72,6 @@ class CDSApiSoapRequest
                 CURLOPT_RETURNTRANSFER => TRUE,
                 CURLOPT_POSTFIELDS => $data,
                 CURLOPT_TIMEOUT => 600
-                //CURLOPT_HTTPHEADER => $this->_header,
             )
         ));
     }

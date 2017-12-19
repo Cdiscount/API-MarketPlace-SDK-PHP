@@ -111,19 +111,11 @@ class OrderFilter extends Filter
     {
         $this->_partnerOrderRef = $partnerOrderRef;
     }
-    
-    /*
-     * order filter constructor
-     */
-    public function __construct() {
-        $this->_orderReferenceList = array();
-    }
-
 
     /*
      * @var array
      */
-    private $_orderReferenceList = null;
+    private $_orderReferenceList = array();
     
     /*
      * @return array

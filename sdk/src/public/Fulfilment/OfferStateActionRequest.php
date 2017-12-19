@@ -33,7 +33,7 @@ class OfferStateActionRequest
      */
     public function setSellerProductId($sellerProductId)
     {
-        $this-> _sellerProductId = $sellerProductId;
+        $this->_sellerProductId = $sellerProductId;
     }
 
     /*
@@ -49,7 +49,7 @@ class OfferStateActionRequest
      */
     public function setAction($offerStateActionType)
     {
-        $this-> _action = $offerStateActionType;
+        $this->_action = $offerStateActionType;
     }
     
     /*

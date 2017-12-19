@@ -16,7 +16,7 @@ class FulfilmentActivationReport
     /*
      * @var array
      */
-    private $_fulfilmentActivationReportDetails = null;
+    private $_fulfilmentActivationReportDetails = array();
 
     /*
      * @var int
@@ -197,12 +197,4 @@ class FulfilmentActivationReport
     {
         $this->_reportDate=$reportDate;
     }
-
-     /*
-     * SupplyOrderReport constructor
-     */
-    public function __construct() 
-    {
-         $this->_fulfilmentActivationReportDetails = array();
-    } 
 }

@@ -41,7 +41,7 @@ class FulfilmentOrderLineRequest
      */
     public function __construct($orderReference, $productEan) 
     {
-        $this-> _orderReference = $orderReference;
-        $this-> _productEan = $productEan;
+        $this->_orderReference = $orderReference;
+        $this->_productEan = $productEan;
     } 
 }

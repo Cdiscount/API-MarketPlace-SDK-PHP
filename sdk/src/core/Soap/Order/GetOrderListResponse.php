@@ -83,8 +83,7 @@ class GetOrderListResponse extends iResponse
     private function _setOrderList()
     {
         $objOrderResult = $this->_dataResponse['s:Body']['GetOrderListResponse']['GetOrderListResult']['OrderList'];
-        
-        $arrays = false;
+
         if (isset($objOrderResult['Order'])) {
             $orderResults = $objOrderResult['Order'];
             if (isset($orderResults['OrderNumber'])){
@@ -330,8 +329,6 @@ class GetOrderListResponse extends iResponse
         $parcelListObj = new ParcelList();
 
         foreach ($parcelList as $parcel) {
-            //echo "CustomerNum : " . $parcel['CustomerNum'] . "<br/>";
-
             $parcelObj = new Parcel();
             $parcelObj->setCustomerNum($parcel['CustomerNum']);
             $parcelObj->setExternalCarrierName($parcel['ExternalCarrierName']);

@@ -66,7 +66,6 @@ class GetFulfilmentSupplyOrderReportListSoap extends BaliseTool
     public function generateSupplyOrderReportRequestXml($request)
     {
         $namespace = 'cdis:';
-        $inlines = array($this->_xmlns_arr);
         /*
          * @param $namespace
          */        

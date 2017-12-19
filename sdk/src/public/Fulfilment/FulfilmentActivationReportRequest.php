@@ -55,9 +55,9 @@ class FulfilmentActivationReportRequest
      */
     public function __construct($BeginDate, $EndDate, $DepositList) 
     {
-        $this-> _BeginDate = $BeginDate;
-        $this-> _EndDate = $EndDate;
-        $this-> _DepositList = $DepositList;
+        $this->_BeginDate = $BeginDate;
+        $this->_EndDate = $EndDate;
+        $this->_DepositList = $DepositList;
     }
 }
 

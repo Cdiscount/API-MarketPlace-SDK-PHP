@@ -12,7 +12,7 @@ class SupplyOrderReportLine
     /*
      * @array
      */
-    private $_errorList = null;
+    private $_errorList = array();
 
     /*
      * @return array
@@ -205,12 +205,4 @@ class SupplyOrderReportLine
     {
         $this->_warehouseReceptionMinDate=$warehouseReceptionMinDate;
     }
-
-    /*
-     * SupplyOrderReportLine constructor
-     */
-    public function __construct() 
-    {
-        $this->_errorList= array();
-    } 
 }

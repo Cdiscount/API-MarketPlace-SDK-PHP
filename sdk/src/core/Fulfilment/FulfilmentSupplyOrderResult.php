@@ -24,7 +24,7 @@ class FulfilmentSupplyOrderResult extends CommonResult
     /*
      * @var array
      */
-    private $_supplyOrderList = null;
+    private $_supplyOrderList = array();
 
     /*
     * return $_currentPageNumber
@@ -79,8 +79,6 @@ class FulfilmentSupplyOrderResult extends CommonResult
      */
     public function __construct() 
     {
-        $this->_supplyOrderList = array();
         $this->_errorList = array();
-
     }
 }

@@ -14,7 +14,7 @@ class FulfilmentOrderListToSupplyResult extends CommonResult
     /*
      * @var array
      */
-    private $_fulfilmentOrderLineList = null;
+    private $_fulfilmentOrderLineList = array();
 
     /*
      * @return array
@@ -36,8 +36,6 @@ class FulfilmentOrderListToSupplyResult extends CommonResult
      */
     public function __construct() 
     {
-        $this->_fulfilmentOrderLineList  = array();
         $this->_errorList = array();
-
     }
 }

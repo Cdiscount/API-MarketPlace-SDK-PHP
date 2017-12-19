@@ -77,8 +77,8 @@ class FulfilmentOnDemandOrderLineFilter
      */
     public function __construct($orderReference,$productEan,$warehouse) 
     {
-        $this-> _orderReference = $orderReference;
-        $this-> _productEan = $productEan;
-        $this-> _warehouse = $warehouse;
+        $this->_orderReference = $orderReference;
+        $this->_productEan = $productEan;
+        $this->_warehouse = $warehouse;
     }
 }

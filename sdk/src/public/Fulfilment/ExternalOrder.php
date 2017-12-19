@@ -39,10 +39,6 @@ class ExternalOrder
      */
     private $_externalOrderLine = array();
 
-    public function __construct() {
-        $_externalOrderLine = array();
-    }
-
     /**
      * @return array ExternalOrderLine
      */

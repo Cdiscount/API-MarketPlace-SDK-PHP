@@ -219,12 +219,4 @@ class FulfilmentActivationReportDetails
     {
         $this->_width=$width;
     }
-
-     /*
-     * SupplyOrderReport constructor
-     */
-    public function __construct() 
-    {
-
-    } 
 }

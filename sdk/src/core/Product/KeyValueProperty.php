@@ -20,7 +20,7 @@ class KeyValueProperty
     /**
      * @var array|null
      */
-    private $_values = null;
+    private $_values = array();
 
     /**
      * KeyValueProperty constructor.
@@ -29,7 +29,6 @@ class KeyValueProperty
     public function __construct($key)
     {
         $this->_key = $key;
-        $this->_values = array();
     }
 
     /**

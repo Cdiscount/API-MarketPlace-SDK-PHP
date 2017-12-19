@@ -46,7 +46,7 @@
      /*
       *@var string
       */
-     private $_orderReferenceList = null;
+     private $_orderReferenceList = array();
      /*
       *@var bool
       */
@@ -64,7 +64,6 @@
      public function __construct() 
      {
         $this->_errorList = array();
-        $this->_orderReferenceList = array();
      }
 
      /*

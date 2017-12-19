@@ -51,10 +51,6 @@ class FulfilmentActivationReportRequestXmlResponse extends iResponse
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
         $this->_errorList = array();
-        if(isset($this->_dataResponse['s:Body']['GetFulfilmentActivationReportListResponse']['GetFulfilmentActivationReportListResult']))
-        {
-            $fulfilmentActivationReportListResultXml = $this->_dataResponse['s:Body']['GetFulfilmentActivationReportListResponse']['GetFulfilmentActivationReportListResult'];
-        }
         // Check For error message
         if(isset($this->_dataResponse['s:Body']['GetFulfilmentActivationReportListResponse']['GetFulfilmentActivationReportListResult']))
         {

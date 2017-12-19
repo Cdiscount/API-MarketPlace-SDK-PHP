@@ -72,8 +72,6 @@ class GetSellerInformationResponse extends iResponse
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
 
-        //print_r($this->_dataResponse);
-
         // Check for error messages
         if (!$this->_hasErrorMessage()) {
             /**

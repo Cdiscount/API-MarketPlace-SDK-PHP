@@ -58,6 +58,6 @@ class FulfilmentProductRequest
      */
     public function setFulfilmentReferencement($fbcReferencementFilter)
     {
-        $this-> _fulfilmentReferencement = $fbcReferencementFilter;
+        $this->_fulfilmentReferencement = $fbcReferencementFilter;
     }
 }

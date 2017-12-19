@@ -23,7 +23,7 @@ class FulfilmentSupplyOrderReportListResult extends CommonResult
     /*
      * @var array
      */
-    private $_reportList = null;
+    private $_reportList = array();
     
     /*
      * @return int
@@ -79,8 +79,6 @@ class FulfilmentSupplyOrderReportListResult extends CommonResult
      */
     public function __construct() 
     {
-         $this->_reportList = array();
          $this->_errorList = array();
-
     } 
 }

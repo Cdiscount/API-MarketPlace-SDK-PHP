@@ -14,7 +14,7 @@ class ValidateOrderLineResults
     /**
      * @var array \Sdk\Order\Validate\ValidateOrderLineResult
      */
-    private $_validateOrderLineResults = null;
+    private $_validateOrderLineResults = array();
 
     /**
      * @return array
@@ -22,14 +22,6 @@ class ValidateOrderLineResults
     public function getValidateOrderLineResultList()
     {
         return $this->_validateOrderLineResults;
-    }
-
-    /**
-     * ValidateOrderLineResults constructor.
-     */
-    public function __construct()
-    {
-        $this->_validateOrderLineResults = array();
     }
 
     /**

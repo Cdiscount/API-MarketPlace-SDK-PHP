@@ -13,10 +13,6 @@ namespace Sdk\Fulfilment;
  */
 class OrderStatusRequest
 {
-    public function __construct() {
-        $_valueList = array();
-    }
-
     /*
      * @var String
      */

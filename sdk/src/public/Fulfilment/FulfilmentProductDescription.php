@@ -91,7 +91,7 @@ class FulfilmentProductDescription
      */
     public function setWarehouse($warehouseTypes)
     {
-        $this-> _warehouse = $warehouseTypes;
+        $this->_warehouse = $warehouseTypes;
     }
 
     /*
@@ -105,11 +105,11 @@ class FulfilmentProductDescription
      */
     public function __construct($extSupplyOrderID, $productEan, $quantity, $sellerProductReference, $wareHouseReceptionMinDate, $warehouse) 
     {
-        $this-> _productEan = $productEan;
-        $this-> _warehouse = $warehouse;
-        $this-> _quantity = $quantity;
-        $this-> _extSupplyOrderID = $extSupplyOrderID;
-        $this-> _wareHouseReceptionMinDate = $wareHouseReceptionMinDate;
-        $this-> _sellerProductReference = $sellerProductReference;    
+        $this->_productEan = $productEan;
+        $this->_warehouse = $warehouse;
+        $this->_quantity = $quantity;
+        $this->_extSupplyOrderID = $extSupplyOrderID;
+        $this->_wareHouseReceptionMinDate = $wareHouseReceptionMinDate;
+        $this->_sellerProductReference = $sellerProductReference;
     }    
 }

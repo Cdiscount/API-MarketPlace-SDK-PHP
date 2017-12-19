@@ -105,7 +105,7 @@ class CategoryTree
     /**
      * @var array \Sdk\Product\CategoryTree
      */
-    private $_childrenCategoryList = null;
+    private $_childrenCategoryList = array();
 
     /**
      * @return array
@@ -121,10 +121,5 @@ class CategoryTree
     public function addChild($child)
     {
         array_push($this->_childrenCategoryList, $child);
-    }
-
-    public function __construct()
-    {
-        $this->_childrenCategoryList = array();
     }
 }

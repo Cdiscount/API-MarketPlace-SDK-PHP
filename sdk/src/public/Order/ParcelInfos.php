@@ -39,7 +39,7 @@ class ParcelInfos
      */
     public function __construct($parcelNumber) 
     {
-        $this-> _parcelNumber = $parcelNumber;
+        $this->_parcelNumber = $parcelNumber;
     }
     
     /*
@@ -47,7 +47,7 @@ class ParcelInfos
      */
     public function setSku($sku)
     {
-        $this-> _sku = $sku;
+        $this->_sku = $sku;
     }
 
     /*
@@ -71,6 +71,6 @@ class ParcelInfos
      */
     public function setManageParcel($parcelActionsTypes)
     {
-        $this-> _manageParcel = $parcelActionsTypes;
+        $this->_manageParcel = $parcelActionsTypes;
     }
 }

@@ -50,11 +50,4 @@ class Error
     {
         $this->_errorMessage=$errorMessage;
     }
-
-    /*
-     * Error constructor
-     */
-    public function __construct() 
-    {
-    } 
 }

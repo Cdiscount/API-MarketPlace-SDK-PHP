@@ -49,7 +49,6 @@ class SubmitFulfilmentActivationSoap extends BaliseTool
      */
     public function generateFulfilmentActivationRequestXml($request)
     {
-        $inlines = array($this->_xmlns_cdis2);
         /*
          * Opening tag FulfilmentSupplyOrderRequest
          */
@@ -65,7 +64,7 @@ class SubmitFulfilmentActivationSoap extends BaliseTool
             foreach($request->getProductActivationList() as $productActivation)
             {
                 //Opening tag ProductActivationData
-                $xml .= $this->_xmlUtil->generateOpenBalise($this-> _productActivationDataTAG);
+                $xml .= $this->_xmlUtil->generateOpenBalise($this->_productActivationDataTAG);
                 if($productActivation->getAction() != null)
                 {
                     //Tag Action
@@ -109,7 +108,7 @@ class SubmitFulfilmentActivationSoap extends BaliseTool
                 }
 
                 //Closing tag ProductActivationData
-                $xml .= $this->_xmlUtil->generateCloseBalise($this-> _productActivationDataTAG);
+                $xml .= $this->_xmlUtil->generateCloseBalise($this->_productActivationDataTAG);
         }
 
         $xml .= $this->_xmlUtil->generateCloseBalise($this->_productActivationListTAG);

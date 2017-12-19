@@ -35,7 +35,7 @@ class FulfilmentDeliveryDocumentRequest
      */
     public function __construct($depositId) 
     {
-        $this-> _depositId = $depositId;
+        $this->_depositId = $depositId;
     }
 }
 
