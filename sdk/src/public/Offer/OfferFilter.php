@@ -12,6 +12,7 @@ namespace Sdk\Offer;
 class OfferFilter
 {
     private $_pageNumber = 0;
+    private $_productList = null;
 
     /**
      * @return int
@@ -27,5 +28,21 @@ class OfferFilter
     public function setPageNumber($pageNumber)
     {
         $this->_pageNumber = $pageNumber;
+    }
+
+    /**
+     * @return array
+     */
+    public function getProductList()
+    {
+        return $this->_productList;
+    }
+
+    /**
+     * @param array $productList
+     */
+    public function setProductList($productList)
+    {
+        $this->_productList = $productList;
     }
 }

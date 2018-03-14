@@ -68,6 +68,7 @@ class OfferPoint
         $offerFilterSoap = new OfferFilter(null);
         $offerFilterSoap->setOfferPoolId($offerPoolId);
         $offerFilterSoap->setOfferFilter($offerFilter);
+        $offerFilterSoap->setProductList($offerFilter->getProductList());
 
         $offerFilterSoapXml = $offerFilterSoap->serialize();
 
