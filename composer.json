@@ -1,5 +1,5 @@
 {
-    "name": "cdiscount/sdkphpapi",
+    "name": "lexo13/sdkphpapi",
     "description": "PHP SDK for the Cdiscount Marketplace API",
     "type": "project",
     "autoload": {
@@ -14,5 +14,11 @@
         "zendframework/zend-config": "^2.6"
     },
     "license": "GPL-3.0",
-    "version": "1.0.8"
+    "version": "1.0.8",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/lexo13/sdkphpapi"
+        }
+    ]
 }
