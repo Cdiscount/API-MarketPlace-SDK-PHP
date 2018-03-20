@@ -43,7 +43,7 @@ class OrderFilterSoap extends FilterSoap
      * Prefix for string tag
      * @var string
      */
-    private $_stringTAG = 'arr:string';
+    private $_stringTAG = 'd5p1:string';
 
     /**
      * ClaimFilterSoap constructor.
