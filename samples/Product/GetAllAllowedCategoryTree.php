@@ -52,6 +52,7 @@ function displayCategoryTree($categoryTreeRoot, $level, $client, $productPoint) 
         " - Name : " . $categoryTreeRoot->getName() .
         " - AllowOfferIntegration:  " . ($categoryTreeRoot->isAllowOfferIntegration() ? 'true' : 'false') .
         " - AllowProductIntegration:  " . ($categoryTreeRoot->isAllowProductIntegration() ? 'true' : 'false') .
+        " - EANOptional:  " . ($categoryTreeRoot->isEanOptional() ? 'true' : 'false') .
         "<br/>";
 
     /** @var \Sdk\Product\CategoryTree $catTree */
