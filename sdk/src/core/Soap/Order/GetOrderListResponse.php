@@ -187,13 +187,20 @@ class GetOrderListResponse extends iResponse
     }
 
     /**
-     * Retrieve <BillingAddress> Balise
+     * Retrieve <BillingAddress|ShippingAddress> Balise
      *
      * @param $objAddressResult
-     * @return Address
+     * @return null|Address
      */
     private function _getAddress($objAddressResult)
     {
+        if (count($objAddressResult) == 1
+            && array_key_exists('nil', $objAddressResult)
+            && $objAddressResult['nil'] == 'true'
+        ) {
+            return null;
+        }
+
         $address = new Address();
 
         $address->setAddress1($objAddressResult['Address1']);
