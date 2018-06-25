@@ -43,6 +43,7 @@ foreach ($offerListResponse->getOfferList() as $offer) {
     echo "IntegrationPrice : " . $offer->getIntegrationPrice() . "<br/>";
     echo "IsCDAV : " . $offer->isIsCDAV() . "<br/>";
     echo "LastUpdateDate : " . $offer->getLastUpdateDate() . "<br/>";
+    echo "LogisticMode : " . $offer->getLogisticMode() . "<br/>";
     echo "MinimumPriceForPriceAlignment : " . $offer->getMinimumPriceForPriceAlignment() . "<br/>";
 
     /** @var \Sdk\Offer\OfferPool $offerPool */

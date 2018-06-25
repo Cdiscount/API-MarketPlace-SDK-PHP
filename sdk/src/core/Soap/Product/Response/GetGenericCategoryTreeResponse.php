@@ -64,6 +64,9 @@ class GetGenericCategoryTreeResponse extends iResponse
         if ($categoryTree['AllowProductIntegration'] == 'true') {
             $categoryTreeObj->setAllowProductIntegration(true);
         }
+        if (isset($categoryTree['IsEANOptional']) && $categoryTree['IsEANOptional'] == 'true') {
+            $categoryTreeObj->setEanOptional(true);
+        }
 
         if (is_array($categoryTree['ChildrenCategoryList']) && isset($categoryTree['ChildrenCategoryList']['CategoryTree'])) {
 

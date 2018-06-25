@@ -67,6 +67,9 @@ class GetOfferListGenericResponse extends iResponse
                 $offer->setIsCDAV(true);
             }
             $offer->setLastUpdateDate($offerXML['LastUpdateDate']);
+            if (isset($offerXML['LogisticMode'])) {
+                $offer->setLogisticMode($offerXML['LogisticMode']);
+            }
             $offer->setMinimumPriceForPriceAlignment($offerXML['MinimumPriceForPriceAlignment']);
 
             if (isset($offerXML['OfferBenchMark']['BestOfferPrice'])) {
