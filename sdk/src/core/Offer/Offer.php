@@ -220,6 +220,29 @@ class Offer
     }
 
     /**
+     * @var string
+     */
+    private $_logisticMode = null;
+
+    /**
+     * @return string
+     */
+    public function getLogisticMode()
+    {
+        return $this->_logisticMode;
+    }
+
+    /**
+     * @param string $logisticMode
+     */
+    public function setLogisticMode($logisticMode)
+    {
+        if (!SoapTools::isSoapValueNull($logisticMode)) {
+            $this->_logisticMode = $logisticMode;
+        }
+    }
+
+    /**
      * @var float
      */
     private $_minimumPriceForPriceAlignment = 0.0;

@@ -23,7 +23,7 @@ if ($token == null || !$client->isTokenValid()) {
 
 $offerPoint = $client->getOfferPoint();
 
-$offerPoolId = 2;
+$offerPoolId = 1;
 
 $offerListResponse = $offerPoint->getOfferList(null, $offerPoolId);
 
@@ -39,6 +39,7 @@ foreach ($offerListResponse->getOfferList() as $offer) {
     echo "IntegrationPrice : " . $offer->getIntegrationPrice() . "<br/>";
     echo "IsCDAV : " . $offer->isIsCDAV() . "<br/>";
     echo "LastUpdateDate : " . $offer->getLastUpdateDate() . "<br/>";
+    echo "LogisticMode : " . $offer->getLogisticMode() . "<br/>";
     echo "MinimumPriceForPriceAlignment : " . $offer->getMinimumPriceForPriceAlignment() . "<br/>";
 
     /** @var \Sdk\Offer\OfferPool $offerPool */

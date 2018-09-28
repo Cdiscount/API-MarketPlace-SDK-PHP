@@ -78,7 +78,7 @@ class OfferFilter extends BaliseTool
             /** SellerProductIdList **/
             $xml .= $this->_xmlUtil->generateOpenBalise($this->SellerProductIdListTAG);
             foreach ($this->_productList as $product) {
-                $xml .= $this->_xmlUtil->generateBalise('s:string', $product);
+                $xml .= $this->_xmlUtil->generateBalise('arr:string', $product);
             }
             $xml .= $this->_xmlUtil->generateCloseBalise($this->SellerProductIdListTAG);
         }
