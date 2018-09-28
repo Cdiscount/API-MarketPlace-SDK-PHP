@@ -8,7 +8,6 @@
 
 namespace Sdk\ConfigTools;
 
-use Zend\Config\Exception\InvalidArgumentException;
 
 class ConfigFileLoader
 {
@@ -19,6 +18,11 @@ class ConfigFileLoader
      * @var Singleton $instance
      */
     private static $_instance = null;
+
+    /**
+     * @var array
+     */
+    private static $customConfig = null;
 
     /**
      * @var Data in the config file
@@ -86,9 +90,18 @@ class ConfigFileLoader
     #region public methods
 
     public function getConfAttribute($attr) {
+        if (isset(self::$customConfig['api'][$attr])) {
+            return self::$customConfig['api'][$attr];
+        }
+
         return $this->_fileData['api'][$attr];
     }
 
     #endregion public methods
+
+    public static function setCustomConfig(array $config)
+    {
+        self::$customConfig = $config;
+    }
 
 }
