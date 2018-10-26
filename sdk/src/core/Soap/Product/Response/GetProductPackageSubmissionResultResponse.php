@@ -111,6 +111,7 @@ class GetProductPackageSubmissionResultResponse extends iResponse
         $objInfoResult = $this->_dataResponse['s:Body']['GetProductPackageSubmissionResultResponse']['GetProductPackageSubmissionResultResult'];
         $this->_tokenID = $objInfoResult['TokenId'];
         $this->_sellerLogin = $objInfoResult['SellerLogin'];
+        $this->_packageId = $objInfoResult['PackageId'];
     }
 
     /**
@@ -137,39 +138,27 @@ class GetProductPackageSubmissionResultResponse extends iResponse
      */
     private function _setImportErrorsFromXML($productLogXML)
     {
-        $isMul = true;
-
         foreach ($productLogXML['ProductReportLog'] as $reportXML) {
-
-            if (!isset($reportXML['LogDate'])) {
-                $isMul = false;
-                break;
-            }
-
-        }
-
-        if (!$isMul) {
-
             $productReportLog = new ProductReportLog();
 
             /** LogDate */
-            $productReportLog->setLogDate($productLogXML['ProductReportLog']['LogDate']);
+            $productReportLog->setLogDate($reportXML['LogDate']);
 
             /** ProductIntegrationStatus */
-            $productReportLog->setProductIntegrationStatus($productLogXML['ProductReportLog']['ProductIntegrationStatus']);
+            $productReportLog->setProductIntegrationStatus($reportXML['ProductIntegrationStatus']);
 
             /** PropertyList - ProductReportPropertyLog */
-            $productReportPropertyLog = new ProductReportPropertyLog($productLogXML['ProductReportLog']['PropertyList']['ProductReportPropertyLog']['ErrorCode']);
-            $productReportPropertyLog->setLogMessage($productLogXML['ProductReportLog']['PropertyList']['ProductReportPropertyLog']['LogMessage']);
-            $productReportPropertyLog->setName($productLogXML['ProductReportLog']['PropertyList']['ProductReportPropertyLog']['Name']);
-            $productReportPropertyLog->setPropertyError($productLogXML['ProductReportLog']['PropertyList']['ProductReportPropertyLog']['PropertyError']);
+            $productReportPropertyLog = new ProductReportPropertyLog($reportXML['PropertyList']['ProductReportPropertyLog']['ErrorCode']);
+            $productReportPropertyLog->setLogMessage($reportXML['PropertyList']['ProductReportPropertyLog']['LogMessage']);
+            $productReportPropertyLog->setName($reportXML['PropertyList']['ProductReportPropertyLog']['Name']);
+            $productReportPropertyLog->setPropertyError($reportXML['PropertyList']['ProductReportPropertyLog']['PropertyError']);
             $productReportLog->addProductReportPropertyLog($productReportPropertyLog);
 
             /** SKU */
-            $productReportLog->setSKU($productLogXML['ProductReportLog']['SKU']);
+            $productReportLog->setSKU($reportXML['SKU']);
 
             /** Validated */
-            if ($productLogXML['ProductReportLog']['Validated'] == 'true') {
+            if ($reportXML['Validated'] == 'true') {
                 $productReportLog->setValidated(true);
             }
 
@@ -182,10 +171,8 @@ class GetProductPackageSubmissionResultResponse extends iResponse
      */
     private function _setImportInformationsFromXML($getProductPackageSubmissionResultResult)
     {
-        /** Package Id */
-        $this->_packageId = $getProductPackageSubmissionResultResult['PackageId'];
-
         /** Integration Status */
         $this->_packageIntegrationStatus = $getProductPackageSubmissionResultResult['PackageIntegrationStatus'];
+
     }
 }

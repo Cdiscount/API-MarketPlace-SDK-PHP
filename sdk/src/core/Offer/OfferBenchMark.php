@@ -95,4 +95,26 @@ class OfferBenchMark
         $this->_shippingCharges = $shippingCharges;
     }
 
+    /**
+     * @var boolean
+     */
+    private $_isBestOfferPrice = null;
+
+    /**
+     * Indicates if the best offer is the current offer
+     * @return boolean
+     */
+    public function getIsBestOfferPrice()
+    {
+        return $this->_isBestOfferPrice;
+    }
+
+    /**
+     *
+     * @param boolean $isBestOfferPrice
+     */
+    public function setIsBestOfferPrice($isBestOfferPrice)
+    {
+        $this->_isBestOfferPrice = $isBestOfferPrice;
+    }
 }
