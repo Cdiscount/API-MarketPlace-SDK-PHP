@@ -26,6 +26,27 @@ class OrderLine
     /**
      * @var string;
      */
+    private $_skuSeparator = '-';
+
+    /**
+     * @return string
+     */
+    public function getSkuSeparator()
+    {
+        return $this->_skuSeparator;
+    }
+
+    /**
+     * @param string $_skuSeparator
+     */
+    public function setSkuSeparator($_skuSeparator)
+    {
+        $this->_skuSeparator = $_skuSeparator;
+    }
+
+    /**
+     * @var string;
+     */
     private $_acceptationState = null;
 
     /**
@@ -365,6 +386,27 @@ class OrderLine
     /**
      * @var string
      */
+    private $_real_sku = null;
+
+    /**
+     * @return string
+     */
+    public function getRealSku()
+    {
+        return $this->_real_sku;
+    }
+
+    /**
+     * @param string $sku
+     */
+    public function setRealSku($sku)
+    {
+        $this->_real_sku = $sku;
+    }
+
+    /**
+     * @var string
+     */
     private $_sku = null;
 
     /**
@@ -380,7 +422,10 @@ class OrderLine
      */
     public function setSku($sku)
     {
-        $this->_sku = $sku;
+        $this->setRealSku($sku);
+
+        $SkuFormated = explode($this->getRealSku(), $this->getSkuSeparator());
+        $this->_sku = $SkuFormated[0];
     }
 
     /**
