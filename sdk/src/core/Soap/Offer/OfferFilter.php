@@ -43,8 +43,16 @@ class OfferFilter extends BaliseTool
      */
     public function __construct($productList)
     {
-        $this->_productList = $productList;
+        $this->setProductList($productList);
         parent::__construct();
+    }
+
+    /**
+     * @param $productList
+     */
+    public function setProductList($productList)
+    {
+        $this->_productList = $productList;
     }
 
     /**

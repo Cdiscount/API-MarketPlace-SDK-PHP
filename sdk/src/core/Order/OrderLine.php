@@ -26,6 +26,27 @@ class OrderLine
     /**
      * @var string;
      */
+    private $_sellerProductIdSeparator = '-';
+
+    /**
+     * @return string
+     */
+    public function getSellerProductIdSeparator()
+    {
+        return $this->_sellerProductIdSeparator;
+    }
+
+    /**
+     * @param string $_sellerProductIdSeparator
+     */
+    public function setSellerProductIdSeparator($_sellerProductIdSeparator)
+    {
+        $this->_sellerProductIdSeparator = $_sellerProductIdSeparator;
+    }
+
+    /**
+     * @var string;
+     */
     private $_acceptationState = null;
 
     /**
@@ -298,6 +319,27 @@ class OrderLine
     /**
      * @var string
      */
+    private $_realSellerProductId = null;
+
+    /**
+     * @return string
+     */
+    public function getRealSellerProductId()
+    {
+        return $this->_realSellerProductId;
+    }
+
+    /**
+     * @param string $realSellerProductId
+     */
+    public function setRealSellerProductId($realSellerProductId)
+    {
+        $this->_realSellerProductId = $realSellerProductId;
+    }
+
+    /**
+     * @var string
+     */
     private $_sellerProductId = null;
 
     /**
@@ -313,7 +355,10 @@ class OrderLine
      */
     public function setSellerProductId($sellerProductId)
     {
-        $this->_sellerProductId = $sellerProductId;
+        $this->setRealSellerProductId($sellerProductId);
+
+        $sellerProductIdFormated = explode($this->getSellerProductIdSeparator(), $this->getRealSellerProductId());
+        $this->_sellerProductId = $sellerProductIdFormated[0];
     }
 
     /**

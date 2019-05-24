@@ -1,5 +1,5 @@
 {
-    "name": "cdiscount/sdkphpapi",
+    "name": "lexo13/sdkphpapi",
     "description": "PHP SDK for the Cdiscount Marketplace API",
     "type": "project",
     "autoload": {
