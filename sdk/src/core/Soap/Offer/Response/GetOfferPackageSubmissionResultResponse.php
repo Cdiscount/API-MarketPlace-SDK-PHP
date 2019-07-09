@@ -159,6 +159,11 @@ class GetOfferPackageSubmissionResultResponse extends iResponse
             $offerReportPropertyLog = $reportXML['PropertyList']['OfferReportPropertyLog'];
 
             if (is_array($offerReportPropertyLog)) {
+
+                if (array_key_exists('LogMessage', $offerReportPropertyLog)) {
+                    $offerReportPropertyLog = [$offerReportPropertyLog];
+                }
+
                 foreach ($offerReportPropertyLog as $key => $log) {
                     /** PropertyList - ProductReportPropertyLog */
                     $offerReportPropertyLog = new OfferReportPropertyLog($log['PropertyCode']);
