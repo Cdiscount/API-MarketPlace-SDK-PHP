@@ -40,6 +40,12 @@ class Token
      * @var string Token to communicate with the API
      */
     private $_token = null;
+    /**
+     * @var string
+     */
+    private $username = null;
+    private $password = null;
+    private $tokenUrl = null;
 
     #endregion Private attributes
 
@@ -48,10 +54,13 @@ class Token
     /**
      * Token constructor.
      */
-    private function __construct()
+    private function __construct(string $username = null, string $password = null, string $tokenUrl = null)
     {
         $this->_isValid = false;
         $this->_initdate = false;
+        $this->username = $username;
+        $this->password = $password;
+        $this->tokenUrl = $tokenUrl;
     }
 
     #endregion Constructor
@@ -62,11 +71,11 @@ class Token
      * Return a unique instance of the token class, initiate it if needed
      * @return Token
      */
-    public static function getInstance()
+    public static function getInstance(string $username = null, string $password = null, string $tokenUrl = null)
     {
 
         if (is_null(self::$_instance)) {
-            self::$_instance = new Token();
+            self::$_instance = new Token($username, $password, $tokenUrl);
         }
         return self::$_instance;
     }
@@ -77,11 +86,17 @@ class Token
 
     private function _generateNewToken()
     {
-        $username = ConfigFileLoader::getInstance()->getConfAttribute('username');
-        $password = ConfigFileLoader::getInstance()->getConfAttribute('password');
-        $urlToken = ConfigFileLoader::getInstance()->getConfAttribute('urltoken');
+        if (null === $this->username) {
+            $this->username = ConfigFileLoader::getInstance()->getConfAttribute('username');
+        }
+        if (null === $this->password) {
+            $this->password = ConfigFileLoader::getInstance()->getConfAttribute('password');
+        }
+        if (null === $this->tokenUrl) {
+            $this->tokenUrl = ConfigFileLoader::getInstance()->getConfAttribute('urltoken');
+        }
 
-        $request = new CDSApiRequest($username, $password, $urlToken);
+        $request = new CDSApiRequest($this->username, $this->password, $this->tokenUrl);
 
         libxml_use_internal_errors(true);
         $xmlResult = simplexml_load_string($request->execute());

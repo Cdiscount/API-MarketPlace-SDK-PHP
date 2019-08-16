@@ -8,8 +8,7 @@
 
 namespace Sdk\Discussion;
 
-use Sdk\ConfigTools\ConfigFileLoader;
-use Sdk\HttpTools\CDSApiSoapRequest;
+use Sdk\AbstractPoint;
 use Sdk\Soap\Common\Body;
 use Sdk\Soap\Common\Envelope;
 use Sdk\Soap\Discussion\ClaimFilterSoap;
@@ -25,7 +24,7 @@ use Sdk\Soap\Discussion\Response\GetOrderClaimListResponse;
 use Sdk\Soap\Discussion\Response\GetOrderQuestionListResponse;
 use Sdk\Soap\HeaderMessage\HeaderMessage;
 
-class DiscussionPoint
+class DiscussionPoint extends AbstractPoint
 {
 
     /**
@@ -151,24 +150,4 @@ class DiscussionPoint
 
         return $envelopeXML;
     }
-
-    /**
-     * @param $method
-     * @param $data
-     * @return string
-     */
-    private function _sendRequest($method, $data)
-    {
-        $headerRequestURL = ConfigFileLoader::getInstance()->getConfAttribute('methodurl');
-
-        $apiURL = ConfigFileLoader::getInstance()->getConfAttribute('url');
-
-        $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
-        $response = $request->call();
-
-        return $response;
-    }
-
-
-
 }

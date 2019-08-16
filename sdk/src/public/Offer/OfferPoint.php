@@ -1,8 +1,8 @@
 <?php
 
 namespace Sdk\Offer;
-use Sdk\ConfigTools\ConfigFileLoader;
-use Sdk\HttpTools\CDSApiSoapRequest;
+
+use Sdk\AbstractPoint;
 use Sdk\Soap\Common\Body;
 use Sdk\Soap\Common\Envelope;
 use Sdk\Soap\HeaderMessage\HeaderMessage;
@@ -23,7 +23,7 @@ use Sdk\Soap\Offer\SubmitOfferPackage;
  * Date: 13/10/2016
  * Time: 15:15
  */
-class OfferPoint
+class OfferPoint extends AbstractPoint
 {
 
     /**
@@ -135,22 +135,5 @@ class OfferPoint
 
         $getOfferPackageSubmissionResultResponse = new GetOfferPackageSubmissionResultResponse($response);
         return $getOfferPackageSubmissionResultResponse;
-    }
-
-    /**
-     * @param $method
-     * @param $data
-     * @return string
-     */
-    private function _sendRequest($method, $data)
-    {
-        $headerRequestURL = ConfigFileLoader::getInstance()->getConfAttribute('methodurl');
-
-        $apiURL = ConfigFileLoader::getInstance()->getConfAttribute('url');
-
-        $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
-        $response = $request->call();
-
-        return $response;
     }
 }
