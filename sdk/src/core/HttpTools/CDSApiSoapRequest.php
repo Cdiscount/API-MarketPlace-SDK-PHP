@@ -31,6 +31,16 @@ class CDSApiSoapRequest
      */
     private $_header = null;
 
+    private $curlOptions = [
+        CURLOPT_VERBOSE => false,
+        CURLOPT_HEADER => true,
+        CURLOPT_POST => true,
+        CURLOPT_SSLVERSION => 4,
+        CURLOPT_SSL_VERIFYPEER => FALSE,
+        CURLOPT_RETURNTRANSFER => TRUE,
+        CURLOPT_TIMEOUT => 600
+    ];
+
     /**
      * CDSApiSoapRequest constructor.
      *
@@ -39,9 +49,9 @@ class CDSApiSoapRequest
      * @param $apiURL
      * @param $data
      */
-    public function __construct($method, $headerMethodURL, $apiURL, $data)
+    public function __construct($method, $headerMethodURL, $apiURL, $data, array $curlOptions = [])
     {
-
+        $this->curlOptions = $curlOptions + $this->curlOptions;
         $this->_client = new \Zend\Http\Client($apiURL);
         $this->_client->setMethod('post');
         $this->_client->setRawBody($data);
@@ -60,19 +70,12 @@ class CDSApiSoapRequest
      * @param $url
      */
     private function _setAdapaterOptions($data, $url)
-    {
+    {   
+        $this->curlOptions[CURLOPT_URL]           = $url;
+        $this->curlOptions[CURLOPT_POSTFIELDS]    = $data;
+
         $this->_adapter->setOptions(array(
-            'curloptions' => array(
-                CURLOPT_URL => $url,
-                CURLOPT_VERBOSE => false,
-                CURLOPT_HEADER => true,
-                CURLOPT_POST => true,
-                CURLOPT_SSLVERSION => 4,
-                CURLOPT_SSL_VERIFYPEER => FALSE,
-                CURLOPT_RETURNTRANSFER => TRUE,
-                CURLOPT_POSTFIELDS => $data,
-                CURLOPT_TIMEOUT => 600
-            )
+            'curloptions' => $this->curlOptions,
         ));
     }
 

@@ -193,6 +193,7 @@ require_once __DIR__ . '/src/core/Soap/SOAPStruct.php';
 require_once __DIR__ . '/src/public/ApiClient/CDSApiClient.php';
 
 require_once __DIR__ . '/src/public/Common/Filter.php';
+require_once __DIR__ . '/src/public/AbstractPoint.php';
 
 
 require_once __DIR__ . '/src/public/Discussion/DiscussionFilter.php';

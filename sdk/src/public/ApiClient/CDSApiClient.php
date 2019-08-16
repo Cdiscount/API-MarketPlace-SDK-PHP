@@ -33,13 +33,15 @@ class CDSApiClient
     private $apiUrl = null;
     private $methodUrl = null;
 
+    private $curlOptions = [];
+
     /**
      * @return SellerPoint
      */
     public function getSellerPoint()
     {
         if ($this->_sellerPoint == null) {
-            $this->_sellerPoint = new SellerPoint($this->methodUrl, $this->apiUrl);
+            $this->_sellerPoint = new SellerPoint($this->methodUrl, $this->apiUrl, $this->curlOptions);
         }
         return $this->_sellerPoint;
     }
@@ -55,7 +57,7 @@ class CDSApiClient
     public function getOrderPoint()
     {
         if ($this->_orderPoint == null) {
-            $this->_orderPoint = new OrderPoint($this->methodUrl, $this->apiUrl);
+            $this->_orderPoint = new OrderPoint($this->methodUrl, $this->apiUrl, $this->curlOptions);
         }
         return $this->_orderPoint;
     }
@@ -71,7 +73,7 @@ class CDSApiClient
     public function getOfferPoint()
     {
         if ($this->_offerPoint == null) {
-            $this->_offerPoint = new OfferPoint($this->methodUrl, $this->apiUrl);
+            $this->_offerPoint = new OfferPoint($this->methodUrl, $this->apiUrl, $this->curlOptions);
         }
         return $this->_offerPoint;
     }
@@ -87,7 +89,7 @@ class CDSApiClient
     public function getProductPoint()
     {
         if ($this->_productPoint == null) {
-            $this->_productPoint = new ProductPoint($this->methodUrl, $this->apiUrl);
+            $this->_productPoint = new ProductPoint($this->methodUrl, $this->apiUrl, $this->curlOptions);
         }
         return $this->_productPoint;
     }
@@ -103,7 +105,7 @@ class CDSApiClient
     public function getFulfilmentPoint()
     {
         if ($this->_fulfilmentPoint == null) {
-            $this->_fulfilmentPoint = new FulfilmentPoint($this->methodUrl, $this->apiUrl);
+            $this->_fulfilmentPoint = new FulfilmentPoint($this->methodUrl, $this->apiUrl, $this->curlOptions);
         }
         return $this->_fulfilmentPoint;
     }
@@ -119,7 +121,7 @@ class CDSApiClient
     public function getDiscussionPoint()
     {
         if ($this->_discussionPoint == null) {
-            $this->_discussionPoint = new DiscussionPoint($this->methodUrl, $this->apiUrl);
+            $this->_discussionPoint = new DiscussionPoint($this->methodUrl, $this->apiUrl, $this->curlOptions);
         }
         return $this->_discussionPoint;
     }
@@ -135,7 +137,7 @@ class CDSApiClient
     public function getRelaysPoint()
     {
         if ($this->_relaysPoint == null) {
-            $this->_relaysPoint = new RelaysPoint($this->methodUrl, $this->apiUrl);
+            $this->_relaysPoint = new RelaysPoint($this->methodUrl, $this->apiUrl, $this->curlOptions);
         }
         return $this->_relaysPoint;
     }
@@ -151,7 +153,7 @@ class CDSApiClient
     public function getMailPoint()
     {
         if ($this->_mailPoint == null) {
-            $this->_mailPoint = new MailPoint($this->methodUrl, $this->apiUrl);
+            $this->_mailPoint = new MailPoint($this->methodUrl, $this->apiUrl, $this->curlOptions);
         }
         return $this->_mailPoint;
     }
@@ -159,10 +161,11 @@ class CDSApiClient
     /**
      * Create and check the token
      */
-    public function init(string $username = null, string $password = null, string $tokenUrl = null, string $apiUrl = null, string $methodUrl = null)
+    public function init(string $username = null, string $password = null, string $tokenUrl = null, string $apiUrl = null, string $methodUrl = null, array $curlOptions = [])
     {
         $this->apiUrl = $apiUrl;
         $this->methodUrl = $methodUrl;
+        $this->curlOptions = $curlOptions;
         $token = Token::getInstance($username, $password, $tokenUrl)->getToken();
         return $token;
     }

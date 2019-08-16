@@ -14,9 +14,16 @@ abstract class AbstractPoint
      */
     protected $headerRequestURL = null;
     protected $apiUrl           = null;
+    /**
+     * curl options
+     *
+     * @var array
+     */
+    protected $curlOptions  = [];
 
-    public function __construct(string $headerRequestURL = null, string $apiUrl = null)
+    public function __construct(string $headerRequestURL = null, string $apiUrl = null, array $curlOptions = [])
     {
+        $this->curlOptions = $curlOptions;
         $this->headerRequestURL = $headerRequestURL;
         if (null === $this->headerRequestURL) {
             $this->headerRequestURL = ConfigFileLoader::getInstance()->getConfAttribute('methodurl');
@@ -34,7 +41,7 @@ abstract class AbstractPoint
      */
     protected function _sendRequest($method, $data)
     {
-        $request = new CDSApiSoapRequest($method, $this->headerRequestURL, $this->apiURL, $data);
+        $request = new CDSApiSoapRequest($method, $this->headerRequestURL, $this->apiUrl, $data, $this->curlOptions);
         $response = $request->call();
 
         return $response;
