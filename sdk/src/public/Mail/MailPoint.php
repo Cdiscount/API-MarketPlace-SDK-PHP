@@ -8,9 +8,7 @@
 
 namespace Sdk\Mail;
 
-
-use Sdk\ConfigTools\ConfigFileLoader;
-use Sdk\HttpTools\CDSApiSoapRequest;
+use Sdk\AbstractPoint;
 use Sdk\Soap\Common\Body;
 use Sdk\Soap\Common\Envelope;
 use Sdk\Soap\HeaderMessage\HeaderMessage;
@@ -20,7 +18,7 @@ use Sdk\Soap\Mail\Request;
 use Sdk\Soap\Mail\Response\GenerateDiscussionMailGuidResponse;
 use Sdk\Soap\Mail\Response\GetDiscussionMailListResponse;
 
-class MailPoint
+class MailPoint extends AbstractPoint
 {
 
     /**
@@ -71,22 +69,5 @@ class MailPoint
 
         $generateDiscussionMailGuidResponse = new GenerateDiscussionMailGuidResponse($response);
         return $generateDiscussionMailGuidResponse;
-    }
-
-    /**
-     * @param $method
-     * @param $data
-     * @return string
-     */
-    private function _sendRequest($method, $data)
-    {
-        $headerRequestURL = ConfigFileLoader::getInstance()->getConfAttribute('methodurl');
-
-        $apiURL = ConfigFileLoader::getInstance()->getConfAttribute('url');
-
-        $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
-        $response = $request->call();
-
-        return $response;
     }
 }

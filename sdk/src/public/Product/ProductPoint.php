@@ -8,9 +8,7 @@
 
 namespace Sdk\Product;
 
-
-use Sdk\ConfigTools\ConfigFileLoader;
-use Sdk\HttpTools\CDSApiSoapRequest;
+use Sdk\AbstractPoint;
 use Sdk\Soap\Common\Body;
 use Sdk\Soap\Common\Envelope;
 use Sdk\Soap\HeaderMessage\HeaderMessage;
@@ -41,7 +39,7 @@ use Sdk\Soap\Product\SubmitProductPackage;
 /*
  * Product point
  */
-class ProductPoint
+class ProductPoint extends AbstractPoint
 {
     /**
      * @return GetProductListByIdentifierResponse
@@ -261,22 +259,4 @@ class ProductPoint
 
         return new GetProductPackageProductMatchingFileDataResponse($response);
     }
-
-    /**
-     * @param $method
-     * @param $data
-     * @return mixed
-     */
-    private function _sendRequest($method, $data)
-    {
-        $headerRequestURL = ConfigFileLoader::getInstance()->getConfAttribute('methodurl');
-
-        $apiURL = ConfigFileLoader::getInstance()->getConfAttribute('url');
-
-        $request = new CDSApiSoapRequest($method, $headerRequestURL, $apiURL, $data);
-
-        return $request->call();
-    }
-
-
 }
