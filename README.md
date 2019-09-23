@@ -1,5 +1,11 @@
 ## 1- Install a web server (for example wamp for windows)
 
+This project is an update to the [Cdiscount/API-MarketPlace-SDK-PHP](https://github.com/Cdiscount/API-MarketPlace-SDK-PHP) parent.
+
+Main Changes include the ability to pass in the username, password, token url and cURL options into the API functionality without the need to modify the supplied `config.ini` file.
+
+The reasons for these changes are to better support frameworks like Laravel and to disuade users from directly editing files in the `vendor` directory.
+
 ### 1.1 - Min requirements :
 
 *   Apache 2.2
