@@ -44,6 +44,10 @@ class GetOfferListGenericResponse extends iResponse
     {
         $reader = new \Zend\Config\Reader\Xml();
         $this->_dataResponse = $reader->fromString($response);
+        $offerList=$this->_dataResponse['s:Body']['GetOfferListPaginatedResponse']['GetOfferListPaginatedResult']['OfferList'];
+        if(isset($offerList['Offer']['CreationDate'])) {
+            $this->_dataResponse['s:Body']['GetOfferListPaginatedResponse']['GetOfferListPaginatedResult']['OfferList']['Offer']=[$offerList['Offer']];
+        }
         $this->_offerList = array();
     }
 
