@@ -158,7 +158,7 @@ class CDSApiClient
      * @param array $config
      * @return string|null
      */
-    public function init(array $config)
+    public function init(array $config = [])
     {
         $token = Token::getInstance()->getToken($config);
         return $token;

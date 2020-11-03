@@ -75,7 +75,7 @@ class Token
 
     #region Private methods
 
-    private function _generateNewToken(array $config)
+    private function _generateNewToken(array $config = [])
     {
         $username = isset($config['username']) ? $config['username'] : ConfigFileLoader::getInstance()->getConfAttribute('username');
         $password = isset($config['password']) ? $config['password'] : ConfigFileLoader::getInstance()->getConfAttribute('password');
@@ -107,7 +107,7 @@ class Token
      * @param array $config
      * @return string|null
      */
-    public function getToken(array $config)
+    public function getToken(array $config = [])
     {
         //TODO vérifier la date
 
