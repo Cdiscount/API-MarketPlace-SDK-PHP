@@ -86,6 +86,9 @@ class GetOfferListGenericResponse extends iResponse
                 if (isset($offerXML['OfferBenchMark']['ShippingCharges'])) {
                     $offerBenchMark->setShippingCharges(floatval($offerXML['OfferBenchMark']['ShippingCharges']));
                 }
+                if (isset($offerXML['OfferBenchMark']['IsBestOfferPrice'])) {
+                    $offerBenchMark->setIsBestOfferPrice('true' === $offerXML['OfferBenchMark']['IsBestOfferPrice']);
+                }
                 $offer->setOfferBenchMark($offerBenchMark);
             }
 
